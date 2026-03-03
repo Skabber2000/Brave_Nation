@@ -1,3 +1,7 @@
 input/
 rate_limit/
+deploy/
+.wrangler/
+*_full.*
+*_original.*
 *.zip
