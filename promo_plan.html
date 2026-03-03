@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nação Valente — Promotional Strategy</title>
+<style>
+  :root {
+    --navy: #1a1a2e;
+    --dark: #16213e;
+    --accent: #e94560;
+    --gold: #d4a843;
+    --light: #f5f5f0;
+    --text: #2c2c2c;
+    --muted: #6b7280;
+    --green: #22c55e;
+    --red: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--text);
+    background: var(--light);
+    line-height: 1.6;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--dark) 60%, #0f3460 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.6em;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle {
+    font-size: 1.15em;
+    color: #b0b8c8;
+    margin-bottom: 24px;
+  }
+  .hero .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-size: 0.95em;
+    color: #8899b0;
+  }
+  .hero .meta-row strong { color: white; }
+
+  /* ── Container ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* ── Sections ── */
+  h2 {
+    font-size: 1.55em;
+    color: var(--navy);
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 8px;
+    margin: 48px 0 20px;
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  h3 {
+    font-size: 1.15em;
+    color: var(--dark);
+    margin: 24px 0 10px;
+  }
+
+  p, li { font-size: 0.97em; margin-bottom: 10px; }
+  ul, ol { padding-left: 24px; }
+  li { margin-bottom: 6px; }
+
+  /* ── Cards ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--gold);
+  }
+  .card h4 {
+    font-size: 1.05em;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .card .price {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .card .note {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.93em;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  th {
+    background: var(--navy);
+    color: white;
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f9fafb; }
+  tr:hover { background: #f0f4ff; }
+
+  /* ── Badges ── */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-yellow { background: #fef9c3; color: #854d0e; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+
+  /* ── Budget tiers ── */
+  .tier {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 20px 0;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .tier::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+  }
+  .tier-300::before { background: #94a3b8; }
+  .tier-500::before { background: var(--gold); }
+  .tier-1000::before { background: var(--accent); }
+  .tier h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+  }
+  .tier h3 .amount {
+    font-size: 1.4em;
+    color: var(--accent);
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), var(--accent));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+    background: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -28px; top: 18px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 3px solid var(--light);
+  }
+  .tl-item .week {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.9em;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    background: #fff7ed;
+    border-left: 4px solid var(--gold);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+  }
+  .callout-red {
+    background: #fef2f2;
+    border-left-color: var(--red);
+  }
+  .callout-green {
+    background: #f0fdf4;
+    border-left-color: var(--green);
+  }
+  .callout strong { color: var(--navy); }
+
+  /* ── Agent cards ── */
+  .agent-card {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--accent);
+    margin-bottom: 16px;
+  }
+  .agent-card h4 {
+    font-size: 1.05em;
+    color: var(--navy);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .agent-card .agent-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: 600;
+    background: var(--navy);
+    color: white;
+  }
+  .agent-card .agent-meta {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .agent-card ul { margin-top: 6px; }
+  .agent-card li { font-size: 0.9em; margin-bottom: 4px; }
+  .agent-card .agent-roi {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #f0fdf4;
+    border-radius: 6px;
+    font-size: 0.88em;
+    color: #166534;
+    font-weight: 600;
+  }
+
+  .arch-box {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin: 20px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88em;
+    line-height: 1.8;
+    white-space: pre-line;
+    color: var(--dark);
+  }
+  .arch-box .label {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.95em;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--muted);
+    font-size: 0.85em;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 48px;
+  }
+
+  /* ── Print ── */
+  @media print {
+    .hero { padding: 30px 20px; }
+    .container { padding: 20px; }
+    h2 { break-after: avoid; }
+    .tier, .tl-item, .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ HERO ════════════════ -->
+<div class="hero">
+  <h1><span>Nação Valente</span> — Promotional Strategy</h1>
+  <div class="subtitle">Digital marketing & PR plan for João Annes' debut book</div>
+  <div class="meta-row">
+    <span>Prepared: <strong>26 Feb 2026</strong></span>
+    <span>Author: <strong>Eugene Nayshtetik</strong></span>
+    <span>Status: <strong>DRAFT v1</strong></span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ════════════════ 1. SITUATION ════════════════ -->
+<h2>1. Situation Analysis</h2>
+
+<h3>What's already working</h3>
+<ul>
+  <li><strong>Successful launch event</strong> — Culturgest Sala 2 was full. High-caliber panelists (Bastonário da OA, Bastonário da OE, SEDES president, ex-CNCS chief)</li>
+  <li><strong>Media coverage</strong> — SOL interview, two iPress Journal articles, LinkedIn traction</li>
+  <li><strong>Instagram presence</strong> — <code>@nacaovalente_pt</code> is live</li>
+  <li><strong>Strong publisher</strong> — PACTOR / Grupo LIDEL handles physical distribution (Bertrand, Wook, FNAC)</li>
+  <li><strong>Timely topic</strong> — Portuguese sovereignty, multipolar world, cybersecurity = headline-relevant</li>
+  <li><strong>Author credibility</strong> — CNCS + defense background, SEDES observatory, regular media contributor</li>
+</ul>
+
+<h3>Gaps to fill</h3>
+<ul>
+  <li>No dedicated website / landing page for the book</li>
+  <li>No paid digital campaign running</li>
+  <li>Limited podcast appearances (the #1 discovery channel for PT nonfiction readers)</li>
+  <li>No Amazon listing optimization (the .co.uk listing exists but is bare)</li>
+  <li>No email list / lead capture for future launches</li>
+  <li>No review solicitation strategy (bookstore comment boxes are empty)</li>
+</ul>
+
+<!-- ════════════════ 2. AUDIENCE ════════════════ -->
+<h2>2. Target Audiences</h2>
+
+<table>
+  <tr><th>Segment</th><th>Profile</th><th>Channel</th><th>Hook</th></tr>
+  <tr>
+    <td><strong>Defense & Security professionals</strong></td>
+    <td>Military, intel, cyber, MNE/MFA, NATO</td>
+    <td>LinkedIn, podcasts</td>
+    <td>4P framework, CNCS credibility</td>
+  </tr>
+  <tr>
+    <td><strong>Policy & academia</strong></td>
+    <td>ISCTE, UNL, think tanks, SEDES network</td>
+    <td>LinkedIn, university events</td>
+    <td>Sovereignty debate, EU reform thesis</td>
+  </tr>
+  <tr>
+    <td><strong>Engaged citizens</strong></td>
+    <td>25-55, politically aware, Observador/Expresso readers</td>
+    <td>Instagram, Meta ads, podcasts</td>
+    <td>"Portugal's place in the world"</td>
+  </tr>
+  <tr>
+    <td><strong>Lusophone diaspora</strong></td>
+    <td>PT expats (UK, FR, DE, LU, CH, BR)</td>
+    <td>Instagram, Amazon</td>
+    <td>National identity, sovereignty pride</td>
+  </tr>
+  <tr>
+    <td><strong>Business leaders</strong></td>
+    <td>CEOs, board members, industry groups</td>
+    <td>LinkedIn, events</td>
+    <td>Prosper pillar, economic strategy</td>
+  </tr>
+</table>
+
+<!-- ════════════════ 3. CHANNELS ════════════════ -->
+<h2>3. Channel Strategy & Unit Economics</h2>
+
+<div class="card-grid">
+  <div class="card">
+    <h4>Meta Ads (Instagram + Facebook)</h4>
+    <p>Portugal CPM: ~&euro;5-8 | CPC: ~&euro;0.40-0.80</p>
+    <p><strong>Best for:</strong> Broad awareness, engaged citizens, diaspora</p>
+    <p><strong>Format:</strong> Short video clips from launch event, quote cards, carousel of 4P pillars</p>
+    <div class="note">&euro;100 = ~15,000 impressions or ~150-250 clicks to bookstore</div>
+  </div>
+
+  <div class="card">
+    <h4>LinkedIn (Organic + Paid)</h4>
+    <p>Portugal CPC: ~&euro;4-6 | CPM: ~&euro;25-35</p>
+    <p><strong>Best for:</strong> Defense/security, policy, business decision-makers</p>
+    <p><strong>Format:</strong> Author thought-leadership posts, event photo carousels, article excerpts</p>
+    <div class="note">Organic is king here. Paid only for boosting top-performing posts.</div>
+  </div>
+
+  <div class="card">
+    <h4>Podcasts & Media</h4>
+    <p>Cost: &euro;0 (earned media)</p>
+    <p><strong>Best for:</strong> Credibility, deep engagement, SEO</p>
+    <p><strong>Targets:</strong> Observador, Expresso, Público, Polititank, RTP</p>
+    <div class="note">Highest ROI channel. One podcast = 10,000+ qualified ears.</div>
+  </div>
+
+  <div class="card">
+    <h4>University & Think Tank Events</h4>
+    <p>Cost: &euro;0-200 (room hire, travel)</p>
+    <p><strong>Best for:</strong> Academic audience, word-of-mouth, long tail</p>
+    <p><strong>Targets:</strong> ISCTE, UNL-FCSH, ICS, IDN, SEDES chapters</p>
+    <div class="note">João already has SEDES connection. Expand to universities.</div>
+  </div>
+
+  <div class="card">
+    <h4>Amazon Optimization</h4>
+    <p>Cost: &euro;0 (metadata only)</p>
+    <p><strong>Best for:</strong> Diaspora, international readers</p>
+    <p><strong>Action:</strong> Fix .co.uk listing: description, keywords, author page, categories</p>
+    <div class="note">Currently bare. A proper listing converts browsing diaspora.</div>
+  </div>
+
+  <div class="card">
+    <h4>Bookstore Reviews (Organic)</h4>
+    <p>Cost: &euro;0</p>
+    <p><strong>Best for:</strong> Social proof on purchase pages</p>
+    <p><strong>Action:</strong> Ask real readers to leave honest reviews</p>
+    <div class="note">See Section 5 for why fake reviews are a bad idea.</div>
+  </div>
+</div>
+
+<!-- ════════════════ 4. BUDGET ════════════════ -->
+<h2>4. Budget Scenarios</h2>
+
+<div class="tier tier-300">
+  <h3>Lean — Sweat Equity + Minimal Spend <span class="amount">&euro;300</span></h3>
+  <table>
+    <tr><th>Item</th><th>Cost</th><th>Expected Result</th></tr>
+    <tr><td>Meta ads — 2-week awareness burst</td><td>&euro;150</td><td>~25K impressions, ~300 clicks</td></tr>
+    <tr><td>LinkedIn post boost (2 top posts)</td><td>&euro;100</td><td>~5K impressions among PT professionals</td></tr>
+    <tr><td>Canva Pro (1 month, ad creatives)</td><td>&euro;13</td><td>Quote cards, carousels, story templates</td></tr>
+    <tr><td>Domain + hosting (landing page)</td><td>&euro;37</td><td>nacaovalente.pt or similar</td></tr>
+    <tr><td colspan="2" style="text-align:right; font-weight:700;">Total</td><td><strong>&euro;300</strong></td></tr>
+  </table>
+  <p><strong>Plus free actions:</strong> Podcast pitches (5-8 shows), Amazon listing optimization, LinkedIn organic content calendar, review solicitation emails to launch attendees, university event outreach</p>
+</div>
+
+<div class="tier tier-500">
+  <h3>Recommended — Balanced Reach + Credibility <span class="amount">&euro;500</span></h3>
+  <table>
+    <tr><th>Item</th><th>Cost</th><th>Expected Result</th></tr>
+    <tr><td>Meta ads — 4-week campaign (2 audiences)</td><td>&euro;250</td><td>~40K impressions, ~500 clicks</td></tr>
+    <tr><td>LinkedIn ad boost (3-4 posts)</td><td>&euro;120</td><td>~7K impressions, defense/policy audience</td></tr>
+    <tr><td>Professional video editing (launch clips)</td><td>&euro;60</td><td>2-3 short clips from Culturgest event</td></tr>
+    <tr><td>Canva Pro + domain + hosting</td><td>&euro;50</td><td>Landing page + all creatives</td></tr>
+    <tr><td>Facebook reading group ads</td><td>&euro;20</td><td>Targeted nonfiction reading communities</td></tr>
+    <tr><td colspan="2" style="text-align:right; font-weight:700;">Total</td><td><strong>&euro;500</strong></td></tr>
+  </table>
+  <p><strong>Plus all free actions from Lean tier</strong>, plus: landing page with email capture, a/b testing on Meta ad creatives, retargeting pixel on landing page for future campaigns</p>
+</div>
+
+<div class="tier tier-1000">
+  <h3>Full Push — Multi-Channel Campaign <span class="amount">&euro;1,000</span></h3>
+  <table>
+    <tr><th>Item</th><th>Cost</th><th>Expected Result</th></tr>
+    <tr><td>Meta ads — 6-week campaign (3 audiences, retargeting)</td><td>&euro;400</td><td>~65K impressions, ~900 clicks</td></tr>
+    <tr><td>LinkedIn sponsored content (4 weeks)</td><td>&euro;250</td><td>~15K impressions among PT decision-makers</td></tr>
+    <tr><td>Professional short-form video production</td><td>&euro;150</td><td>Author interview clip + 4P explainer reel</td></tr>
+    <tr><td>Landing page (professional build)</td><td>&euro;100</td><td>nacaovalente.pt with email capture + analytics</td></tr>
+    <tr><td>Google Ads (branded search)</td><td>&euro;60</td><td>Capture "nacao valente" searchers</td></tr>
+    <tr><td>Canva Pro + tools</td><td>&euro;40</td><td>All creatives for 6 weeks</td></tr>
+    <tr><td colspan="2" style="text-align:right; font-weight:700;">Total</td><td><strong>&euro;1,000</strong></td></tr>
+  </table>
+  <p><strong>Plus all free actions</strong>, plus: retargeting visitors who didn't purchase, A/B test 3+ ad creatives, email nurture sequence, Goodreads author page + giveaway, coordinate with PACTOR on co-promotion</p>
+</div>
+
+<div class="callout">
+  <strong>My recommendation:</strong> Start with <strong>&euro;500</strong> (Recommended tier). The free channels (podcasts, LinkedIn organic, university events, review requests) will do 70% of the heavy lifting. The paid spend amplifies what's already working. If the first 4 weeks show good engagement, scale to &euro;1,000 by adding retargeting and Google branded search.
+</div>
+
+<!-- ════════════════ 5. FAKE REVIEWS ════════════════ -->
+<h2>5. On "Bot Comments" — Why Not, and What Instead</h2>
+
+<div class="callout callout-red">
+  <strong>Do not use bots for bookstore reviews.</strong> Here's why:
+  <ul style="margin-top: 8px;">
+    <li><strong>Detection risk:</strong> Bertrand/Wook (Porto Editora group) and FNAC moderate reviews. Multiple reviews from new accounts, similar writing style, or same IP range will get flagged.</li>
+    <li><strong>Penalty:</strong> Book can be flagged, reviews removed, and in worst case the listing gets deprioritized in search results.</li>
+    <li><strong>Reputation:</strong> João is a cybersecurity professional. If fake reviews are discovered, the irony would be devastating for his credibility — the exact audience he targets (security, defense, policy) would notice.</li>
+    <li><strong>Unnecessary:</strong> The book has a real audience. The Culturgest launch was packed. Real reviews from real readers are achievable.</li>
+  </ul>
+</div>
+
+<div class="callout callout-green">
+  <strong>What to do instead — Organic review generation:</strong>
+  <ul style="margin-top: 8px;">
+    <li><strong>Email the launch attendees</strong> — "Thank you for attending. If you've started reading, a short review on Bertrand/Wook would mean a lot." Include direct links.</li>
+    <li><strong>LinkedIn ask</strong> — Post: "The book is out for a week. If you've read it, I'd love an honest review on [store]." The professional network will respond.</li>
+    <li><strong>Panelist endorsements</strong> — Ask Álvaro Beleza, João Massano, etc. to post their honest take on LinkedIn. One senior endorsement > 50 fake comments.</li>
+    <li><strong>Review copies</strong> — Send 5-10 free copies to journalists, academics, bloggers who cover PT geopolitics. Ask for nothing — just send with a note.</li>
+    <li><strong>Goodreads</strong> — Create the book page, mark it as "currently reading" yourself, invite network. Goodreads reviews are public and boost discoverability.</li>
+  </ul>
+</div>
+
+<!-- ════════════════ 6. PODCAST TARGETS ════════════════ -->
+<h2>6. Podcast & Media Hit List</h2>
+
+<p>These are the highest-ROI targets. One 45-minute podcast appearance reaches more qualified buyers than &euro;200 in ads. Pitch should emphasize the 4P framework as a conversation starter, not a book plug.</p>
+
+<table>
+  <tr><th>Outlet</th><th>Show / Section</th><th>Why</th><th>Priority</th></tr>
+  <tr>
+    <td>Observador</td>
+    <td>Geopolítica podcast (Bruno Cardoso Reis)</td>
+    <td>Perfect topic match — multipolar world, PT sovereignty</td>
+    <td><span class="badge badge-red">HIGH</span></td>
+  </tr>
+  <tr>
+    <td>Expresso</td>
+    <td>Bloco de Leste / International section</td>
+    <td>Ukraine war + European defense = direct relevance</td>
+    <td><span class="badge badge-red">HIGH</span></td>
+  </tr>
+  <tr>
+    <td>Observador</td>
+    <td>Weekly interview (Thursday 13h)</td>
+    <td>Flagship long-form interview, broad audience</td>
+    <td><span class="badge badge-red">HIGH</span></td>
+  </tr>
+  <tr>
+    <td>RTP</td>
+    <td>Prova dos Factos / Sexta as 9</td>
+    <td>National TV reach, cybersecurity angle</td>
+    <td><span class="badge badge-red">HIGH</span></td>
+  </tr>
+  <tr>
+    <td>Polititank</td>
+    <td>Gabinete de Crise</td>
+    <td>Independent think tank — exact audience match</td>
+    <td><span class="badge badge-yellow">MED</span></td>
+  </tr>
+  <tr>
+    <td>Público</td>
+    <td>Politics podcast</td>
+    <td>Left-of-center readership — sovereignty debate generates friction = engagement</td>
+    <td><span class="badge badge-yellow">MED</span></td>
+  </tr>
+  <tr>
+    <td>FFMS</td>
+    <td>[IN]Pertinente podcast</td>
+    <td>Francisco Manuel dos Santos Foundation — credible, policy-focused</td>
+    <td><span class="badge badge-yellow">MED</span></td>
+  </tr>
+  <tr>
+    <td>Diário de Notícias</td>
+    <td>Opinion / interview</td>
+    <td>João already has DN author page — leverage existing relationship</td>
+    <td><span class="badge badge-yellow">MED</span></td>
+  </tr>
+  <tr>
+    <td>CNN Portugal</td>
+    <td>Panel / debate segment</td>
+    <td>Defense/cyber topics get airtime, especially post-NATO summits</td>
+    <td><span class="badge badge-blue">LOW</span></td>
+  </tr>
+  <tr>
+    <td>SIC Notícias</td>
+    <td>Interview / Expresso da Meia Noite</td>
+    <td>Broad reach, requires stronger news hook</td>
+    <td><span class="badge badge-blue">LOW</span></td>
+  </tr>
+</table>
+
+<!-- ════════════════ 7. CONTENT CALENDAR ════════════════ -->
+<h2>7. Content Calendar — First 6 Weeks</h2>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="week">Week 1 (26 Feb — 4 Mar) — FOUNDATION</div>
+    <ul>
+      <li>Set up landing page with purchase links + email capture</li>
+      <li>Optimize Amazon .co.uk listing (description, keywords, author bio)</li>
+      <li>Create Goodreads author page + book listing</li>
+      <li>Design 10 Instagram/LinkedIn content pieces (quote cards, 4P pillars, event photos)</li>
+      <li>Send review request emails to Culturgest attendees</li>
+      <li>Draft podcast pitch email (template + personalization per show)</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="week">Week 2 (5-11 Mar) — OUTREACH BLITZ</div>
+    <ul>
+      <li>Send podcast pitches to all HIGH priority targets</li>
+      <li>Launch Meta ads (Audience 1: PT nonfiction readers, 25-55)</li>
+      <li>Post LinkedIn article: excerpt from most provocative chapter</li>
+      <li>Ask panelists to post their endorsements on LinkedIn</li>
+      <li>Instagram: daily stories for 7 days (behind-the-scenes, writing process, reactions)</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="week">Week 3 (12-18 Mar) — AMPLIFY</div>
+    <ul>
+      <li>Launch Meta ads Audience 2 (PT diaspora: UK, FR, LU, DE, CH)</li>
+      <li>Boost top-performing LinkedIn post</li>
+      <li>Send podcast pitches to MED priority targets</li>
+      <li>Contact 3-5 university departments for speaking invitations</li>
+      <li>Coordinate with PACTOR on any co-marketing opportunities</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="week">Week 4 (19-25 Mar) — OPTIMIZE</div>
+    <ul>
+      <li>Review Meta ad performance — kill underperforming creatives, double budget on winners</li>
+      <li>LinkedIn: share any early reviews, media mentions, or podcast confirmations</li>
+      <li>Send review copies to 5-10 journalists/academics</li>
+      <li>Instagram carousel: "5 decisions Portugal must make" (teaser from book)</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="week">Week 5-6 (26 Mar — 8 Apr) — SUSTAIN</div>
+    <ul>
+      <li>Record first podcast appearances (if confirmed)</li>
+      <li>Confirm and announce second launch event (João mentioned more events coming)</li>
+      <li>LinkedIn op-ed tied to a current news event (using book framework)</li>
+      <li>If &euro;500+ tier: activate retargeting ads for landing page visitors who didn't purchase</li>
+      <li>Begin planning next event (Porto? Coimbra? University setting?)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════ 8. KPIs ════════════════ -->
+<h2>8. Success Metrics</h2>
+
+<table>
+  <tr><th>Metric</th><th>4-Week Target</th><th>8-Week Target</th><th>How to Measure</th></tr>
+  <tr><td>Bookstore page visits (from our campaigns)</td><td>500+</td><td>1,500+</td><td>UTM links + Meta/LinkedIn analytics</td></tr>
+  <tr><td>Organic reviews (Bertrand + Wook + Goodreads)</td><td>5-8</td><td>15-20</td><td>Manual check</td></tr>
+  <tr><td>Podcast appearances confirmed</td><td>1-2</td><td>3-5</td><td>Email tracking</td></tr>
+  <tr><td>LinkedIn post impressions (author profile)</td><td>20K</td><td>50K</td><td>LinkedIn analytics</td></tr>
+  <tr><td>Instagram followers (@nacaovalente_pt)</td><td>+200</td><td>+500</td><td>Instagram insights</td></tr>
+  <tr><td>Email list subscribers</td><td>50</td><td>150</td><td>Landing page form</td></tr>
+  <tr><td>Media mentions (articles, interviews)</td><td>3-5</td><td>8-12</td><td>Google Alerts + manual</td></tr>
+  <tr><td>University/event invitations</td><td>1</td><td>2-3</td><td>Email tracking</td></tr>
+</table>
+
+<!-- ════════════════ 9. WHAT I CAN DO ════════════════ -->
+<h2>9. What I Can Build for João</h2>
+
+<div class="card-grid">
+  <div class="card">
+    <h4>Landing Page</h4>
+    <p>Single-page site with book info, purchase links (Bertrand/Wook/FNAC/Amazon), author bio, press quotes, email signup. Mobile-first.</p>
+    <div class="note">Timeline: 1-2 days | Cost to João: hosting only (~&euro;3/month)</div>
+  </div>
+
+  <div class="card">
+    <h4>Ad Creatives</h4>
+    <p>Instagram/Facebook ad set: 3-5 variations (quote cards, 4P carousel, author photo + CTA). Sized for stories + feed.</p>
+    <div class="note">Timeline: 1 day | Deliverable: PNG/MP4 files ready to upload</div>
+  </div>
+
+  <div class="card">
+    <h4>Meta Ads Campaign Setup</h4>
+    <p>Full campaign structure: audiences, placements, budget allocation, UTM tracking. João runs it from his account.</p>
+    <div class="note">Timeline: half day | Requires: João's Meta Business account access</div>
+  </div>
+
+  <div class="card">
+    <h4>Podcast Pitch Pack</h4>
+    <p>Email templates personalized per show, one-page media kit PDF, suggested talking points, author headshot package.</p>
+    <div class="note">Timeline: 1 day | João sends them from his email</div>
+  </div>
+
+  <div class="card">
+    <h4>LinkedIn Content Calendar</h4>
+    <p>6 weeks of post drafts: mix of book excerpts, opinion pieces, event updates, engagement questions. João reviews + posts.</p>
+    <div class="note">Timeline: 1-2 days | 2-3 posts per week</div>
+  </div>
+
+  <div class="card">
+    <h4>Review Request Campaign</h4>
+    <p>Email template for Culturgest attendees + João's network. Direct links to Bertrand/Wook review pages. Polite, personal tone.</p>
+    <div class="note">Timeline: 2 hours | Most impactful quick win</div>
+  </div>
+</div>
+
+<!-- ════════════════ 10. AI AGENTS ════════════════ -->
+<h2>10. AI Agents — Automated Optimization</h2>
+
+<p>Beyond manual marketing, we can deploy custom AI agents that run continuously — generating content, monitoring news, tracking reviews, and optimizing ads. These are Python scripts using the Claude API and web scraping, scheduled to run on autopilot. <strong>Cost: &euro;0 beyond API usage (~&euro;5-15/month).</strong></p>
+
+<h3>Off-the-Shelf Tools (João signs up directly)</h3>
+
+<table>
+  <tr><th>Tool</th><th>What It Does</th><th>Cost</th></tr>
+  <tr><td><strong>Buffer</strong></td><td>Schedule LinkedIn + Instagram posts in PT, AI suggests optimal posting times</td><td>&euro;6/mo</td></tr>
+  <tr><td><strong>Predis.ai</strong></td><td>Generate Instagram carousels, quote cards, reels from text prompts in Portuguese</td><td>Free / &euro;29/mo</td></tr>
+  <tr><td><strong>Canva AI</strong></td><td>Magic Write for ad copy + AI image generation for creatives</td><td>&euro;13/mo</td></tr>
+  <tr><td><strong>Meta Advantage+</strong></td><td>Meta's built-in AI auto-optimizes audiences, placements, bids in real time</td><td>Free (part of ad spend)</td></tr>
+  <tr><td><strong>Google Alerts</strong></td><td>Monitor "Nação Valente" + "João Annes" mentions across the web</td><td>Free</td></tr>
+</table>
+
+<h3>Custom AI Agents (we build and deploy)</h3>
+
+<div class="agent-card">
+  <h4>Agent 1: Content Generator <span class="agent-tag">PRIORITY 1</span></h4>
+  <div class="agent-meta">Claude API + Python | Runs weekly | Output: 8-12 posts/week</div>
+  <p>Batch-generates 4-6 weeks of Portuguese social media content from book themes, chapter excerpts, and the 4P framework. Tone-locked to João's voice (trained on his LinkedIn posts and SOL interview).</p>
+  <ul>
+    <li><strong>LinkedIn:</strong> Long-form thought leadership posts (500-800 words)</li>
+    <li><strong>Instagram:</strong> Captions, story text, carousel copy, quote card text</li>
+    <li><strong>Variation:</strong> Each theme generates 3 variants for A/B testing</li>
+  </ul>
+  <div class="agent-roi">Replaces 10-15 hours/month of writing. João reviews and posts — the AI drafts, the human approves.</div>
+</div>
+
+<div class="agent-card">
+  <h4>Agent 2: News Hook Monitor <span class="agent-tag">PRIORITY 1</span></h4>
+  <div class="agent-meta">RSS feeds + Claude API | Runs daily 7 AM | Output: email digest</div>
+  <p>Scans Portuguese news every morning for topics João can comment on, linking to his book framework. This is how nonfiction authors stay in the news cycle — reactive PR.</p>
+  <ul>
+    <li><strong>Sources:</strong> Observador, Expresso, Público, DN, Lusa, RTP news feeds</li>
+    <li><strong>Triggers:</strong> Sovereignty, cybersecurity, NATO, defense spending, EU reform, multipolar, migration</li>
+    <li><strong>Output:</strong> "Today's hook: [headline]. Angle: tie to Chapter X, 4P pillar Y. Suggested LinkedIn post draft."</li>
+  </ul>
+  <div class="agent-roi">One timely commentary post = 5-10x engagement vs scheduled content. This agent ensures João never misses a news hook.</div>
+</div>
+
+<div class="agent-card">
+  <h4>Agent 3: Podcast Pitch Writer <span class="agent-tag">PRIORITY 2</span></h4>
+  <div class="agent-meta">Claude API + web research | Runs on demand | Output: personalized emails</div>
+  <p>Researches each target podcast (recent episodes, host style, guest history), then generates a personalized pitch email in Portuguese — from João's perspective, emphasizing why he's the right guest for that specific show.</p>
+  <ul>
+    <li><strong>Input:</strong> Our 10-show hit list from Section 6</li>
+    <li><strong>Output:</strong> Personalized email + 3 suggested talking points per show</li>
+    <li><strong>Extras:</strong> One-page media kit PDF, author headshot package</li>
+  </ul>
+  <div class="agent-roi">10 personalized pitches in 20 minutes vs 4-5 hours manually. João sends from his own email for authenticity.</div>
+</div>
+
+<div class="agent-card">
+  <h4>Agent 4: Review &amp; Mention Tracker <span class="agent-tag">PRIORITY 2</span></h4>
+  <div class="agent-meta">Web scraping + Claude API | Runs daily | Output: weekly report</div>
+  <p>Monitors all bookstore product pages and social media for reviews, ratings, and mentions. This is the ethical, useful alternative to the "bot comments" idea — know when real people talk about the book, then engage authentically.</p>
+  <ul>
+    <li><strong>Monitors:</strong> Bertrand, Wook, FNAC, Goodreads, Amazon.co.uk product pages</li>
+    <li><strong>Social:</strong> Instagram hashtags (#nacaovalente), LinkedIn mentions, Twitter/X</li>
+    <li><strong>Output:</strong> Weekly summary — new reviews, sentiment analysis, notable mentions, suggested responses</li>
+  </ul>
+  <div class="agent-roi">Catches every review and mention within 24 hours. Enables João to thank reviewers personally — building community, not faking it.</div>
+</div>
+
+<div class="agent-card">
+  <h4>Agent 5: Ad Copy Optimizer <span class="agent-tag">PRIORITY 3</span></h4>
+  <div class="agent-meta">Claude API | Runs before each ad cycle | Output: 10-15 ad variants</div>
+  <p>Generates and scores Meta ad copy variations before spending money. Each variant gets a headline, body text, and CTA optimized for a specific audience segment.</p>
+  <ul>
+    <li><strong>Audience-specific:</strong> Defense/security hook vs diaspora hook vs general citizen hook</li>
+    <li><strong>Format-specific:</strong> Feed ads, Story ads, Reels captions — different copy for each</li>
+    <li><strong>Scoring:</strong> Rates each variant on clarity, emotional hook, CTA strength before launch</li>
+  </ul>
+  <div class="agent-roi">Testing 5 copy variants instead of 2 = finding winners faster, lower CPC. Pays for itself in avoided ad waste.</div>
+</div>
+
+<div class="agent-card">
+  <h4>Agent 6: Review Request Sequencer <span class="agent-tag">PRIORITY 3</span></h4>
+  <div class="agent-meta">Claude API + email templates | One-time setup | Output: 3-email sequence</div>
+  <p>Generates a timed email sequence for Culturgest attendees and João's network who bought the book. Personalized, warm, and timed to reading progress — not spammy bulk emails.</p>
+  <ul>
+    <li><strong>Day 1:</strong> "Thank you for your support at the launch"</li>
+    <li><strong>Day 10:</strong> "How are you finding it? I'd love to hear your thoughts"</li>
+    <li><strong>Day 21:</strong> Gentle review request with direct links to Bertrand/Wook/Goodreads</li>
+  </ul>
+  <div class="agent-roi">This is the ethical version of "bot comments" — real reviews from real readers, at scale. 20-30% of recipients typically leave a review.</div>
+</div>
+
+<h3>Orchestration — How They Work Together</h3>
+
+<div class="arch-box">
+<span class="label">Daily (7:00 AM):</span>
+News Hook Monitor scans PT news &#8594; if match found &#8594; drafts reactive LinkedIn post &#8594; sends to João for approval
+
+<span class="label">Daily (8:00 AM):</span>
+Review Tracker checks all bookstore pages + social media &#8594; if new review/mention &#8594; alerts João via Telegram/email
+
+<span class="label">Weekly (Sunday evening):</span>
+Content Generator produces next week's posts &#8594; queues in Buffer &#8594; João reviews Monday morning
+
+<span class="label">On demand:</span>
+Podcast Pitcher researches show &#8594; generates personalized pitch &#8594; drafts email for João to send
+
+<span class="label">Before each ad cycle:</span>
+Ad Copy Optimizer generates 10-15 variants &#8594; scores them &#8594; top 5 go into Meta campaign
+</div>
+
+<div class="callout">
+  <strong>Total agent infrastructure cost:</strong> Claude API ~&euro;5-15/month depending on usage volume. No servers needed — runs on a scheduled laptop or &euro;5/month VPS. The agents don't replace João's voice — they draft, he decides. Every post, every pitch, every response goes through João before it goes public.
+</div>
+
+<!-- ════════════════ 11. NEXT STEPS ════════════════ -->
+<h2>11. Immediate Next Steps</h2>
+
+<ol>
+  <li><strong>João picks a budget tier</strong> (&euro;300 / &euro;500 / &euro;1,000) — or tells us his comfort range</li>
+  <li><strong>Share assets</strong> — High-res book cover, author headshot, any photos/video from Culturgest event</li>
+  <li><strong>Access</strong> — Does João have a Meta Business account? Instagram business profile? Google Analytics?</li>
+  <li><strong>Domain</strong> — Check availability of nacaovalente.pt (or .com) and register if desired</li>
+  <li><strong>Review my content calendar</strong> — adjust priorities based on João's comfort level with public appearances</li>
+  <li><strong>Green light</strong> — We can start building Week 1 deliverables immediately</li>
+</ol>
+
+</div><!-- /container -->
+
+<div class="footer">
+  Prepared by Eugene Nayshtetik | Brave Nation Project | February 2026<br>
+  This document is confidential and intended for João Annes only.
+</div>
+
+</body>
+</html>

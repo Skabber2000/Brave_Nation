@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nacaovalente.com.pt/sitemap.xml
