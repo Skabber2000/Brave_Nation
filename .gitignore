@@ -5,3 +5,4 @@ deploy/
 *_full.*
 *_original.*
 *.zip
+agents/__pycache__/
