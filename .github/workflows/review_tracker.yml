@@ -1,0 +1,46 @@
+name: "Review Tracker — Nação Valente"
+
+on:
+  schedule:
+    # 8:00 AM UTC = 9:00 AM Lisbon (WET/WEST)
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  track-reviews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r agents/requirements.txt
+
+      - name: Run Review Tracker
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_EMAIL: ${{ secrets.SMTP_EMAIL }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          CC_EMAIL: ${{ secrets.CC_EMAIL }}
+        run: python agents/review_tracker.py
+
+      - name: Commit updated review state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add agents/review_state.json
+          git diff --cached --quiet || git commit -m "chore: update review_state.json [skip ci]"
+          git push

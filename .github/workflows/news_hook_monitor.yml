@@ -1,0 +1,33 @@
+name: "News Hook Monitor — Nação Valente"
+
+on:
+  schedule:
+    # 7:00 AM UTC = 8:00 AM Lisbon (WET/WEST)
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+jobs:
+  scan-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r agents/requirements.txt
+
+      - name: Run News Hook Monitor
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_EMAIL: ${{ secrets.SMTP_EMAIL }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          CC_EMAIL: ${{ secrets.CC_EMAIL }}
+        run: python agents/news_hook_monitor.py
