@@ -5,6 +5,12 @@ on:
     # 8:00 AM UTC = 9:00 AM Lisbon (WET/WEST)
     - cron: "0 8 * * *"
   workflow_dispatch:
+    inputs:
+      force_summary:
+        description: "Force send weekly summary (true/false)"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -35,6 +41,7 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
           CC_EMAIL: ${{ secrets.CC_EMAIL }}
+          FORCE_SUMMARY: ${{ github.event.inputs.force_summary }}
         run: python agents/review_tracker.py
 
       - name: Commit updated review state

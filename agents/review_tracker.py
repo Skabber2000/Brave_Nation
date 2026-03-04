@@ -671,8 +671,9 @@ def main() -> None:
     # Weekly summary on Mondays
     # -----------------------------------------------------------------------
     today = datetime.now(timezone.utc)
-    if today.weekday() == 0:  # Monday
-        log.info("Monday — sending weekly summary")
+    force_summary = os.environ.get("FORCE_SUMMARY", "").lower() in ("true", "1", "yes")
+    if today.weekday() == 0 or force_summary:  # Monday or forced
+        log.info("Sending weekly summary (Monday=%s, forced=%s)", today.weekday() == 0, force_summary)
         subject = "\U0001f4ca Na\u00e7\u00e3o Valente \u2014 Resumo Semanal de Reviews"
         html = build_weekly_summary_email(store_summaries)
         send_email(subject, html)
