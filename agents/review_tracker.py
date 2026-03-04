@@ -18,7 +18,7 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 import requests
-from anthropic import Anthropic
+from openai import OpenAI
 from bs4 import BeautifulSoup
 
 # ---------------------------------------------------------------------------
@@ -360,16 +360,16 @@ def parse_amazon(soup: BeautifulSoup) -> dict:
 
 
 def analyze_review(review_text: str) -> str:
-    """Use Claude Haiku to analyze review sentiment and suggest a reply."""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    """Use OpenAI GPT-4o-mini to analyze review sentiment and suggest a reply."""
+    api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
-        log.warning("ANTHROPIC_API_KEY not set — skipping sentiment analysis")
+        log.warning("OPENAI_API_KEY not set — skipping sentiment analysis")
         return "(Sentiment analysis unavailable — API key not configured)"
 
     try:
-        client = Anthropic(api_key=api_key)
-        message = client.messages.create(
-            model="claude-haiku-4-5-20251001",
+        client = OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
             max_tokens=400,
             messages=[
                 {
@@ -383,9 +383,9 @@ def analyze_review(review_text: str) -> str:
                 }
             ],
         )
-        return message.content[0].text
+        return response.choices[0].message.content or ""
     except Exception as exc:
-        log.warning("Claude analysis failed: %s", exc)
+        log.warning("OpenAI analysis failed: %s", exc)
         return f"(Sentiment analysis error: {exc})"
 
 

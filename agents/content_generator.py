@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from anthropic import Anthropic
+from openai import OpenAI
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -42,7 +42,7 @@ THEMES = [
     "Futuro de Portugal",
 ]
 
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "gpt-4o"
 MAX_TOKENS = 4096
 
 # Brand colours (navy / gold)
@@ -127,16 +127,16 @@ Reference nacaovalente.com.pt where natural.\
 
 
 def generate_content(theme: str) -> str:
-    """Call Claude API and return the generated markdown content."""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    """Call OpenAI API and return the generated markdown content."""
+    api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
-        log.error("ANTHROPIC_API_KEY is not set")
+        log.error("OPENAI_API_KEY is not set")
         sys.exit(1)
 
-    client = Anthropic(api_key=api_key)
-    log.info("Calling Claude API (model=%s) ...", MODEL)
+    client = OpenAI(api_key=api_key)
+    log.info("Calling OpenAI API (model=%s) ...", MODEL)
 
-    message = client.messages.create(
+    response = client.chat.completions.create(
         model=MODEL,
         max_tokens=MAX_TOKENS,
         messages=[
@@ -147,13 +147,14 @@ def generate_content(theme: str) -> str:
         ],
     )
 
-    content = message.content[0].text
+    content = response.choices[0].message.content or ""
+    usage = response.usage
     log.info(
-        "Received %d characters (stop_reason=%s, tokens_in=%d, tokens_out=%d)",
+        "Received %d characters (finish_reason=%s, tokens_in=%d, tokens_out=%d)",
         len(content),
-        message.stop_reason,
-        message.usage.input_tokens,
-        message.usage.output_tokens,
+        response.choices[0].finish_reason,
+        usage.prompt_tokens if usage else 0,
+        usage.completion_tokens if usage else 0,
     )
     return content
 

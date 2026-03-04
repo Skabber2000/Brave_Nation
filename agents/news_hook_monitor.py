@@ -5,11 +5,11 @@ Scans Portuguese news RSS feeds daily and identifies commentary
 opportunities for João Annes tied to his book
 "Nação Valente — Decisões Soberanas para Portugal".
 
-Uses Claude API to analyze headlines and draft LinkedIn / Instagram posts.
+Uses OpenAI API to analyze headlines and draft LinkedIn / Instagram posts.
 Sends results via Gmail SMTP.
 
 Required env vars:
-    ANTHROPIC_API_KEY, SMTP_EMAIL, SMTP_PASSWORD, NOTIFY_EMAIL, CC_EMAIL
+    OPENAI_API_KEY, SMTP_EMAIL, SMTP_PASSWORD, NOTIFY_EMAIL, CC_EMAIL
 """
 
 import logging
@@ -22,7 +22,7 @@ from email.mime.text import MIMEText
 from html import escape
 
 import feedparser
-from anthropic import Anthropic
+from openai import OpenAI
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -46,7 +46,7 @@ RSS_FEEDS: dict[str, str] = {
     "RTP": "https://www.rtp.pt/noticias/rss",
 }
 
-CLAUDE_MODEL = "claude-sonnet-4-20250514"
+OPENAI_MODEL = "gpt-4o"
 
 SYSTEM_PROMPT = (
     "You are a media advisor for João Annes, author of "
@@ -133,9 +133,9 @@ def fetch_recent_articles() -> list[dict]:
 # Claude analysis
 # ---------------------------------------------------------------------------
 
-def analyse_with_claude(articles: list[dict]) -> str:
-    """Send article data to Claude and return the analysis text."""
-    client = Anthropic()
+def analyse_with_openai(articles: list[dict]) -> str:
+    """Send article data to OpenAI and return the analysis text."""
+    client = OpenAI()
 
     # Build the user message with all headlines
     lines: list[str] = []
@@ -153,22 +153,19 @@ def analyse_with_claude(articles: list[dict]) -> str:
         + "\n".join(lines)
     )
 
-    log.info("Sending %d articles to Claude (%s) for analysis...", len(articles), CLAUDE_MODEL)
+    log.info("Sending %d articles to OpenAI (%s) for analysis...", len(articles), OPENAI_MODEL)
 
-    message = client.messages.create(
-        model=CLAUDE_MODEL,
+    response = client.chat.completions.create(
+        model=OPENAI_MODEL,
         max_tokens=4096,
         messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_text},
         ],
-        system=SYSTEM_PROMPT,
     )
 
-    # Extract text blocks
-    result_text = "\n".join(
-        block.text for block in message.content if block.type == "text"
-    )
-    log.info("Claude response received (%d chars).", len(result_text))
+    result_text = response.choices[0].message.content or ""
+    log.info("OpenAI response received (%d chars).", len(result_text))
     return result_text
 
 
@@ -278,7 +275,7 @@ def main() -> None:
     subject = f"\U0001f514 Nação Valente — Oportunidades de Media [{today}]"
 
     # Validate required env vars early
-    required_vars = ["ANTHROPIC_API_KEY", "SMTP_EMAIL", "SMTP_PASSWORD", "NOTIFY_EMAIL"]
+    required_vars = ["OPENAI_API_KEY", "SMTP_EMAIL", "SMTP_PASSWORD", "NOTIFY_EMAIL"]
     missing = [v for v in required_vars if not os.environ.get(v)]
     if missing:
         log.error("Missing required environment variables: %s", ", ".join(missing))
@@ -298,7 +295,7 @@ def main() -> None:
 
     # 2. Analyse with Claude
     try:
-        analysis = analyse_with_claude(articles)
+        analysis = analyse_with_openai(articles)
     except Exception:
         log.exception("Claude API call failed.")
         sys.exit(1)
