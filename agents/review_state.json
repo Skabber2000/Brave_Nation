@@ -1,0 +1,11 @@
+{
+  "stores": {
+    "Amazon UK": {
+      "review_count": null,
+      "rating": null,
+      "review_hashes": [],
+      "last_reviews": []
+    }
+  },
+  "last_check": "2026-03-04T06:21:51.534882+00:00"
+}
