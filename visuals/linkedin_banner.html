@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Visuals — Nação Valente</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #e8e4dc;
+    color: #333;
+    padding: 40px 20px;
+    line-height: 1.5;
+  }
+
+  /* ── Brand Tokens ── */
+  :root {
+    --navy:   #1a1a2e;
+    --gold:   #C5A55A;
+    --gold-light: #d4b96e;
+    --warm-bg: #f5f0e8;
+    --white:  #ffffff;
+    --navy-90: rgba(26, 26, 46, 0.9);
+  }
+
+  /* ── Page Header / Instructions ── */
+  .page-header {
+    max-width: 1600px;
+    margin: 0 auto 48px;
+    background: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 32px 40px;
+  }
+  .page-header h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .page-header .subtitle {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  .page-header h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .instructions {
+    background: var(--warm-bg);
+    border-left: 4px solid var(--gold);
+    padding: 20px 24px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+  }
+  .instructions ol {
+    margin-left: 20px;
+  }
+  .instructions li {
+    margin-bottom: 6px;
+  }
+  .instructions code {
+    background: rgba(26,26,46,0.08);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  /* ── Template Wrapper ── */
+  .template-section {
+    max-width: 1600px;
+    margin: 0 auto 60px;
+  }
+  .template-label {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .template-meta {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+
+  /* ── Shared canvas styling ── */
+  .canvas {
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+  .canvas img {
+    display: block;
+  }
+
+  /* ════════════════════════════════════════════
+     1. LinkedIn Profile Banner — 1584 x 396
+     ════════════════════════════════════════════ */
+  .banner-1 {
+    width: 1584px;
+    height: 396px;
+    background:
+      linear-gradient(135deg, var(--navy) 0%, #12122a 60%, #1f1f3d 100%);
+  }
+  /* Gold accent bar across top */
+  .banner-1::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  }
+  /* Subtle diagonal gold gradient in background */
+  .banner-1::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(197,165,90,0.04) 50%, rgba(197,165,90,0.08) 100%);
+    pointer-events: none;
+  }
+
+  .banner-1 .text-block {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 900px;
+    z-index: 2;
+  }
+  .banner-1 .text-block .title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .banner-1 .text-block .subtitle-text {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--white);
+    opacity: 0.92;
+    letter-spacing: 0.5px;
+    line-height: 1.35;
+  }
+  .banner-1 .text-block .bottom-line {
+    margin-top: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.8px;
+    text-transform: none;
+  }
+
+  .banner-1 .cover-block {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .banner-1 .cover-block img {
+    height: 320px;
+    width: auto;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  }
+
+  /* Gold bottom bar */
+  .banner-1 .gold-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    z-index: 2;
+  }
+
+
+  /* ════════════════════════════════════════════
+     2. Book Announcement — 1200 x 627
+     ════════════════════════════════════════════ */
+  .banner-2 {
+    width: 1200px;
+    height: 627px;
+    background:
+      linear-gradient(160deg, var(--navy) 0%, #12122a 100%);
+  }
+  .banner-2::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .banner-2 .layout {
+    display: flex;
+    height: 100%;
+    padding: 50px 60px;
+    align-items: center;
+    gap: 60px;
+  }
+  .banner-2 .cover-side {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .banner-2 .cover-side img {
+    height: 440px;
+    width: auto;
+    border-radius: 4px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  .banner-2 .badge {
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .banner-2 .info-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .banner-2 .info-side .title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .banner-2 .info-side .subtitle-text {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    color: var(--white);
+    opacity: 0.9;
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+  .banner-2 .info-side .author {
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 32px;
+    letter-spacing: 0.3px;
+  }
+  .banner-2 .info-side .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0.6;
+  }
+  .banner-2 .info-side .buy-label {
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .banner-2 .info-side .buy-stores {
+    font-size: 18px;
+    color: var(--white);
+    opacity: 0.85;
+    letter-spacing: 0.5px;
+  }
+  .banner-2 .info-side .url {
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+  }
+
+
+  /* ════════════════════════════════════════════
+     3. Event Recap — 1200 x 627
+     ════════════════════════════════════════════ */
+  .banner-3 {
+    width: 1200px;
+    height: 627px;
+    background:
+      linear-gradient(160deg, var(--navy) 0%, #12122a 100%);
+  }
+  .banner-3::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .banner-3 .content {
+    padding: 56px 70px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .banner-3 .event-tag {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .banner-3 .headline {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    max-width: 800px;
+  }
+  .banner-3 .date {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    color: var(--white);
+    opacity: 0.85;
+    margin-bottom: 36px;
+  }
+
+  .banner-3 .panel-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .banner-3 .panelists {
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.7;
+    opacity: 0.9;
+    max-width: 700px;
+  }
+  .banner-3 .panelists .name {
+    font-weight: 600;
+  }
+  .banner-3 .moderator {
+    margin-top: 16px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+  }
+  .banner-3 .moderator strong {
+    color: rgba(255,255,255,0.75);
+  }
+
+  .banner-3 .cover-corner {
+    position: absolute;
+    right: 70px;
+    bottom: 50px;
+  }
+  .banner-3 .cover-corner img {
+    height: 220px;
+    width: auto;
+    border-radius: 3px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+    opacity: 0.9;
+  }
+
+  .banner-3 .gold-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+
+  /* ════════════════════════════════════════════
+     4. Article Header — 1200 x 644
+     ════════════════════════════════════════════ */
+  .banner-4 {
+    width: 1200px;
+    height: 644px;
+    background:
+      linear-gradient(160deg, var(--navy) 0%, #12122a 70%, #1a1a35 100%);
+  }
+  .banner-4::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .banner-4 .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 80px;
+  }
+
+  .banner-4 .main-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .banner-4 .tagline {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    color: var(--white);
+    opacity: 0.88;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .banner-4 .author-line {
+    font-size: 17px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 48px;
+    letter-spacing: 0.5px;
+  }
+
+  .banner-4 .divider-line {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    opacity: 0.5;
+  }
+
+  .banner-4 .pillars {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+  }
+  .banner-4 .pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .banner-4 .pillar .icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 22px;
+    opacity: 0.85;
+  }
+  .banner-4 .pillar .pillar-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.8px;
+  }
+
+  .banner-4 .pillar-sep {
+    color: var(--gold);
+    opacity: 0.25;
+    font-size: 28px;
+    align-self: center;
+    margin-top: -8px;
+  }
+
+  .banner-4 .gold-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+
+  /* ── Print styles ── */
+  @media print {
+    body {
+      background: #fff;
+      padding: 20px;
+    }
+    .page-header {
+      break-after: page;
+    }
+    .template-section {
+      break-inside: avoid;
+      break-after: page;
+      margin-bottom: 20px;
+    }
+    .canvas {
+      box-shadow: none;
+      border: 1px solid #ccc;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     Instruções
+     ══════════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <h1>LinkedIn Visuals — Nação Valente</h1>
+  <p class="subtitle">Modelos visuais para LinkedIn de "Nação Valente — Decisões Soberanas para Portugal" por João Annes</p>
+
+  <h2>Como exportar as imagens</h2>
+  <div class="instructions">
+    <ol>
+      <li>Abra este ficheiro num navegador (Chrome ou Edge recomendados).</li>
+      <li>Para cada modelo, clique com o botão direito sobre a imagem e selecione <strong>Inspecionar</strong>.</li>
+      <li>No painel DevTools, clique com o botão direito no elemento <code>&lt;div class="canvas ..."&gt;</code> e selecione <strong>Capture node screenshot</strong>.</li>
+      <li>A imagem será guardada com as dimensões exactas em pixels indicadas em cada modelo.</li>
+      <li><strong>Alternativa com Playwright</strong>: Execute o seguinte comando para capturar todos os modelos automaticamente:
+        <br><code>playwright screenshot --selector=".banner-1" linkedin_banner.html banner-1.png</code></li>
+      <li><strong>Alternativa com DevTools</strong>: Use <code>Ctrl+Shift+P</code> &rarr; "Capture node screenshot" depois de selecionar o nó no painel Elements.</li>
+      <li>Verifique que as imagens <code>../img/cover.jpg</code> e <code>../img/author.jpg</code> estão acessíveis.</li>
+    </ol>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     1. LinkedIn Profile Banner — 1584 x 396
+     ══════════════════════════════════════════════════════════ -->
+<div class="template-section">
+  <h2 class="template-label">1. Banner de Perfil LinkedIn</h2>
+  <p class="template-meta">1584 &times; 396 px &mdash; Imagem de fundo do perfil pessoal ou página de empresa</p>
+
+  <div class="canvas banner-1">
+    <div class="text-block">
+      <div class="title">Nação Valente</div>
+      <div class="subtitle-text">Decisões Soberanas para Portugal</div>
+      <div class="bottom-line">nacaovalente.com.pt &nbsp;&middot;&nbsp; Disponível na Bertrand, Wook e FNAC</div>
+    </div>
+    <div class="cover-block">
+      <img src="../img/cover.jpg" alt="Capa do livro Nação Valente">
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     2. LinkedIn Post — Anúncio do Livro — 1200 x 627
+     ══════════════════════════════════════════════════════════ -->
+<div class="template-section">
+  <h2 class="template-label">2. Post LinkedIn — Anúncio do Livro</h2>
+  <p class="template-meta">1200 &times; 627 px &mdash; Imagem para publicação de anúncio</p>
+
+  <div class="canvas banner-2">
+    <div class="layout">
+      <div class="cover-side">
+        <div class="badge">Novo Livro</div>
+        <img src="../img/cover.jpg" alt="Capa do livro Nação Valente">
+      </div>
+      <div class="info-side">
+        <div class="title">Nação Valente</div>
+        <div class="subtitle-text">Decisões Soberanas para Portugal</div>
+        <div class="author">Por João Annes</div>
+        <div class="divider"></div>
+        <div class="buy-label">Comprar</div>
+        <div class="buy-stores">Bertrand &nbsp;&middot;&nbsp; Wook &nbsp;&middot;&nbsp; FNAC</div>
+        <div class="url">nacaovalente.com.pt</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     3. LinkedIn Post — Evento na Culturgest — 1200 x 627
+     ══════════════════════════════════════════════════════════ -->
+<div class="template-section">
+  <h2 class="template-label">3. Post LinkedIn — Resumo do Evento</h2>
+  <p class="template-meta">1200 &times; 627 px &mdash; Imagem para publicação sobre o lançamento</p>
+
+  <div class="canvas banner-3">
+    <div class="content">
+      <div class="event-tag">Lançamento do Livro</div>
+      <div class="headline">Lançamento na Culturgest<br>— Sala Esgotada</div>
+      <div class="date">23 de Fevereiro de 2026</div>
+
+      <div class="panel-label">Painel de Debate</div>
+      <div class="panelists">
+        <span class="name">Álvaro Beleza</span> &nbsp;&middot;&nbsp;
+        <span class="name">João Massano</span> &nbsp;&middot;&nbsp;
+        <span class="name">António Mendonça</span><br>
+        <span class="name">C/A Gameiro Marques</span>
+      </div>
+      <div class="moderator">Moderadora: <strong>Valentina Marcelino</strong></div>
+    </div>
+
+    <div class="cover-corner">
+      <img src="../img/cover.jpg" alt="Capa do livro Nação Valente">
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     4. LinkedIn Article Header — 1200 x 644
+     ══════════════════════════════════════════════════════════ -->
+<div class="template-section">
+  <h2 class="template-label">4. Cabeçalho de Artigo LinkedIn</h2>
+  <p class="template-meta">1200 &times; 644 px &mdash; Imagem para artigos e newsletters LinkedIn</p>
+
+  <div class="canvas banner-4">
+    <div class="content">
+      <div class="main-title">Nação Valente</div>
+      <div class="tagline">Uma proposta para o futuro de Portugal</div>
+      <div class="author-line">Por João Annes</div>
+
+      <div class="divider-line"></div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="icon-circle">
+            <!-- Shield / Prevenir -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="pillar-name">Prevenir</div>
+        </div>
+
+        <div class="pillar-sep">&middot;</div>
+
+        <div class="pillar">
+          <div class="icon-circle">
+            <!-- Lock / Proteger -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+          </div>
+          <div class="pillar-name">Proteger</div>
+        </div>
+
+        <div class="pillar-sep">&middot;</div>
+
+        <div class="pillar">
+          <div class="icon-circle">
+            <!-- Compass / Projetar -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+            </svg>
+          </div>
+          <div class="pillar-name">Projetar</div>
+        </div>
+
+        <div class="pillar-sep">&middot;</div>
+
+        <div class="pillar">
+          <div class="icon-circle">
+            <!-- Trending Up / Prosperar -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/>
+              <polyline points="17,6 23,6 23,12"/>
+            </svg>
+          </div>
+          <div class="pillar-name">Prosperar</div>
+        </div>
+      </div>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+</div>
+
+</body>
+</html>

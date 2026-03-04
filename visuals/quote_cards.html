@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nação Valente — Quote Cards para Instagram</title>
+<style>
+  /* ── Reset & Base ───────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #e8e3db;
+    font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── Page Header ────────────────────────────────────── */
+  .page-header {
+    max-width: 1120px;
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.2rem;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .page-header .subtitle {
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  .page-header .instructions {
+    background: #fff;
+    border: 1px solid #d4cfc5;
+    border-radius: 8px;
+    padding: 18px 28px;
+    display: inline-block;
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.7;
+    text-align: left;
+    max-width: 700px;
+  }
+  .page-header .instructions strong {
+    color: #1a1a2e;
+  }
+  .page-header .instructions code {
+    background: #f5f0e8;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.88rem;
+  }
+
+  /* ── Card Grid ──────────────────────────────────────── */
+  .card-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+  }
+
+  .card-wrapper {
+    position: relative;
+  }
+  .card-wrapper .card-label {
+    font-size: 0.82rem;
+    color: #999;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Base Card ──────────────────────────────────────── */
+  .card {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* ── Colors ─────────────────────────────────────────── */
+  :root {
+    --navy:  #1a1a2e;
+    --navy2: #16213e;
+    --navy3: #0f1626;
+    --gold:  #C5A55A;
+    --gold-light: #d4b96a;
+    --warm:  #f5f0e8;
+    --white: #ffffff;
+  }
+
+  /* ── Scale for screen display ───────────────────────── */
+  @media screen {
+    .card {
+      transform: scale(0.5);
+      transform-origin: top left;
+    }
+    .card-wrapper {
+      width: 540px;
+      height: 540px;
+    }
+  }
+
+  /* ── Print: one card per page ───────────────────────── */
+  @media print {
+    body { background: none; padding: 0; }
+    .page-header { display: none; }
+    .card-grid { display: block; gap: 0; }
+    .card-wrapper { page-break-after: always; margin: 0; padding: 0; }
+    .card-wrapper .card-label { display: none; }
+    .card { transform: none; width: 1080px; height: 1080px; }
+  }
+
+  /* ────────────────────────────────────────────────────
+     CARD VARIANT STYLES
+     ──────────────────────────────────────────────────── */
+
+  /* --- VARIANT A: Classic centered, gold top bar --- */
+  .card.variant-a {
+    background: linear-gradient(160deg, #1f1f38 0%, var(--navy) 40%, var(--navy3) 100%);
+    padding: 100px 110px;
+  }
+  .card.variant-a .accent-top {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    height: 4px;
+    background: var(--gold);
+  }
+  .card.variant-a .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 48px;
+    line-height: 1.45;
+    color: var(--white);
+    font-style: italic;
+    letter-spacing: 0.01em;
+  }
+  .card.variant-a .author {
+    margin-top: 48px;
+    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 24px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card.variant-a .book-title {
+    position: absolute;
+    bottom: 72px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+  .card.variant-a .website {
+    position: absolute;
+    bottom: 40px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* --- VARIANT B: Guillemets with side accent --- */
+  .card.variant-b {
+    background: linear-gradient(180deg, var(--navy) 0%, #12122a 100%);
+    padding: 100px 120px;
+  }
+  .card.variant-b .accent-left {
+    position: absolute;
+    left: 60px; top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 320px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+  .card.variant-b .guillemet-open,
+  .card.variant-b .guillemet-close {
+    font-family: Georgia, serif;
+    font-size: 72px;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.6;
+  }
+  .card.variant-b .guillemet-open { margin-bottom: 16px; }
+  .card.variant-b .guillemet-close { margin-top: 16px; }
+  .card.variant-b .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 46px;
+    line-height: 1.45;
+    color: var(--white);
+    max-width: 800px;
+  }
+  .card.variant-b .author {
+    margin-top: 44px;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card.variant-b .book-title {
+    position: absolute;
+    bottom: 72px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+  .card.variant-b .website {
+    position: absolute;
+    bottom: 40px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* --- VARIANT C: Diamond accent + top/bottom gold lines --- */
+  .card.variant-c {
+    background: linear-gradient(135deg, #1e1e36 0%, var(--navy) 50%, #0d0d1f 100%);
+    padding: 110px 110px;
+  }
+  .card.variant-c .line-top,
+  .card.variant-c .line-bottom {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    height: 1px;
+    width: 500px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .card.variant-c .line-top { top: 100px; }
+  .card.variant-c .line-bottom { bottom: 130px; }
+  .card.variant-c .diamond {
+    width: 14px; height: 14px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    margin-bottom: 40px;
+    flex-shrink: 0;
+  }
+  .card.variant-c .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 46px;
+    line-height: 1.5;
+    color: var(--white);
+    font-style: italic;
+    max-width: 800px;
+  }
+  .card.variant-c .author {
+    margin-top: 48px;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card.variant-c .book-title {
+    position: absolute;
+    bottom: 72px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+  .card.variant-c .website {
+    position: absolute;
+    bottom: 40px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* --- VARIANT D: Large opening quote mark + left-aligned --- */
+  .card.variant-d {
+    background: linear-gradient(200deg, #1f1f38 0%, var(--navy) 50%, #0b0b1e 100%);
+    padding: 100px 110px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .card.variant-d .big-quote {
+    font-family: Georgia, serif;
+    font-size: 200px;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: 40px;
+    left: 70px;
+    line-height: 1;
+    user-select: none;
+  }
+  .card.variant-d .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 46px;
+    line-height: 1.5;
+    color: var(--white);
+    max-width: 860px;
+    position: relative;
+    z-index: 1;
+  }
+  .card.variant-d .author {
+    margin-top: 48px;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card.variant-d .accent-bottom {
+    position: absolute;
+    bottom: 120px; left: 110px;
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+  }
+  .card.variant-d .book-title {
+    position: absolute;
+    bottom: 72px;
+    left: 110px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+  .card.variant-d .website {
+    position: absolute;
+    bottom: 40px;
+    left: 110px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* --- VARIANT E: Circular gold ring background + centered --- */
+  .card.variant-e {
+    background: radial-gradient(ellipse at center, #1f1f3a 0%, var(--navy) 60%, var(--navy3) 100%);
+    padding: 120px 120px;
+  }
+  .card.variant-e .ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 720px;
+    height: 720px;
+    border: 1px solid rgba(197, 165, 90, 0.12);
+    border-radius: 50%;
+  }
+  .card.variant-e .ring-inner {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 620px;
+    height: 620px;
+    border: 1px solid rgba(197, 165, 90, 0.06);
+    border-radius: 50%;
+  }
+  .card.variant-e .accent-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-bottom: 32px;
+    flex-shrink: 0;
+  }
+  .card.variant-e .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 46px;
+    line-height: 1.5;
+    color: var(--white);
+    max-width: 740px;
+    position: relative;
+    z-index: 1;
+  }
+  .card.variant-e .author {
+    margin-top: 44px;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+  .card.variant-e .book-title {
+    position: absolute;
+    bottom: 72px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+    z-index: 1;
+  }
+  .card.variant-e .website {
+    position: absolute;
+    bottom: 40px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+    z-index: 1;
+  }
+
+  /* --- VARIANT F: Horizontal gold rule above & below quote --- */
+  .card.variant-f {
+    background: linear-gradient(170deg, #1a1a30 0%, var(--navy) 45%, #101025 100%);
+    padding: 100px 120px;
+  }
+  .card.variant-f .rule {
+    width: 160px;
+    height: 2px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .card.variant-f .rule-top { margin-bottom: 48px; }
+  .card.variant-f .rule-bottom { margin-top: 48px; }
+  .card.variant-f .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 46px;
+    line-height: 1.5;
+    color: var(--white);
+    font-style: italic;
+    max-width: 800px;
+  }
+  .card.variant-f .author {
+    margin-top: 44px;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card.variant-f .book-title {
+    position: absolute;
+    bottom: 72px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+  .card.variant-f .website {
+    position: absolute;
+    bottom: 40px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* --- VARIANT G: Corner brackets + minimal --- */
+  .card.variant-g {
+    background: linear-gradient(145deg, #1c1c34 0%, var(--navy) 100%);
+    padding: 120px 130px;
+  }
+  .card.variant-g .corner {
+    position: absolute;
+    width: 60px; height: 60px;
+    border-color: var(--gold);
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.4;
+  }
+  .card.variant-g .corner-tl { top: 80px; left: 80px; border-top-width: 2px; border-left-width: 2px; }
+  .card.variant-g .corner-tr { top: 80px; right: 80px; border-top-width: 2px; border-right-width: 2px; }
+  .card.variant-g .corner-bl { bottom: 120px; left: 80px; border-bottom-width: 2px; border-left-width: 2px; }
+  .card.variant-g .corner-br { bottom: 120px; right: 80px; border-bottom-width: 2px; border-right-width: 2px; }
+  .card.variant-g .quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 44px;
+    line-height: 1.5;
+    color: var(--white);
+    max-width: 780px;
+  }
+  .card.variant-g .author {
+    margin-top: 48px;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card.variant-g .book-title {
+    position: absolute;
+    bottom: 62px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+  .card.variant-g .website {
+    position: absolute;
+    bottom: 32px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     PAGE HEADER
+     ════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <h1>Na&#231;&#227;o Valente &#8212; Quote Cards para Instagram</h1>
+  <p class="subtitle">10 cart&#245;es de cita&#231;&#227;o &#8226; 1080 &#215; 1080 px &#8226; Prontos para publica&#231;&#227;o</p>
+  <div class="instructions">
+    <strong>Como utilizar:</strong><br>
+    1. Abrir este ficheiro no navegador (Chrome ou Edge recomendados)<br>
+    2. Clicar com o bot&#227;o direito em cada cart&#227;o &#8594; <code>Guardar imagem como...</code><br>
+    3. Ou utilizar <code>Ctrl+P</code> &#8594; Guardar como PDF (um cart&#227;o por p&#225;gina)<br>
+    4. Para captura exata a 1080&#215;1080, usar extens&#227;o de screenshot do navegador ou ferramenta como ShareX<br>
+    <br>
+    <strong>Nota:</strong> Os cart&#245;es s&#227;o apresentados a 50% no ecr&#227;. O tamanho real &#233; 1080&#215;1080 px.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     CARD GRID
+     ════════════════════════════════════════════════════ -->
+<div class="card-grid">
+
+  <!-- ──────────────── CARD 1 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 1 de 10</div>
+    <div class="card variant-a">
+      <div class="accent-top"></div>
+      <p class="quote">Defendo um Estado forte em que ningu&#233;m &#233; vassalo, todos somos livres.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 2 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 2 de 10</div>
+    <div class="card variant-b">
+      <div class="accent-left"></div>
+      <span class="guillemet-open">&#171;</span>
+      <p class="quote">Portugal n&#227;o &#233; um pa&#237;s pequeno &#8212; &#233; uma pot&#234;ncia atl&#226;ntica por descobrir.</p>
+      <span class="guillemet-close">&#187;</span>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 3 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 3 de 10</div>
+    <div class="card variant-c">
+      <div class="line-top"></div>
+      <div class="diamond"></div>
+      <p class="quote">A ciberseguran&#231;a n&#227;o &#233; um tema t&#233;cnico. &#201; a nova fronteira da soberania.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <div class="line-bottom"></div>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 4 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 4 de 10</div>
+    <div class="card variant-d">
+      <span class="big-quote">&#8220;</span>
+      <p class="quote">Prevenir &#233; mais barato do que reconstruir. Proteger &#233; mais s&#225;bio do que reagir.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <div class="accent-bottom"></div>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 5 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 5 de 10</div>
+    <div class="card variant-e">
+      <div class="ring"></div>
+      <div class="ring-inner"></div>
+      <div class="accent-dot"></div>
+      <p class="quote">Num mundo multipolar, a neutralidade &#233; uma ilus&#227;o. A prepara&#231;&#227;o &#233; uma escolha.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 6 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 6 de 10</div>
+    <div class="card variant-f">
+      <div class="rule rule-top"></div>
+      <p class="quote">A democracia n&#227;o se defende com discursos &#8212; defende-se com literacia e participa&#231;&#227;o.</p>
+      <div class="rule rule-bottom"></div>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 7 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 7 de 10</div>
+    <div class="card variant-g">
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <p class="quote">Projetar Portugal no mundo exige coragem para pensar al&#233;m do ciclo eleitoral.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 8 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 8 de 10</div>
+    <div class="card variant-b">
+      <div class="accent-left"></div>
+      <span class="guillemet-open">&#171;</span>
+      <p class="quote">Prosperidade sem soberania &#233; depend&#234;ncia. Soberania sem prosperidade &#233; fragilidade.</p>
+      <span class="guillemet-close">&#187;</span>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 9 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 9 de 10</div>
+    <div class="card variant-c">
+      <div class="line-top"></div>
+      <div class="diamond"></div>
+      <p class="quote">A seguran&#231;a nacional come&#231;a na educa&#231;&#227;o de cada cidad&#227;o.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <div class="line-bottom"></div>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── CARD 10 ──────────────── -->
+  <div class="card-wrapper">
+    <div class="card-label">Cart&#227;o 10 de 10</div>
+    <div class="card variant-a">
+      <div class="accent-top"></div>
+      <p class="quote">O futuro de Portugal decide-se hoje &#8212; nas escolhas que fazemos como na&#231;&#227;o.</p>
+      <p class="author">&#8212; Jo&#227;o Annes</p>
+      <p class="book-title">NA&#199;&#195;O VALENTE</p>
+      <p class="website">nacaovalente.com.pt</p>
+    </div>
+  </div>
+
+</div><!-- .card-grid -->
+
+</body>
+</html>

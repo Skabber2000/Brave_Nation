@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel 4P — Nação Valente</title>
+<style>
+  /* ── Reset & Base ─────────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:   #1a1a2e;
+    --gold:   #C5A55A;
+    --warm:   #f5f0e8;
+    --red:    #e94560;
+    --white:  #ffffff;
+    --slide:  1080px;
+  }
+
+  body {
+    background: var(--warm);
+    font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--navy);
+    padding: 40px 20px;
+  }
+
+  /* ── Page header (instructions — not part of slides) ── */
+  .page-header {
+    max-width: var(--slide);
+    margin: 0 auto 48px;
+    padding: 28px 32px;
+    background: var(--white);
+    border: 1px solid #d5d0c8;
+    border-radius: 8px;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .page-header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .page-header code {
+    background: #eee8da;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .page-header ul { margin: 10px 0 0 20px; }
+  .page-header li { margin-bottom: 4px; }
+
+  /* ── Slide container ──────────────────────────────────── */
+  .slides-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .slide {
+    width: var(--slide);
+    height: var(--slide);
+    background: var(--navy);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Gold border accent (top + bottom strip) ──────────── */
+  .slide::before,
+  .slide::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gold);
+    z-index: 2;
+  }
+  .slide::before { top: 0; }
+  .slide::after  { bottom: 0; }
+
+  /* ── Inner frame (gold inset border) ──────────────────── */
+  .slide-frame {
+    position: absolute;
+    inset: 32px;
+    border: 1.5px solid rgba(197, 165, 90, 0.35);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Slide content area ───────────────────────────────── */
+  .slide-content {
+    position: relative;
+    z-index: 3;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 72px 80px 80px;
+  }
+
+  /* ── Typography ───────────────────────────────────────── */
+  .heading-main {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.15;
+    letter-spacing: 1px;
+  }
+
+  .heading-pillar {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 62px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 28px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .pillar-number {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 160px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.12;
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    line-height: 1;
+    z-index: 0;
+  }
+
+  .pillar-label {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  /* ── Bullet list ──────────────────────────────────────── */
+  .bullets {
+    list-style: none;
+    margin-top: 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .bullets li {
+    font-size: 26px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.92);
+    padding-left: 36px;
+    position: relative;
+  }
+
+  .bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* ── Gold divider under heading ───────────────────────── */
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin-top: 20px;
+    margin-bottom: 8px;
+    border-radius: 2px;
+  }
+
+  /* ── Swipe / navigation dots ──────────────────────────── */
+  .slide-nav {
+    position: absolute;
+    bottom: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 5;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 1.5px solid rgba(197, 165, 90, 0.5);
+  }
+
+  .dot.active {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  /* ── Slide counter (corner) ───────────────────────────── */
+  .slide-counter {
+    position: absolute;
+    bottom: 44px;
+    right: 60px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 2px;
+    z-index: 5;
+  }
+
+  /* ── Swipe indicator (cover slide) ────────────────────── */
+  .swipe-indicator {
+    position: absolute;
+    bottom: 44px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    z-index: 5;
+  }
+  .swipe-indicator .arrow {
+    font-size: 22px;
+    color: var(--gold);
+    animation: nudge 1.8s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(6px); }
+  }
+
+  /* ── CTA button ───────────────────────────────────────── */
+  .cta {
+    display: inline-block;
+    margin-top: auto;
+    padding: 16px 36px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  /* ── Cover-specific ───────────────────────────────────── */
+  .cover-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cover-center .heading-main {
+    font-size: 82px;
+  }
+
+  .cover-center .subtitle {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+
+  .cover-badge {
+    margin-top: 40px;
+    padding: 10px 28px;
+    border: 1.5px solid var(--gold);
+    border-radius: 4px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--gold);
+    opacity: 0.85;
+  }
+
+  /* ── Decorative corner ornaments (cover) ──────────────── */
+  .corner-ornament {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.4;
+    z-index: 4;
+  }
+  .corner-ornament.tl { top: 48px; left: 48px; border-width: 2px 0 0 2px; }
+  .corner-ornament.tr { top: 48px; right: 48px; border-width: 2px 2px 0 0; }
+  .corner-ornament.bl { bottom: 48px; left: 48px; border-width: 0 0 2px 2px; }
+  .corner-ornament.br { bottom: 48px; right: 48px; border-width: 0 2px 2px 0; }
+
+  /* ── Print styles ─────────────────────────────────────── */
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+    }
+    .page-header {
+      display: none;
+    }
+    .slides-wrapper {
+      gap: 0;
+    }
+    .slide {
+      page-break-after: always;
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .slide:last-child {
+      page-break-after: auto;
+    }
+    @page {
+      size: 1080px 1080px;
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE HEADER — Screenshot Instructions
+     ════════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <h1>Carousel 4P — Nação Valente</h1>
+  <p>5-slide Instagram carousel (1080 &times; 1080 px) for the 4P Framework by João Annes.</p>
+  <ul>
+    <li><strong>Browser screenshot:</strong> Open this file in Chrome, zoom to 100&nbsp;%, then use DevTools
+        &rarr; <code>Ctrl+Shift+P</code> &rarr; "Capture node screenshot" on each <code>.slide</code> element.</li>
+    <li><strong>Playwright / Puppeteer:</strong> Script each <code>.slide</code> div with
+        <code>element.screenshot({ type: 'png' })</code> at the native 1080&times;1080 size.</li>
+    <li><strong>Print to PDF:</strong> Use <code>Ctrl+P</code> with custom page size 1080&times;1080&nbsp;px,
+        margins 0, background graphics enabled.</li>
+  </ul>
+</div>
+
+<div class="slides-wrapper">
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 1 — COVER
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" id="slide-1">
+  <div class="slide-frame"></div>
+  <div class="corner-ornament tl"></div>
+  <div class="corner-ornament tr"></div>
+  <div class="corner-ornament bl"></div>
+  <div class="corner-ornament br"></div>
+
+  <div class="slide-content cover-center">
+    <div class="cover-badge">Estratégia Nacional</div>
+    <h1 class="heading-main" style="margin-top: 32px;">O Framework 4P</h1>
+    <div class="divider" style="margin: 24px auto;"></div>
+    <p class="subtitle">Nação Valente &mdash; João Annes</p>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="slide-nav">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- Swipe indicator -->
+  <div class="swipe-indicator">
+    Swipe <span class="arrow">&rarr;</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 2 — PREVENIR
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" id="slide-2">
+  <div class="slide-frame"></div>
+  <span class="pillar-number">P</span>
+
+  <div class="slide-content">
+    <span class="pillar-label">Pilar 1 de 4</span>
+    <h2 class="heading-pillar">Prevenir</h2>
+    <div class="divider"></div>
+
+    <ul class="bullets">
+      <li>Antecipar ameaças antes que se materializem</li>
+      <li>Investir em inteligência estratégica</li>
+      <li>Construir resiliência institucional</li>
+      <li>Literacia democrática como primeira linha de defesa</li>
+    </ul>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="slide-nav">
+    <span class="dot"></span>
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <div class="slide-counter">1 / 4</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 3 — PROTEGER
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" id="slide-3">
+  <div class="slide-frame"></div>
+  <span class="pillar-number">P</span>
+
+  <div class="slide-content">
+    <span class="pillar-label">Pilar 2 de 4</span>
+    <h2 class="heading-pillar">Proteger</h2>
+    <div class="divider"></div>
+
+    <ul class="bullets">
+      <li>Cibersegurança como pilar da soberania nacional</li>
+      <li>Defesa das infraestruturas críticas</li>
+      <li>Proteção dos dados e privacidade dos cidadãos</li>
+      <li>Fortalecimento das Forças Armadas e NATO</li>
+    </ul>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="slide-nav">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <div class="slide-counter">2 / 4</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 4 — PROJETAR
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" id="slide-4">
+  <div class="slide-frame"></div>
+  <span class="pillar-number">P</span>
+
+  <div class="slide-content">
+    <span class="pillar-label">Pilar 3 de 4</span>
+    <h2 class="heading-pillar">Projetar</h2>
+    <div class="divider"></div>
+
+    <ul class="bullets">
+      <li>Posicionar Portugal como potência atlântica</li>
+      <li>Diplomacia ativa na UE e no espaço lusófono</li>
+      <li>Autonomia estratégica europeia</li>
+      <li>Soft power cultural e científico</li>
+    </ul>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="slide-nav">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot active"></span>
+    <span class="dot"></span>
+  </div>
+
+  <div class="slide-counter">3 / 4</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 5 — PROSPERAR
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" id="slide-5">
+  <div class="slide-frame"></div>
+  <span class="pillar-number">P</span>
+
+  <div class="slide-content">
+    <span class="pillar-label">Pilar 4 de 4</span>
+    <h2 class="heading-pillar">Prosperar</h2>
+    <div class="divider"></div>
+
+    <ul class="bullets">
+      <li>Soberania económica e tecnológica</li>
+      <li>Reindustrialização estratégica</li>
+      <li>Retenção de talento e combate à emigração</li>
+      <li>Prosperidade partilhada e coesão social</li>
+    </ul>
+
+    <a class="cta" href="https://nacaovalente.com.pt" target="_blank">Comprar: nacaovalente.com.pt</a>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="slide-nav">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot active"></span>
+  </div>
+
+  <div class="slide-counter">4 / 4</div>
+</div>
+
+</div><!-- /slides-wrapper -->
+</body>
+</html>
