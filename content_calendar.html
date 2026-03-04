@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário de Conteúdos — Nação Valente | LinkedIn + Instagram</title>
+<style>
+  :root {
+    --gold: #C5A55A;
+    --gold-light: #d4b96e;
+    --gold-faint: rgba(197,165,90,0.12);
+    --navy: #1a1a2e;
+    --navy-dark: #12121f;
+    --warm-bg: #f5f0e8;
+    --warm-bg-alt: #eee8db;
+    --text: #2c2c2c;
+    --text-muted: #6b6560;
+    --white: #ffffff;
+    --linkedin: #0a66c2;
+    --instagram: #e1306c;
+    --story: #833ab4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--warm-bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.4em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.15em;
+    color: #b0a89e;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .header .meta {
+    font-size: 0.9em;
+    color: #8a8078;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Navigation ── */
+  .toc {
+    background: var(--navy-dark);
+    padding: 16px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toc a {
+    color: #b0a89e;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .toc a:hover { color: var(--gold); background: rgba(197,165,90,0.1); }
+
+  /* ── Container ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Week Section ── */
+  .week-section {
+    margin: 48px 0;
+    scroll-margin-top: 60px;
+  }
+  .week-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 24px 32px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .week-header h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.6em;
+  }
+  .week-header h2 span { color: var(--gold); }
+  .week-header .week-dates {
+    font-size: 0.9em;
+    color: #b0a89e;
+    background: rgba(197,165,90,0.1);
+    padding: 4px 14px;
+    border-radius: 4px;
+  }
+  .week-header .week-theme {
+    width: 100%;
+    font-size: 0.95em;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .week-body {
+    background: var(--white);
+    border: 1px solid #e0d8cc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 32px;
+  }
+
+  /* ── Post Card ── */
+  .post-card {
+    margin-bottom: 36px;
+    border-left: 4px solid var(--gold);
+    padding: 0 0 0 24px;
+  }
+  .post-card:last-child { margin-bottom: 0; }
+
+  .post-card.linkedin { border-left-color: var(--linkedin); }
+  .post-card.instagram { border-left-color: var(--instagram); }
+  .post-card.story { border-left-color: var(--story); }
+
+  .post-label {
+    display: inline-block;
+    font-size: 0.72em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .post-label.linkedin { background: var(--linkedin); }
+  .post-label.instagram { background: var(--instagram); }
+  .post-label.story { background: var(--story); }
+
+  .post-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.15em;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .post-day {
+    font-size: 0.82em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .post-content {
+    background: var(--warm-bg);
+    border-radius: 6px;
+    padding: 20px 24px;
+    font-size: 0.93em;
+    line-height: 1.85;
+    white-space: pre-line;
+    color: var(--text);
+  }
+  .post-content strong { color: var(--navy); }
+
+  .hashtags {
+    margin-top: 12px;
+    font-size: 0.85em;
+    color: var(--linkedin);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .hashtags.ig { color: var(--instagram); }
+
+  .post-note {
+    margin-top: 10px;
+    font-size: 0.82em;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 8px 12px;
+    background: var(--gold-faint);
+    border-radius: 4px;
+  }
+
+  /* ── Dividers ── */
+  .platform-divider {
+    border: none;
+    border-top: 2px dashed #e0d8cc;
+    margin: 32px 0;
+  }
+
+  /* ── Quote Cards Section ── */
+  .quotes-section {
+    margin: 56px 0;
+    scroll-margin-top: 60px;
+  }
+  .section-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 24px 32px;
+    border-radius: 8px 8px 0 0;
+  }
+  .section-header h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.6em;
+  }
+  .section-header h2 span { color: var(--gold); }
+  .section-header p {
+    font-size: 0.9em;
+    color: #b0a89e;
+    margin-top: 4px;
+  }
+  .section-body {
+    background: var(--white);
+    border: 1px solid #e0d8cc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 32px;
+  }
+
+  .quote-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .quote-card {
+    background: var(--navy);
+    color: var(--white);
+    padding: 28px 24px;
+    border-radius: 8px;
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .quote-card::before {
+    content: '\201C';
+    font-family: Georgia, serif;
+    font-size: 3.5em;
+    color: var(--gold);
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .quote-card p {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1em;
+    font-style: italic;
+    line-height: 1.6;
+    padding-left: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-card .qnum {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.7em;
+    font-style: normal;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  .quote-card .attribution {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8em;
+    font-style: normal;
+    color: var(--gold);
+    margin-top: 12px;
+    padding-left: 28px;
+  }
+
+  /* ── Hashtag Strategy ── */
+  .hashtag-section {
+    margin: 56px 0;
+    scroll-margin-top: 60px;
+  }
+  .hashtag-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .hashtag-cat {
+    background: var(--warm-bg);
+    border-radius: 8px;
+    padding: 20px 24px;
+    border-top: 3px solid var(--gold);
+  }
+  .hashtag-cat h4 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1em;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .hashtag-cat .tags {
+    font-size: 0.88em;
+    line-height: 2;
+    color: var(--linkedin);
+    font-weight: 500;
+  }
+  .hashtag-cat .tags span {
+    display: inline-block;
+    background: rgba(10,102,194,0.08);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin: 2px 4px 2px 0;
+  }
+
+  /* ── Strategy Notes ── */
+  .strategy-section {
+    margin: 56px 0 64px;
+    scroll-margin-top: 60px;
+  }
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .strategy-card {
+    background: var(--warm-bg);
+    border-radius: 8px;
+    padding: 24px;
+    border-left: 4px solid var(--gold);
+  }
+  .strategy-card h4 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.05em;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .strategy-card p, .strategy-card ul {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .strategy-card ul {
+    padding-left: 18px;
+    margin-top: 6px;
+  }
+  .strategy-card ul li { margin-bottom: 4px; }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy-dark);
+    color: #6b6560;
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 0.85em;
+  }
+  .footer span { color: var(--gold); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.8em; }
+    .week-header h2 { font-size: 1.3em; }
+    .week-body { padding: 20px; }
+    .post-card { padding-left: 16px; }
+    .post-content { padding: 16px; }
+    .quote-grid { grid-template-columns: 1fr; }
+    .hashtag-grid { grid-template-columns: 1fr; }
+    .strategy-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 16px; }
+  }
+
+  @media print {
+    .toc { position: static; }
+    .week-section { break-inside: avoid; }
+    .post-card { break-inside: avoid; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!--                        HEADER                          -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="header">
+  <h1><span>Nacao Valente</span> &mdash; Calendario de Conteudos</h1>
+  <div class="subtitle">Plano Editorial LinkedIn + Instagram &bull; 6 Semanas</div>
+  <div class="meta">
+    <span>Autor: Joao Annes</span>
+    <span>Periodo: 5 Mar &ndash; 13 Abr 2026</span>
+    <span>Plataformas: LinkedIn + Instagram</span>
+    <span>Idioma: Portugues</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!--                      NAVIGATION                        -->
+<!-- ════════════════════════════════════════════════════════ -->
+<nav class="toc">
+  <a href="#semana1">Semana 1</a>
+  <a href="#semana2">Semana 2</a>
+  <a href="#semana3">Semana 3</a>
+  <a href="#semana4">Semana 4</a>
+  <a href="#semana5">Semana 5</a>
+  <a href="#semana6">Semana 6</a>
+  <a href="#citacoes">Citacoes</a>
+  <a href="#hashtags">Hashtags</a>
+  <a href="#estrategia">Estrategia</a>
+</nav>
+
+<div class="container">
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--                     SEMANA 1 — LANCAMENTO + GRATIDAO              -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="week-section" id="semana1">
+  <div class="week-header">
+    <h2>Semana <span>1</span></h2>
+    <div class="week-dates">5 &ndash; 11 Marco 2026</div>
+    <div class="week-theme">Tema: Lancamento &mdash; Recapitulacao e Gratidao</div>
+  </div>
+  <div class="week-body">
+
+    <!-- LI Post 1.1 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">O dia em que a Culturgest esgotou para falar de Portugal</div>
+      <div class="post-day">Quarta-feira, 5 de marco</div>
+      <div class="post-content">Ha uma semana, a Sala 2 da Culturgest encheu para o lancamento do meu primeiro livro, "Nacao Valente &mdash; Decisoes Soberanas para Portugal". Confesso que nao esperava uma sala cheia. Nao se tratava de um evento com figuras mediaticas. Nao havia entretenimento facil. O convite era simples: pensar Portugal num mundo mais incerto.
+
+E as pessoas vieram. Familiares, amigos, colegas, decisores publicos, academicos, estudantes e cidadaos comuns que partilham uma preocupacao: o que sera do nosso pais nos proximos dez anos?
+
+A sessao foi moderada pela Valentina Marcelino e contou com intervencoes de Alvaro Beleza (Presidente da SEDES), Joao Massano (Bastonario da Ordem dos Advogados), Antonio Mendonca (Bastonario da Ordem dos Economistas) e do Contra-Almirante Antonio Gameiro Marques (ex-Autoridade Nacional de Seguranca). Nenhum leu discursos preparados. Todos falaram sem rede, com a honestidade que o momento exige.
+
+O debate que se seguiu confirmou aquilo que senti ao longo dos anos em que trabalhei neste livro: os portugueses querem participar nas decisoes que determinam o seu futuro. Querem um Estado forte &mdash; nao um Estado grande, mas um Estado capaz, estrategico e respeitador das liberdades.
+
+Obrigado a todos os que estiveram presentes. Obrigado a PACTOR Editora e ao Grupo LIDEL por acreditarem neste projeto. E obrigado a quem, nao tendo podido estar, ja encomendou o livro e me tem enviado mensagens.
+
+O lancamento foi o inicio. O debate esta aberto.
+
+Nacao Valente esta disponivel na Bertrand, Wook e FNAC.
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #DecisoesSoberanas #Portugal #SoberaniaPortuguesa #Geopolitica #Ciberseguranca #DefesaNacional #Culturgest #PACTOR #SEDES</div>
+      <div class="post-note">Acompanhar com 2-3 fotografias do evento na Culturgest (sala cheia, mesa de oradores, capa do livro).</div>
+    </div>
+
+    <!-- LI Post 1.2 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">Porque escrevi este livro &mdash; e porque agora</div>
+      <div class="post-day">Sexta-feira, 7 de marco</div>
+      <div class="post-content">Trabalho em ciberseguranca e defesa ha quase duas decadas. Durante esse tempo, fui testemunha privilegiado de como as decisoes &mdash; ou a ausencia delas &mdash; determinam a capacidade de um pais proteger os seus cidadaos.
+
+Escrevi "Nacao Valente" porque acredito que Portugal precisa de um debate serio, informado e sem tabus sobre soberania. Nao um debate partidario. Nao um debate de slogans. Um debate sobre as escolhas estruturais que vao definir se seremos protagonistas ou espectadores no mundo que se esta a redesenhar.
+
+O titulo do livro nao e um apelo ao nacionalismo. E um apelo a coragem civica. A "valentia" de que falo e a de um povo que exige aos seus governantes transparencia, estrategia e visao de longo prazo. E a de um cidadao que se recusa a aceitar a mediocridade como destino.
+
+O livro esta estruturado em torno de quatro pilares &mdash; Prevenir, Proteger, Projetar, Prosperar &mdash; que representam um ciclo virtuoso: so prosperamos se soubermos projetar influencia, so projetamos se soubermos proteger o que temos, e so protegemos se anteciparmos o que vem.
+
+Portugal nao e um pais pequeno. E um pais que precisa de pensar em grande. Este livro e a minha contribuicao para esse pensamento.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Ciberseguranca #DefesaNacional #Portugal #PensamentoEstrategico #SoberaniaPortuguesa #PoliticaPublica #Geopolitica #CNCS</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- IG Post 1.1 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Sala cheia na Culturgest</div>
+      <div class="post-day">Quarta-feira, 5 de marco</div>
+      <div class="post-content">23 de fevereiro de 2026. Sala 2 da Culturgest. Lotacao esgotada.
+
+O "Nacao Valente" nasceu naquela noite &mdash; nao como livro (esse ja existia), mas como debate. As perguntas da plateia duraram quase tanto como as intervencoes dos oradores. E isso diz tudo.
+
+Obrigado a todos os que estiveram. O debate esta aberto.
+
+Livro disponivel: link na bio
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #DecisoesSoberanas #Portugal #Culturgest #LivroPortugues #Lancamento #JoaoAnnes #SoberaniaPortuguesa #PoliticaPortuguesa #DebatePublico #Geopolitica #PACTOR</div>
+      <div class="post-note">Carrossel: 3-5 fotos do evento (sala cheia, oradores, publico, autor com o livro). Primeira imagem forte &mdash; perspetiva da sala lotada.</div>
+    </div>
+
+    <!-- IG Post 1.2 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card &mdash; Citacao principal</div>
+      <div class="post-day">Sabado, 8 de marco</div>
+      <div class="post-content">"Defendo um Estado forte em que ninguem e vassalo, todos somos livres."
+
+&mdash; Nacao Valente, Joao Annes
+
+Disponivel na Bertrand, Wook e FNAC.
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #CitacaoDoDia #SoberaniaPortuguesa #Portugal #EstadoDeDireito #Liberdade #DecisoesSoberanas #PensamentoEstrategico #LivroPortugues</div>
+      <div class="post-note">Imagem: quote card com fundo navy (#1a1a2e), texto em dourado (#C5A55A), tipografia Georgia/serif. Logo "Nacao Valente" discreto no canto inferior.</div>
+    </div>
+
+    <!-- IG Post 1.3 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Agradecimento aos oradores</div>
+      <div class="post-day">Domingo, 9 de marco</div>
+      <div class="post-content">O lancamento do "Nacao Valente" nao teria sido o mesmo sem estes quatro oradores que aceitaram debater, sem rede, o futuro de Portugal:
+
+Alvaro Beleza &mdash; Presidente da SEDES
+Joao Massano &mdash; Bastonario da Ordem dos Advogados
+Antonio Mendonca &mdash; Bastonario da Ordem dos Economistas
+Contra-Almirante Antonio Gameiro Marques &mdash; ex-Autoridade Nacional de Seguranca
+
+Moderacao: Valentina Marcelino
+
+A todos, o meu obrigado. O debate continua.
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #LancamentoLivro #Culturgest #Portugal #SEDES #DebatePublico #DecisoesSoberanas #JoaoAnnes #OrdemDosAdvogados #Geopolitica</div>
+      <div class="post-note">Foto dos 5 oradores na mesa ou montagem individual. Marcar perfis dos oradores quando possivel.</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- Story 1 -->
+    <div class="post-card story">
+      <span class="post-label story">Instagram Story</span>
+      <div class="post-title">Recapitulacao do lancamento em video</div>
+      <div class="post-day">Quinta-feira, 6 de marco</div>
+      <div class="post-content">Sequencia de 4-5 stories:
+1. Video curto (15s) da sala cheia com texto sobreposto: "Culturgest esgotou"
+2. Foto da mesa de oradores + nomes
+3. Momento da assinatura de livros
+4. Screenshot das primeiras reacoes/mensagens recebidas (com autorizacao)
+5. Slide final: "Obrigado. O debate esta aberto." + sticker de link para nacaovalente.com.pt
+
+Musica sugerida: instrumental suave, tom institucional.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--              SEMANA 2 — FRAMEWORK 4P (DEEP DIVE)                  -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="week-section" id="semana2">
+  <div class="week-header">
+    <h2>Semana <span>2</span></h2>
+    <div class="week-dates">12 &ndash; 18 Marco 2026</div>
+    <div class="week-theme">Tema: Os 4 Pilares &mdash; Prevenir, Proteger, Projetar, Prosperar</div>
+  </div>
+  <div class="week-body">
+
+    <!-- LI Post 2.1 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">PREVENIR: A antecipacao como ato de soberania</div>
+      <div class="post-day">Terca-feira, 12 de marco</div>
+      <div class="post-content">Se um pais nao antecipa as ameacas, esta condenado a reagir tarde demais.
+
+No "Nacao Valente", o primeiro pilar que proponho e Prevenir. Nao se trata apenas de defesa militar. Trata-se de construir capacidade estrategica para ler o mundo antes que os acontecimentos nos atropelem.
+
+Portugal viveu, durante decadas, numa logica reativa: respondemos a crises quando elas ja sao evidentes. A pandemia mostrou-nos isso. As ciberameacas mostram-nos isso diariamente. A guerra na Ucrania mostrou-nos isso de forma dramatica.
+
+Prevenir significa investir em inteligencia &mdash; nao apenas a dos servicos, mas a inteligencia coletiva de um pais que compreende os riscos que enfrenta. Significa formar cidadaos que saibam distinguir informacao de desinformacao. Significa ter instituicoes que pensem a 10 e 20 anos, e nao apenas ate ao proximo ciclo eleitoral.
+
+Na minha experiencia em ciberseguranca, aprendi uma coisa fundamental: o custo de prevenir e sempre inferior ao custo de remediar. Um euro investido em prevencao poupa dez em gestao de crise. Isto e verdade para as redes informaticas. E igualmente verdade para a politica nacional.
+
+Portugal precisa de um ecossistema de prevencao &mdash; que inclua prospetiva estrategica, literacia democratica, cooperacao civil-militar e uma cultura institucional que premie quem antecipa, nao apenas quem apaga fogos.
+
+Prevenir nao e pessimismo. E responsabilidade.
+
+Este e o primeiro de quatro pilares que exploro em "Nacao Valente". Os proximos: Proteger, Projetar e Prosperar.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Prevenir #PensamentoEstrategico #Ciberseguranca #Portugal #SoberaniaPortuguesa #Geopolitica #LiteraciaDemocratica #DefesaNacional #PrevenirParaProteger</div>
+    </div>
+
+    <!-- LI Post 2.2 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">PROTEGER: Infraestruturas criticas e a soberania digital</div>
+      <div class="post-day">Quinta-feira, 14 de marco</div>
+      <div class="post-content">Em 2024, Portugal registou milhares de incidentes de ciberseguranca. A maioria nunca chegou aos jornais. Muitos afetaram servicos essenciais. Alguns tinham ligacao a atores estatais.
+
+No "Nacao Valente", o segundo pilar &mdash; Proteger &mdash; aborda a questao central da resiliencia nacional. Nao basta ter um exercito. E preciso proteger o que permite que um pais funcione: as redes eletricas, as comunicacoes, os hospitais, os dados dos cidadaos, o sistema financeiro, os processos democraticos.
+
+Trabalhei durante anos na protecao de infraestruturas criticas nacionais. O que posso dizer e que Portugal fez progressos reais &mdash; a criacao do Centro Nacional de Ciberseguranca, a transposicao da Diretiva NIS, o reforco de capacidades. Mas o fosso entre o ritmo das ameacas e a velocidade da nossa resposta continua a crescer.
+
+Proteger, no seculo XXI, e muito mais do que defesa militar. E proteger a integridade da informacao que os cidadaos recebem. E garantir que uma eleicao nao pode ser manipulada. E assegurar que os dados de saude de milhoes de portugueses nao acabam num mercado negro digital.
+
+E, acima de tudo, e uma questao de soberania. Se dependemos inteiramente de tecnologia, plataformas e infraestruturas controladas por terceiros, somos soberanos apenas no papel.
+
+O segundo pilar de "Nacao Valente" argumenta que proteger nao e um custo &mdash; e um investimento na nossa autonomia.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Proteger #Ciberseguranca #InfraestruturasCriticas #SoberaniaDigital #Portugal #CNCS #DefesaNacional #SegurancaNacional #ResilienciaNacional</div>
+    </div>
+
+    <!-- LI Post 2.3 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">PROJETAR + PROSPERAR: De pais periferico a potencia atlantica</div>
+      <div class="post-day">Sabado, 15 de marco</div>
+      <div class="post-content">Portugal nao e um pais periferico. E um pais atlantico com uma posicao geostrategica que muitas nacoes invejariam. Temos a maior zona economica exclusiva da Europa. Estamos na charneira entre a Europa, a Africa e as Americas. Falamos uma lingua de 260 milhoes de pessoas.
+
+Entao porque e que nos comportamos como se fossemos pequenos?
+
+No "Nacao Valente", o terceiro pilar &mdash; Projetar &mdash; aborda a necessidade de Portugal se afirmar no mundo. Nao com arrogancia, mas com competencia. Atraves da diplomacia, da participacao ativa na NATO e na UE, do reforco da CPLP e de uma politica externa que nao se limite a acompanhar os outros.
+
+E o quarto pilar &mdash; Prosperar &mdash; fecha o ciclo. Porque a projecao externa so e sustentavel se, internamente, criarmos condicoes para que os portugueses nao precisem de emigrar para ter uma vida digna. Prosperidade nao e apenas PIB. E educacao, saude, justica, inovacao e um contrato social que funcione.
+
+Prevenir, Proteger, Projetar, Prosperar. Nao sao quatro temas isolados. Sao um ciclo: cada pilar alimenta o seguinte. E e esse ciclo que proponho como enquadramento para as decisoes soberanas que Portugal precisa de tomar.
+
+O debate e sobre o pais que queremos ser. E esse debate pertence a todos nos.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Projetar #Prosperar #Portugal #PotenciaAtlantica #CPLP #NATO #UniaoEuropeia #EstrategiaPortuguesa #AutonomiaEstrategica #Geopolitica</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- IG Post 2.1 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Carrossel: Os 4 Pilares explicados</div>
+      <div class="post-day">Quarta-feira, 12 de marco</div>
+      <div class="post-content">Como pode Portugal navegar um mundo cada vez mais incerto?
+
+No "Nacao Valente", proponho quatro pilares:
+
+PREVENIR &mdash; Antecipar ameacas antes que se tornem crises.
+PROTEGER &mdash; Defender as infraestruturas criticas e a soberania digital.
+PROJETAR &mdash; Afirmar Portugal no mundo com competencia e visao.
+PROSPERAR &mdash; Criar condicoes internas para uma vida digna.
+
+Quatro verbos. Um ciclo. Um pais inteiro por construir.
+
+Disponivel na Bertrand, Wook e FNAC.
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #4Pilares #Prevenir #Proteger #Projetar #Prosperar #Portugal #SoberaniaPortuguesa #PensamentoEstrategico #LivroPortugues #DecisoesSoberanas #JoaoAnnes</div>
+      <div class="post-note">Carrossel de 5 slides: capa do livro + 1 slide por pilar (fundo navy, icone dourado, texto branco). Design coerente com o site. Formato quadrado 1080x1080.</div>
+    </div>
+
+    <!-- IG Post 2.2 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card &mdash; Prevenir</div>
+      <div class="post-day">Sexta-feira, 14 de marco</div>
+      <div class="post-content">"O custo de prevenir e sempre inferior ao custo de remediar. Isto e verdade para as redes informaticas. E igualmente verdade para a politica nacional."
+
+&mdash; Nacao Valente, Joao Annes
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #Prevenir #PensamentoEstrategico #Ciberseguranca #Portugal #SoberaniaPortuguesa #CitacaoDoDia #LivroPortugues #JoaoAnnes</div>
+    </div>
+
+    <!-- IG Post 2.3 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card &mdash; Projetar</div>
+      <div class="post-day">Domingo, 16 de marco</div>
+      <div class="post-content">"Portugal nao e um pais periferico. E um pais atlantico com uma posicao geostrategica que muitas nacoes invejariam."
+
+&mdash; Nacao Valente, Joao Annes
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #Projetar #PotenciaAtlantica #Portugal #Geopolitica #EstrategiaPortuguesa #CPLP #DecisoesSoberanas #LivroPortugues #JoaoAnnes</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- Story 2 -->
+    <div class="post-card story">
+      <span class="post-label story">Instagram Story</span>
+      <div class="post-title">Quiz interativo: Os 4 Pilares</div>
+      <div class="post-day">Quinta-feira, 13 de marco</div>
+      <div class="post-content">Sequencia de 5 stories:
+1. Slide de abertura: "Conheces os 4 Pilares do Nacao Valente?"
+2. Enquete: "Qual consideras mais urgente para Portugal?" (opcoes: Prevenir / Proteger)
+3. Enquete: "E entre estes dois?" (opcoes: Projetar / Prosperar)
+4. Slide de resposta: "Na verdade, os quatro sao um ciclo &mdash; cada um depende do anterior."
+5. CTA: "Descobre o enquadramento completo no livro" + link sticker nacaovalente.com.pt
+
+Objetivo: engagement + educacao sobre o framework do livro.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--             SEMANA 3 — ATUALIDADE (TIE-IN COM NOTICIAS)           -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="week-section" id="semana3">
+  <div class="week-header">
+    <h2>Semana <span>3</span></h2>
+    <div class="week-dates">19 &ndash; 25 Marco 2026</div>
+    <div class="week-theme">Tema: Atualidade &mdash; Ganchos de Noticias (Defesa UE, NATO, Ciberseguranca)</div>
+  </div>
+  <div class="week-body">
+
+    <!-- LI Post 3.1 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">A Europa esta a reaprender a defender-se. E Portugal?</div>
+      <div class="post-day">Terca-feira, 19 de marco</div>
+      <div class="post-content">Nas ultimas semanas, o debate sobre defesa europeia acelerou como nunca. A Comissao Europeia propoe novos instrumentos de financiamento militar. A Alemanha reve a sua politica de seguranca. A Franca fala de autonomia estrategica. A Policia esta a tornar-se o pilar do flanco leste da NATO.
+
+E Portugal? Onde esta Portugal neste debate?
+
+No "Nacao Valente", argumento que Portugal nao pode ser um espectador passivo da transformacao estrategica da Europa. Temos interesses legitimos, capacidades proprias e uma posicao geostrategica unica. Mas para nos sentarmos a mesa das decisoes, precisamos primeiro de decidir o que queremos.
+
+O 2% do PIB em defesa &mdash; meta da NATO que Portugal consistentemente falha &mdash; nao e apenas um numero. E um sinal politico. E uma demonstracao de compromisso com os nossos aliados e, acima de tudo, com a nossa propria seguranca.
+
+Mas o investimento em defesa nao pode ser cego. Precisamos de uma estrategia clara: onde investir, com quem cooperar, que capacidades desenvolver. Portugal pode ser um parceiro valioso na vigilancia maritima, na ciberseguranca, no espaco e na defesa dos cabos submarinos que transportam 97% das comunicacoes transatlanticas.
+
+O mundo esta a reorganizar-se. Nao ha lugar para os que nao se decidem.
+
+Esta reflexao e central no "Nacao Valente". O debate esta aberto.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #DefesaEuropeia #NATO #Portugal #AutonomiaEstrategica #Geopolitica #UniaoEuropeia #DefesaNacional #SegurancaEuroatlantica #2PorCento</div>
+      <div class="post-note">Adaptar o gancho a noticia concreta da semana (ex.: cimeira NATO, proposta UE de fundo de defesa, etc.).</div>
+    </div>
+
+    <!-- LI Post 3.2 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">A proxima grande ameaca nao vem de tanques &mdash; vem de um ecra</div>
+      <div class="post-day">Quinta-feira, 21 de marco</div>
+      <div class="post-content">Esta semana, mais um caso de ciberataque com impacto em servicos publicos europeus. Ja perdemos a conta. E esse e precisamente o problema: a normalizacao da inseguranca digital.
+
+No "Nacao Valente", dedico uma parte significativa a reflexao sobre ciberseguranca &mdash; nao como questao tecnica, mas como questao de soberania nacional. E uma area em que trabalhei diretamente e sobre a qual tenho convicoes fortes.
+
+Sabemos o seguinte:
+&mdash; As ciberameacas sao a forma mais eficaz e economica de projecao de poder hostil.
+&mdash; Portugal, como membro da NATO e da UE, e um alvo. Nao e uma questao de "se", mas de "quando" e "com que gravidade".
+&mdash; A maioria dos cidadaos nao tem qualquer nocao do nivel de exposicao digital do pais.
+
+Proteger Portugal no ciberespaco exige tres coisas: investimento (real, nao simbolico), talento (que estamos a perder para o estrangeiro) e cooperacao (nacional e internacional).
+
+Mas exige tambem algo mais fundamental: que os decisores politicos compreendam que a ciberseguranca nao e um assunto de tecnicos. E um assunto de Estado. Da mesma forma que nao delegamos a defesa aerea em empresas privadas, nao podemos delegar a defesa digital em boas intencoes.
+
+No mundo de 2026, soberania sem ciberseguranca e uma ficcao.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Ciberseguranca #SoberaniaDigital #CyberSecurity #Portugal #CNCS #DefesaNacional #AmeacasCiberneticas #InfraestruturasCriticas #SegurancaNacional</div>
+      <div class="post-note">Idealmente publicar no mesmo dia ou no dia seguinte a uma noticia relevante de ciberataque ou legislacao europeia de ciberseguranca. Monitorizar: ENISA, CNCS, media PT.</div>
+    </div>
+
+    <!-- LI Post 3.3 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">Desinformacao: a ameaca que nao precisa de armas</div>
+      <div class="post-day">Sabado, 22 de marco</div>
+      <div class="post-content">A desinformacao nao e novidade. A novidade e a escala, a velocidade e a sofisticacao com que e utilizada como arma geopolitica.
+
+No "Nacao Valente", abordo a questao da literacia democratica como pilar de defesa nacional. Pode parecer exagerado. Nao e.
+
+Uma sociedade que nao sabe distinguir um facto de uma narrativa fabricada e uma sociedade vulneravel. E uma sociedade que pode ser manipulada sem que um unico soldado atravesse uma fronteira.
+
+Portugal nao e imune. Vemos, com frequencia crescente, campanhas coordenadas de desinformacao sobre temas sensiveis: imigracao, saude, processos eleitorais, relacoes internacionais. Muitas destas campanhas nao sao espontaneas &mdash; sao desenhadas para fragmentar, polarizar e enfraquecer.
+
+O que proponho no livro e que a literacia democratica seja tratada com a mesma seriedade que a literacia financeira ou a literacia digital. Que se invista em pensamento critico nas escolas. Que os media de qualidade sejam apoiados como servico publico. Que os cidadaos tenham ferramentas para navegar num ambiente informacional cada vez mais contaminado.
+
+Democracia nao e so votar. E compreender o que esta em jogo antes de votar.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Desinformacao #LiteraciaDemocratica #Portugal #PensamentoCritico #SegurancaNacional #Democracia #MediaLiteracy #SoberaniaPortuguesa #Geopolitica</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- IG Post 3.1 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">A Europa esta a rearmar-se. Onde esta Portugal?</div>
+      <div class="post-day">Quarta-feira, 19 de marco</div>
+      <div class="post-content">A Europa esta a viver a maior transformacao em defesa desde o fim da Guerra Fria. Novos orcamentos. Novas capacidades. Novos debates.
+
+E Portugal? Estamos na mesa ou estamos a assistir?
+
+No "Nacao Valente", argumento que Portugal tem uma posicao unica: atlantico, europeu, lusofono. Mas posicao sem estrategia e apenas geografia.
+
+O debate e agora.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #DefesaEuropeia #NATO #Portugal #Geopolitica #AutonomiaEstrategica #UniaoEuropeia #DecisoesSoberanas #JoaoAnnes #DebatePublico</div>
+      <div class="post-note">Imagem: mapa estilizado da Europa com destaque para Portugal. Ou grafico com dados de investimento em defesa NATO.</div>
+    </div>
+
+    <!-- IG Post 3.2 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card &mdash; Ciberseguranca</div>
+      <div class="post-day">Sexta-feira, 21 de marco</div>
+      <div class="post-content">"No mundo de 2026, soberania sem ciberseguranca e uma ficcao."
+
+&mdash; Nacao Valente, Joao Annes
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #Ciberseguranca #SoberaniaDigital #Portugal #SegurancaNacional #CyberSecurity #CitacaoDoDia #JoaoAnnes #LivroPortugues</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- Story 3 -->
+    <div class="post-card story">
+      <span class="post-label story">Instagram Story</span>
+      <div class="post-title">Reacao a noticia da semana</div>
+      <div class="post-day">Terca ou quarta-feira (adaptar ao ciclo noticioso)</div>
+      <div class="post-content">Sequencia de 3-4 stories:
+1. Screenshot ou titulo de noticia relevante (defesa UE, ciberataque, NATO) com destaque
+2. Texto do autor: comentario em 2-3 frases sobre a noticia
+3. "Esta e uma das questoes que abordo no Nacao Valente" + capa do livro
+4. Sticker de pergunta: "Achas que Portugal esta preparado?" (respostas Sim/Nao)
+
+Objetivo: posicionar o autor como comentador credivel de atualidade estrategica.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--             SEMANA 4 — BASTIDORES (PROCESSO DE ESCRITA)            -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="week-section" id="semana4">
+  <div class="week-header">
+    <h2>Semana <span>4</span></h2>
+    <div class="week-dates">26 Mar &ndash; 1 Abr 2026</div>
+    <div class="week-theme">Tema: Bastidores &mdash; Processo de escrita, investigacao e motivacao pessoal</div>
+  </div>
+  <div class="week-body">
+
+    <!-- LI Post 4.1 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">Escrever um livro nao e um ato solitario &mdash; e um ato de escuta</div>
+      <div class="post-day">Terca-feira, 26 de marco</div>
+      <div class="post-content">Quando comecei a escrever o "Nacao Valente", pensei que ia ser um exercicio individual. Rapidamente percebi que estava errado.
+
+Um livro sobre soberania nao pode ser escrito em isolamento. Exige ouvir &mdash; ouvir muito. Conversar com militares, diplomaticos, economistas, juristas, academicos, empresarios, jovens que equacionam emigrar, portugueses na diaspora que observam o pais a distancia.
+
+Cada conversa acrescentou uma camada ao livro. Cada desacordo obrigou-me a rever argumentos. Cada historia pessoal deu corpo a ideias que, de outra forma, seriam apenas abstratas.
+
+Uma das conversas que mais me marcou foi com um oficial das Forcas Armadas que me disse, com uma honestidade desarmante: "O problema nao e falta de talento. E falta de direcao politica." Essa frase ficou comigo durante meses e influenciou profundamente o capitulo sobre defesa nacional.
+
+Outra conversa determinante foi com um jovem engenheiro que me explicou, com numeros na mao, porque ia trabalhar para a Holanda. Nao por falta de patriotismo. Por falta de perspetiva. Esse relato moldou a reflexao sobre Prosperar.
+
+O "Nacao Valente" e, no fundo, o resultado de centenas de conversas com portugueses que se preocupam com o pais. Nao e o meu livro. E o nosso debate.
+
+Obrigado a todos os que contribuiram, direta ou indiretamente. As ideias sao minhas e os erros tambem. Mas a motivacao veio de todos vos.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #ProcessoDeEscrita #Bastidores #Portugal #LivroPortugues #PrimeiroLivro #PACTOR #Escrita #MotivacaoPessoal #DecisoesSoberanas</div>
+    </div>
+
+    <!-- LI Post 4.2 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">Da ciberseguranca a escrita: o mesmo metodo, outro campo de batalha</div>
+      <div class="post-day">Quinta-feira, 28 de marco</div>
+      <div class="post-content">As pessoas perguntam-me frequentemente: "Como e que um profissional de ciberseguranca decide escrever um livro sobre politica?"
+
+A resposta e mais simples do que parece: o metodo e o mesmo.
+
+Em ciberseguranca, trabalhamos com ameacas. Identificamos vulnerabilidades. Avaliamos riscos. Propomos solucoes. E medimos resultados.
+
+Quando olhei para Portugal atraves dessa lente &mdash; a mesma que uso profissionalmente &mdash; vi um pais com ativos extraordinarios e vulnerabilidades preocupantes. Vi ameacas reais e iminentes. E vi uma notavel ausencia de pensamento estrategico integrado.
+
+O "Nacao Valente" nasceu dessa analise. Nao como exercicio academico, mas como tentativa pratica de aplicar ao pais a mesma disciplina que aplicamos a protecao das infraestruturas criticas.
+
+A estrutura do livro reflete isso: Prevenir (threat intelligence), Proteger (defesa ativa), Projetar (resiliencia e projecao) e Prosperar (sustentabilidade). Sao conceitos que qualquer profissional de seguranca reconhece. A novidade e aplica-los a escala de uma nacao.
+
+Nao pretendo ter todas as respostas. Mas a minha experiencia ensinou-me que as perguntas certas valem mais do que as respostas precipitadas. E este livro e, acima de tudo, um conjunto de perguntas que precisamos de fazer.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #Ciberseguranca #CyberSecurity #PensamentoEstrategico #Portugal #ThreatIntelligence #AnáliseDeRisco #LivroPortugues #ProcessoDeEscrita #MetodoAnalítico</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- IG Post 4.1 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Os bastidores do livro</div>
+      <div class="post-day">Quarta-feira, 26 de marco</div>
+      <div class="post-content">Um livro nao nasce num dia. Nasce de meses de investigacao, de centenas de conversas e de madrugadas a reescrever paragrafos.
+
+O "Nacao Valente" comecou como uma intuicao e tornou-se numa convicao: Portugal precisa de um debate serio sobre o seu futuro.
+
+Cada capitulo tem a marca de alguem com quem conversei &mdash; militares, diplomaticos, economistas, jovens que ponderam emigrar.
+
+O livro e meu. Mas o debate e nosso.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #Bastidores #ProcessoDeEscrita #LivroPortugues #Portugal #JoaoAnnes #PrimeiroLivro #PACTOR #EscritaCreativa #DecisoesSoberanas #DebatePublico</div>
+      <div class="post-note">Foto do autor a trabalhar (secretaria, livros abertos, notas manuscritas) ou foto da primeira prova do livro. Tom autentico, nao encenado.</div>
+    </div>
+
+    <!-- IG Post 4.2 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card &mdash; Investigacao</div>
+      <div class="post-day">Sexta-feira, 28 de marco</div>
+      <div class="post-content">"Nao pretendo ter todas as respostas. Mas a minha experiencia ensinou-me que as perguntas certas valem mais do que as respostas precipitadas."
+
+&mdash; Nacao Valente, Joao Annes
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #PensamentoEstrategico #PerguntasCertas #Portugal #JoaoAnnes #LivroPortugues #CitacaoDoDia #Reflexao</div>
+    </div>
+
+    <!-- IG Post 4.3 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">O livro em numeros</div>
+      <div class="post-day">Domingo, 30 de marco</div>
+      <div class="post-content">Nacao Valente em numeros:
+
+232 paginas
+4 pilares
+Meses de investigacao
+Centenas de conversas
+1 convicao: Portugal pode mais.
+
+Disponivel na Bertrand, Wook e FNAC.
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #LivroPortugues #EmNumeros #232paginas #Portugal #JoaoAnnes #PACTOR #DecisoesSoberanas #SoberaniaPortuguesa</div>
+      <div class="post-note">Infografico minimalista com os numeros. Fundo navy, numeros dourados, tipografia limpa. Formato quadrado.</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- Story 4 -->
+    <div class="post-card story">
+      <span class="post-label story">Instagram Story</span>
+      <div class="post-title">Q&amp;A: Perguntas sobre o processo de escrita</div>
+      <div class="post-day">Sabado, 29 de marco</div>
+      <div class="post-content">Sequencia de 5-6 stories:
+1. Slide de abertura: "Perguntem-me sobre o processo de escrita do Nacao Valente" + sticker de perguntas
+2. (Respostas a publicar no dia seguinte ou horas depois)
+3. Resposta 1: "Quanto tempo demorou?" &rarr; resposta do autor
+4. Resposta 2: "Qual foi a parte mais dificil?" &rarr; resposta do autor
+5. Resposta 3: "Quem te influenciou?" &rarr; resposta do autor
+6. Slide final: "Obrigado pelas perguntas. O debate continua." + link
+
+Objetivo: humanizar o autor, criar proximidade com a audiencia.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--             SEMANA 5 — REACOES, REVIEWS E DISCUSSAO               -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="week-section" id="semana5">
+  <div class="week-header">
+    <h2>Semana <span>5</span></h2>
+    <div class="week-dates">2 &ndash; 8 Abril 2026</div>
+    <div class="week-theme">Tema: Reacoes dos Leitores, Reviews e Discussao</div>
+  </div>
+  <div class="week-body">
+
+    <!-- LI Post 5.1 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">As reacoes que nao esperava ao "Nacao Valente"</div>
+      <div class="post-day">Terca-feira, 2 de abril</div>
+      <div class="post-content">Passaram pouco mais de cinco semanas desde o lancamento do "Nacao Valente". Nesse tempo, recebi centenas de mensagens. Algumas eram previsíveis &mdash; colegas de ciberseguranca, profissionais de defesa, academicos. Outras surpreenderam-me profundamente.
+
+Uma mae que me escreveu a dizer que deu o livro ao filho de 17 anos. "Para que perceba que pensar sobre Portugal nao e coisa de velhos." Um emigrante em Berlim que me disse que o livro o fez reconsiderar a possibilidade de regressar. Uma professora universitaria que quer incluir excertos do livro num curso de ciencia politica.
+
+Estas reacoes confirmam algo que ja intuia: o apetite por debate serio sobre Portugal e muito maior do que o discurso politico dominante faz crer. As pessoas querem falar sobre estrategia, sobre soberania, sobre o futuro. Querem ser tratadas como cidadaos adultos, nao como espectadores de um espetaculo mediatico.
+
+Nem todas as reacoes foram positivas &mdash; e ainda bem. Alguns leitores discordam da minha posicao sobre defesa europeia. Outros acham que sou demasiado moderado na critica a determinadas instituicoes. Outros ainda gostariam de mais dados e menos opiniao.
+
+Todas estas criticas sao validas e bem-vindas. Escrevi o livro para abrir um debate, nao para fecha-lo. E o debate so e real quando inclui discordancia.
+
+Obrigado a todos os que leram, comentaram, criticaram, partilharam. Continuem.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #ReacoesLeitores #LivroPortugues #Portugal #DebatePublico #DecisoesSoberanas #Leitura #SoberaniaPortuguesa #Cidadania #PensamentoCritico</div>
+      <div class="post-note">Se houver reviews publicadas (Bertrand, Wook, imprensa), citar com autorizacao. Se houver mensagens de leitores particularmente fortes, pedir autorizacao para partilhar (anonimizando se necessario).</div>
+    </div>
+
+    <!-- LI Post 5.2 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">Um livro nao muda um pais. Um debate pode.</div>
+      <div class="post-day">Quinta-feira, 4 de abril</div>
+      <div class="post-content">Nao tenho ilusoes: um livro, por si so, nao muda nada. Portugal nao vai resolver os seus problemas estrategicos porque alguem escreveu 232 paginas sobre o tema.
+
+Mas um debate pode mudar coisas.
+
+Quando um oficial militar le o "Nacao Valente" e partilha com o seu comandante, algo muda. Quando um deputado le o capitulo sobre defesa e questiona o ministro na Assembleia, algo muda. Quando um jovem le sobre literacia democratica e começa a verificar as fontes antes de partilhar uma noticia, algo muda.
+
+A mudanca nao vem de cima. Nunca veio. Vem de milhares de pequenas decisoes individuais. De cidadaos que decidem que o pais lhes pertence e que a passividade nao e opcao.
+
+O "Nacao Valente" e um convite a essa decisao. Nao um manifesto. Nao um programa politico. Um ponto de partida para uma conversa que deveriamos ter tido ha muito.
+
+E a conversa esta a acontecer. Nas mensagens que recebo. Nos debates que estao a ser organizados. Nas perguntas que me fazem. E nas criticas que me dirigem.
+
+Nacao Valente nao e o meu livro. E o debate de todos nos. E os debates que interessam sao os que nunca acabam.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #DebatePublico #Portugal #Cidadania #MudancaSocial #DecisoesSoberanas #SoberaniaPortuguesa #PensamentoCritico #Participacao #Democracia</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- IG Post 5.1 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Testemunhos de leitores</div>
+      <div class="post-day">Quarta-feira, 2 de abril</div>
+      <div class="post-content">As mensagens que tenho recebido sobre o "Nacao Valente" sao a melhor parte deste caminho.
+
+De colegas de ciberseguranca. De militares. De professores. De jovens. De emigrantes. De pessoas que nunca conheci e que tiraram tempo para me escrever.
+
+A todos: obrigado. O debate e nosso. E continua.
+
+Partilhem as vossas reflexoes nos comentarios ou em mensagem privada. Quero ler-vos.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #Testemunhos #Leitores #LivroPortugues #Portugal #JoaoAnnes #DebatePublico #DecisoesSoberanas #Gratidao #Cidadania #SoberaniaPortuguesa</div>
+      <div class="post-note">Carrossel com 3-5 excertos de mensagens reais de leitores (com autorizacao, anonimizados se necessario). Design limpo: fundo navy, texto branco, aspas douradas.</div>
+    </div>
+
+    <!-- IG Post 5.2 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card &mdash; Debate</div>
+      <div class="post-day">Sexta-feira, 4 de abril</div>
+      <div class="post-content">"Um livro nao muda um pais. Um debate pode."
+
+&mdash; Joao Annes
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #DebatePublico #Portugal #MudancaSocial #Cidadania #JoaoAnnes #LivroPortugues #CitacaoDoDia #Reflexao</div>
+    </div>
+
+    <!-- IG Post 5.3 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Foto do livro "na vida real" dos leitores</div>
+      <div class="post-day">Domingo, 6 de abril</div>
+      <div class="post-content">Onde esta o vosso "Nacao Valente"?
+
+Na secretaria. No metro. Na mesinha de cabeceira. No cafe. Numa mochila de viagem.
+
+Partilhem uma foto com o livro e marquem @nacaovalente_pt. Quero ver onde o debate esta a chegar.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #OndeLes #LivroPortugues #Leitura #Portugal #JoaoAnnes #BookstagramPortugues #DecisoesSoberanas #PACTOR</div>
+      <div class="post-note">Repost das melhores fotos enviadas por leitores. Criar um template Stories para facilitar partilha (moldura com logo Nacao Valente). UGC = user-generated content, excelente para alcance organico.</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- Story 5 -->
+    <div class="post-card story">
+      <span class="post-label story">Instagram Story</span>
+      <div class="post-title">Partilha de reviews e criticas</div>
+      <div class="post-day">Quarta-feira, 2 de abril</div>
+      <div class="post-content">Sequencia de 4-5 stories:
+1. Slide: "O que os leitores estao a dizer sobre o Nacao Valente"
+2. Screenshot de review na Bertrand/Wook (se disponivel) com destaque na frase-chave
+3. Excerto de mensagem de leitor (com autorizacao)
+4. Excerto de eventual artigo de imprensa ou mencao mediatica
+5. Slide final: "E tu, ja leste? Diz-me o que pensas." + sticker de pergunta + link
+
+Objetivo: prova social e incentivo a reviews.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--           SEMANA 6 — VISAO DE FUTURO E PROXIMOS PASSOS            -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="week-section" id="semana6">
+  <div class="week-header">
+    <h2>Semana <span>6</span></h2>
+    <div class="week-dates">9 &ndash; 13 Abril 2026</div>
+    <div class="week-theme">Tema: Visao de Futuro &mdash; Proximos Eventos e o Portugal que Queremos</div>
+  </div>
+  <div class="week-body">
+
+    <!-- LI Post 6.1 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">Que Portugal queremos em 2036?</div>
+      <div class="post-day">Quarta-feira, 9 de abril</div>
+      <div class="post-content">Exercicio de pensamento: estamos em 2036. Passaram dez anos. Que Portugal encontramos?
+
+Cenario A: Portugal continuou a adiar decisoes estrategicas. O investimento em defesa ficou abaixo dos compromissos. A emigracao jovem acelerou. As infraestruturas criticas sofreram dois ciberataques graves com impacto em servicos essenciais. O pais depende cada vez mais de decisoes tomadas em Bruxelas, Washington ou Pequim.
+
+Cenario B: Portugal tomou decisoes dificeis, mas necessarias. Investiu em ciberseguranca e defesa. Reformou a educacao para incluir literacia democratica. Aproveitou a sua posicao atlantica para se tornar um hub de cabos submarinos, energias renovaveis e cooperacao com Africa. Os jovens encontram razoes para ficar &mdash; ou para regressar.
+
+Nenhum destes cenarios e inevitavel. Ambos sao possiveis. A diferenca esta nas decisoes que tomarmos nos proximos anos.
+
+O "Nacao Valente" nao e uma profecia. E um conjunto de propostas para que o Cenario B seja mais provavel do que o Cenario A. E uma tentativa de dizer: o futuro nao acontece &mdash; constroi-se. E constroi-se com decisoes soberanas.
+
+A pergunta que deixo e esta: se pudessem mudar uma coisa em Portugal nos proximos dez anos, o que mudariam?
+
+Respondam nos comentarios. Este e o tipo de conversa que o pais precisa de ter.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #FuturoDePortugal #Portugal2036 #PensamentoEstrategico #DecisoesSoberanas #Portugal #SoberaniaPortuguesa #VisaoDeFuturo #Geopolitica #Cidadania</div>
+      <div class="post-note">Post desenhado para maximizar engagement nos comentarios. Monitorizar e responder a todos os comentarios substantivos. Considerar fixar o melhor comentario.</div>
+    </div>
+
+    <!-- LI Post 6.2 -->
+    <div class="post-card linkedin">
+      <span class="post-label linkedin">LinkedIn</span>
+      <div class="post-title">O debate continua &mdash; proximos passos</div>
+      <div class="post-day">Sexta-feira, 11 de abril</div>
+      <div class="post-content">Seis semanas depois do lancamento do "Nacao Valente", o balanco que faco e de gratidao e de responsabilidade.
+
+Gratidao pelas centenas de leitores que ja adquiriram o livro. Pelas mensagens que recebo. Pelos convites para debater as ideias do livro em universidades, associacoes e empresas. Pela cobertura mediatica generosa.
+
+Responsabilidade porque percebo que o debate que o livro abriu nao pode parar aqui. Um livro e um ponto de partida, nao um ponto de chegada.
+
+Nos proximos meses, quero levar este debate a mais espacos:
+
+&mdash; Sessoes de apresentacao e debate em universidades e instituicoes
+&mdash; Participacao em podcasts e media
+&mdash; Conversas publicas sobre temas concretos do livro: ciberseguranca, defesa, literacia democratica, emigracao, posicionamento estrategico
+&mdash; Dialogo com decisores politicos de todos os quadrantes
+
+Nao tenho partido. Nao tenho agenda eleitoral. Tenho uma convicao: Portugal pode mais do que aquilo que aceita para si proprio. E essa convicao e que me move.
+
+Se a sua organizacao, universidade, associacao ou empresa quiser acolher um debate sobre os temas do "Nacao Valente", estou disponivel. Enviem-me uma mensagem.
+
+O debate pertence a todos. E este debate nao acaba &mdash; continua.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags">#NacaoValente #DebatePublico #Portugal #ProximosPassos #UniversidadesPortuguesas #LivroPortugues #DecisoesSoberanas #SoberaniaPortuguesa #JoaoAnnes #PACTOR</div>
+      <div class="post-note">Este post funciona como CTA para convites a eventos futuros. Incluir link para contacto ou indicar como as instituicoes podem agendar uma sessao.</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- IG Post 6.1 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Que Portugal queremos em 2036?</div>
+      <div class="post-day">Quarta-feira, 9 de abril</div>
+      <div class="post-content">Que Portugal queremos daqui a 10 anos?
+
+Um que continua a adiar decisoes. Ou um que as toma com coragem.
+
+No "Nacao Valente", proponho que o futuro nao acontece &mdash; constroi-se. Com decisoes soberanas.
+
+A pergunta e: se pudesses mudar uma coisa em Portugal, o que mudarias?
+
+Responde nos comentarios.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #FuturoDePortugal #Portugal2036 #DecisoesSoberanas #SoberaniaPortuguesa #JoaoAnnes #DebatePublico #PensamentoEstrategico #LivroPortugues #Cidadania</div>
+      <div class="post-note">Imagem: split visual &mdash; lado esquerdo sombrio (Portugal estagnado), lado direito luminoso (Portugal prospero). Ou simplesmente texto forte sobre fundo navy.</div>
+    </div>
+
+    <!-- IG Post 6.2 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">O debate continua</div>
+      <div class="post-day">Sexta-feira, 11 de abril</div>
+      <div class="post-content">6 semanas. Centenas de leitores. Dezenas de mensagens. Muitas perguntas. Algumas criticas. Zero indiferenca.
+
+O "Nacao Valente" ja nao e so um livro. E um debate. E o debate continua.
+
+Proximas sessoes de apresentacao em breve. Acompanhem.
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #DebatePublico #Portugal #6Semanas #Balanco #JoaoAnnes #LivroPortugues #DecisoesSoberanas #SoberaniaPortuguesa #PACTOR</div>
+    </div>
+
+    <!-- IG Post 6.3 -->
+    <div class="post-card instagram">
+      <span class="post-label instagram">Instagram</span>
+      <div class="post-title">Quote card final &mdash; Valentia</div>
+      <div class="post-day">Domingo, 13 de abril</div>
+      <div class="post-content">"A valentia de que falo nao e a da guerra. E a de um povo que exige aos seus governantes transparencia, estrategia e visao de longo prazo."
+
+&mdash; Nacao Valente, Joao Annes
+
+nacaovalente.com.pt</div>
+      <div class="hashtags ig">#NacaoValente #Valentia #Portugal #Transparencia #VisaoDeFuturo #JoaoAnnes #LivroPortugues #CitacaoDoDia #SoberaniaPortuguesa #Cidadania</div>
+    </div>
+
+    <hr class="platform-divider">
+
+    <!-- Story 6 -->
+    <div class="post-card story">
+      <span class="post-label story">Instagram Story</span>
+      <div class="post-title">Countdown para proximo evento + retrospetiva</div>
+      <div class="post-day">Sabado, 12 de abril</div>
+      <div class="post-content">Sequencia de 5 stories:
+1. Retrospetiva em video (15-30s): o autor agradece as 6 semanas, fala diretamente para a camara
+2. Slide com numeros: "X leitores, X mensagens, X eventos"
+3. Anuncio: "Proxima sessao de apresentacao: [local e data]" (se ja definido)
+4. Enquete: "Que tema do livro gostavas de ver debatido?" (opcoes: Defesa / Ciberseguranca / Emigracao / Democracia)
+5. Slide final: "Obrigado por estarem nesta viagem. Isto e so o inicio." + sticker de link
+
+Objetivo: fechar o ciclo de 6 semanas e abrir o proximo capitulo da promocao.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--               10 TEXTOS PARA QUOTE CARDS (INSTAGRAM)              -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="quotes-section" id="citacoes">
+  <div class="section-header">
+    <h2>10 Textos para <span>Quote Cards</span></h2>
+    <p>Para publicacoes visuais no Instagram &mdash; fundo navy (#1a1a2e), texto dourado (#C5A55A), tipografia Georgia/serif</p>
+  </div>
+  <div class="section-body">
+    <div class="quote-grid">
+
+      <div class="quote-card">
+        <span class="qnum">01</span>
+        <p>Defendo um Estado forte em que ninguem e vassalo, todos somos livres.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">02</span>
+        <p>O custo de prevenir e sempre inferior ao custo de remediar. Isto e verdade para as redes informaticas. E igualmente verdade para a politica nacional.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">03</span>
+        <p>Portugal nao e um pais periferico. E um pais atlantico com uma posicao geostrategica que muitas nacoes invejariam.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">04</span>
+        <p>No mundo de 2026, soberania sem ciberseguranca e uma ficcao.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">05</span>
+        <p>A valentia de que falo nao e a da guerra. E a de um povo que exige aos seus governantes transparencia, estrategia e visao de longo prazo.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">06</span>
+        <p>Democracia nao e so votar. E compreender o que esta em jogo antes de votar.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">07</span>
+        <p>Nao pretendo ter todas as respostas. Mas as perguntas certas valem mais do que as respostas precipitadas.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">08</span>
+        <p>Um livro nao muda um pais. Um debate pode.</p>
+        <div class="attribution">&mdash; Joao Annes</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">09</span>
+        <p>O futuro nao acontece. Constroi-se. E constroi-se com decisoes soberanas.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+      <div class="quote-card">
+        <span class="qnum">10</span>
+        <p>Uma sociedade que nao sabe distinguir um facto de uma narrativa fabricada e uma sociedade vulneravel.</p>
+        <div class="attribution">&mdash; Nacao Valente</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--                     ESTRATEGIA DE HASHTAGS                        -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="hashtag-section" id="hashtags">
+  <div class="section-header">
+    <h2>Estrategia de <span>Hashtags</span></h2>
+    <p>15-20 hashtags organizadas por categoria &mdash; usar 8-12 por publicacao, rotacionar entre categorias</p>
+  </div>
+  <div class="section-body">
+    <div class="hashtag-grid">
+
+      <div class="hashtag-cat">
+        <h4>Marca / Livro</h4>
+        <div class="tags">
+          <span>#NacaoValente</span>
+          <span>#DecisoesSoberanas</span>
+          <span>#JoaoAnnes</span>
+          <span>#PACTOR</span>
+          <span>#LivroPortugues</span>
+        </div>
+      </div>
+
+      <div class="hashtag-cat">
+        <h4>Temas Estrategicos</h4>
+        <div class="tags">
+          <span>#SoberaniaPortuguesa</span>
+          <span>#Geopolitica</span>
+          <span>#DefesaNacional</span>
+          <span>#PensamentoEstrategico</span>
+          <span>#AutonomiaEstrategica</span>
+        </div>
+      </div>
+
+      <div class="hashtag-cat">
+        <h4>Ciberseguranca e Tecnologia</h4>
+        <div class="tags">
+          <span>#Ciberseguranca</span>
+          <span>#SoberaniaDigital</span>
+          <span>#CyberSecurity</span>
+          <span>#InfraestruturasCriticas</span>
+        </div>
+      </div>
+
+      <div class="hashtag-cat">
+        <h4>Democracia e Sociedade</h4>
+        <div class="tags">
+          <span>#LiteraciaDemocratica</span>
+          <span>#Democracia</span>
+          <span>#Cidadania</span>
+          <span>#DebatePublico</span>
+        </div>
+      </div>
+
+      <div class="hashtag-cat">
+        <h4>Portugal e Europa</h4>
+        <div class="tags">
+          <span>#Portugal</span>
+          <span>#PotenciaAtlantica</span>
+          <span>#FuturoDePortugal</span>
+          <span>#UniaoEuropeia</span>
+          <span>#NATO</span>
+        </div>
+      </div>
+
+      <div class="hashtag-cat">
+        <h4>Leitura e Cultura</h4>
+        <div class="tags">
+          <span>#BookstagramPortugues</span>
+          <span>#Leitura</span>
+          <span>#CitacaoDoDia</span>
+          <span>#PoliticaPortuguesa</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 28px; padding: 20px; background: var(--gold-faint); border-radius: 8px; border-left: 4px solid var(--gold);">
+      <h4 style="font-family: Georgia, 'Times New Roman', serif; color: var(--navy); margin-bottom: 8px;">Notas de Utilizacao</h4>
+      <ul style="font-size: 0.9em; color: var(--text-muted); line-height: 1.8; padding-left: 18px;">
+        <li><strong>LinkedIn:</strong> 5-8 hashtags no final do post. Incluir sempre #NacaoValente + 2-3 tematicos + 1-2 de alcance amplo (#Portugal, #Geopolitica).</li>
+        <li><strong>Instagram feed:</strong> 10-15 hashtags. Primeira linha no comentario, nao na legenda. Rotar entre categorias para nao repetir exatamente o mesmo conjunto.</li>
+        <li><strong>Instagram Stories:</strong> 1-3 hashtags maximo (podem ser escondidos sob stickers). Sempre #NacaoValente.</li>
+        <li><strong>#NacaoValente</strong> e o hashtag ancora &mdash; usar em todas as publicacoes sem excecao.</li>
+        <li><strong>#CyberSecurity</strong> (ingles) e usado estrategicamente para alcance internacional no LinkedIn.</li>
+        <li>Monitorizar hashtags concorrentes/complementares e ajustar mensalmente.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--                     NOTAS ESTRATEGICAS                            -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="strategy-section" id="estrategia">
+  <div class="section-header">
+    <h2>Notas <span>Estrategicas</span></h2>
+    <p>Orientacoes gerais para execucao do calendario de conteudos</p>
+  </div>
+  <div class="section-body">
+    <div class="strategy-grid">
+
+      <div class="strategy-card">
+        <h4>Tom e Voz</h4>
+        <p>Profissional, ponderado, institucional. Nunca promocional ou vendedor. O autor fala como especialista e cidadao, nao como influencer. Autoridade vem da experiencia, nao da autopromoção.</p>
+        <ul>
+          <li>Evitar superlativos ("o melhor", "imperdivel")</li>
+          <li>Evitar apelos diretos a compra (exceto CTA discreto no final)</li>
+          <li>Privilegiar o debate sobre a venda</li>
+          <li>Usar primeira pessoa ("acredito", "proponho") com parcimonia</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h4>Frequencia e Timing</h4>
+        <p>Cadencia recomendada por semana:</p>
+        <ul>
+          <li><strong>LinkedIn:</strong> 2-3 posts (ter/qui/sab, entre 8h-10h ou 18h-19h)</li>
+          <li><strong>Instagram feed:</strong> 2-3 posts (qua/sex/dom, entre 12h-14h ou 19h-21h)</li>
+          <li><strong>Instagram Stories:</strong> 1-2 por semana (nao saturar)</li>
+          <li>Adaptar timing ao ciclo noticioso quando o tema e atualidade</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h4>Conteudo Visual</h4>
+        <p>Identidade coerente com o site nacaovalente.com.pt:</p>
+        <ul>
+          <li>Fundo navy (#1a1a2e) + texto/elementos dourados (#C5A55A)</li>
+          <li>Tipografia: Georgia ou serif elegante para citacoes</li>
+          <li>Fotografias reais (evento, autor, livro) > stock photos</li>
+          <li>Quote cards: formato quadrado 1080x1080, minimalistas</li>
+          <li>Carrosseis: 5-7 slides maximo, coerencia visual entre slides</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h4>Engagement e Comunidade</h4>
+        <p>Regras de interacao:</p>
+        <ul>
+          <li>Responder a todos os comentarios substantivos em 24h</li>
+          <li>Agradecer partilhas publicamente</li>
+          <li>Nao entrar em polemicas partidarias &mdash; redirecionar para debate de ideias</li>
+          <li>Fazer repost de conteudo de leitores (com autorizacao)</li>
+          <li>Convidar leitores a partilhar reflexoes nos comentarios</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h4>Metricas a Monitorizar</h4>
+        <ul>
+          <li><strong>LinkedIn:</strong> Impressoes, engagement rate, cliques no link, novos seguidores, mensagens recebidas</li>
+          <li><strong>Instagram:</strong> Alcance, saves, shares, cliques no link da bio, crescimento de seguidores</li>
+          <li><strong>Vendas:</strong> Correlacao temporal entre posts de maior engagement e vendas (pedir dados a PACTOR se possivel)</li>
+          <li><strong>Qualitativo:</strong> Tipo de mensagens recebidas, convites para eventos, mencoes mediaticas</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h4>Adaptacao e Flexibilidade</h4>
+        <p>Este calendario e um guia, nao uma prisao:</p>
+        <ul>
+          <li>Se houver noticia forte (ciberataque, decisao NATO, debate parlamentar), antecipar ou adiar posts para aproveitar o momento</li>
+          <li>Se uma publicacao tiver performance excecional, considerar um follow-up imediato</li>
+          <li>Se um tema gerar polemíca indesejada, pausar e reavaliar antes do post seguinte</li>
+          <li>Adaptar o conteudo da Semana 3 ao ciclo noticioso real</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!--                           FOOTER                                  -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="footer">
+  <p><span>Nacao Valente</span> &mdash; Calendario de Conteudos &bull; 6 Semanas &bull; Marco&ndash;Abril 2026</p>
+  <p style="margin-top: 4px;">Documento interno de planeamento editorial &bull; <span>nacaovalente.com.pt</span></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Podcast Pitch Pack — Nação Valente | João Annes</title>
+<style>
+  :root {
+    --navy: #1a1a2e;
+    --dark: #16213e;
+    --gold: #C5A55A;
+    --gold-light: #e8d9a8;
+    --light: #f5f5f0;
+    --text: #2c2c2c;
+    --muted: #6b7280;
+    --white: #ffffff;
+    --border: #e5e7eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @media print {
+    body { font-size: 11pt; }
+    .hero { padding: 30px 20px 24px; }
+    .hero h1 { font-size: 1.8em; }
+    .container { padding: 20px 16px; }
+    h2 { margin-top: 28px; page-break-after: avoid; }
+    .pitch-card, .media-kit { page-break-inside: avoid; }
+    .no-print { display: none; }
+    a { color: var(--navy); text-decoration: none; }
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    background: var(--light);
+    line-height: 1.65;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--dark) 60%, #0f3460 100%);
+    color: white;
+    padding: 56px 40px 44px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle {
+    font-size: 1.15em;
+    color: #b0b8c8;
+    margin-bottom: 20px;
+  }
+  .hero .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 0.92em;
+    color: #8899b0;
+  }
+  .hero .meta-row strong { color: white; }
+
+  /* ── Container ── */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* ── Section Headers ── */
+  h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5em;
+    color: var(--navy);
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 8px;
+    margin: 48px 0 20px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h2 .en { font-weight: 400; font-size: 0.75em; color: var(--muted); }
+
+  h3 {
+    font-size: 1.1em;
+    color: var(--dark);
+    margin: 20px 0 8px;
+  }
+
+  p { margin-bottom: 12px; font-size: 0.96em; }
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { margin-bottom: 6px; font-size: 0.95em; }
+
+  strong { color: var(--navy); }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Template Box ── */
+  .template-box {
+    background: var(--white);
+    border: 2px dashed var(--gold);
+    border-radius: 10px;
+    padding: 28px 28px 20px;
+    margin: 20px 0 32px;
+    position: relative;
+  }
+  .template-box::before {
+    content: 'MODELO / TEMPLATE';
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 3px 12px;
+    border-radius: 4px;
+  }
+  .template-box .field {
+    background: #fef9c3;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #854d0e;
+  }
+  .template-box p { margin-bottom: 14px; }
+  .template-box .subject-line {
+    font-weight: 700;
+    font-size: 1.05em;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Pitch Cards ── */
+  .pitch-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 28px;
+    margin: 24px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 5px solid var(--gold);
+  }
+  .pitch-card .show-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pitch-card .show-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .pitch-card .show-detail {
+    font-size: 0.85em;
+    color: var(--muted);
+  }
+  .pitch-card .priority {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .priority-high { background: #fee2e2; color: #991b1b; }
+  .priority-med  { background: #fef9c3; color: #854d0e; }
+
+  .pitch-card .pitch-body {
+    margin-bottom: 16px;
+  }
+  .pitch-card .pitch-body p {
+    margin-bottom: 12px;
+  }
+  .pitch-card .subject-line {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.97em;
+    margin-bottom: 12px;
+  }
+
+  .talking-points {
+    background: #f8f6f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+  .talking-points h4 {
+    font-size: 0.88em;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .talking-points ol {
+    padding-left: 20px;
+  }
+  .talking-points li {
+    margin-bottom: 8px;
+    font-size: 0.93em;
+  }
+  .talking-points li strong {
+    color: var(--dark);
+  }
+
+  /* ── Media Kit ── */
+  .media-kit {
+    background: var(--navy);
+    color: white;
+    border-radius: 12px;
+    padding: 36px 32px;
+    margin: 32px 0 0;
+  }
+  .media-kit h2 {
+    color: var(--gold);
+    border-bottom-color: rgba(197,165,90,0.4);
+    margin-top: 0;
+  }
+  .media-kit h3 {
+    color: var(--gold-light);
+    margin-top: 24px;
+  }
+  .media-kit p, .media-kit li {
+    color: #c8cdd6;
+  }
+  .media-kit strong {
+    color: white;
+  }
+  .media-kit a {
+    color: var(--gold-light);
+  }
+
+  .kit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 20px 0;
+  }
+  @media (max-width: 640px) {
+    .kit-grid { grid-template-columns: 1fr; }
+  }
+  .kit-block {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .kit-block h4 {
+    color: var(--gold);
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .kit-block p {
+    margin-bottom: 6px;
+    font-size: 0.92em;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .stat {
+    background: rgba(197,165,90,0.12);
+    border: 1px solid rgba(197,165,90,0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+  .stat .number {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat .label {
+    font-size: 0.78em;
+    color: #8899b0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .video-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .video-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .video-list li:last-child { border-bottom: none; }
+  .video-list .video-title { color: white; font-weight: 600; }
+  .video-list .video-host { color: #8899b0; font-size: 0.85em; }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ── Tips Section ── */
+  .tips {
+    background: #fffbe6;
+    border: 1px solid #f0e4a8;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .tips h4 {
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .tips li {
+    font-size: 0.92em;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 0.82em;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <h1><span>Nacao Valente</span> &mdash; Podcast Pitch Pack</h1>
+  <p class="subtitle">Guia de contacto para podcasts &amp; programas de debate &bull; Joao Annes</p>
+  <div class="meta-row">
+    <span><strong>Livro:</strong> Decisoes Soberanas para Portugal</span>
+    <span><strong>Editora:</strong> PACTOR (Grupo LIDEL)</span>
+    <span><strong>Lancamento:</strong> 23 Fev 2026</span>
+    <span><strong>Site:</strong> nacaovalente.com.pt</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 1: TEMPLATE GENERICO
+     ════════════════════════════════════════════════════════════════ -->
+<h2>1. Modelo Generico de Pitch <span class="en">/ Generic Pitch Template</span></h2>
+
+<p>O modelo abaixo pode ser adaptado para qualquer podcast, programa de televisao ou radio. Os campos a <span style="background:#fef9c3;padding:1px 4px;border-radius:3px;">amarelo</span> devem ser personalizados para cada contacto.</p>
+
+<div class="template-box">
+  <p class="subject-line">Assunto: Convite ao autor de "Nacao Valente" para <span class="field">[NOME DO PROGRAMA]</span></p>
+
+  <p>Exmo(a). <span class="field">[NOME DO APRESENTADOR/PRODUTOR]</span>,</p>
+
+  <p>O meu nome e Joao Annes, sou especialista em ciberseguranca e defesa, com passagem pelo Centro Nacional de Ciberseguranca (CNCS) e membro do Observatorio de Seguranca e Defesa da SEDES. Acabo de publicar <strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> (PACTOR/Grupo LIDEL, fevereiro de 2026), um ensaio politico sobre soberania portuguesa num mundo multipolar.</p>
+
+  <p>O livro propoe um modelo concreto &mdash; o <strong>Modelo 4P: Prevenir, Proteger, Projetar e Prosperar</strong> &mdash; para pensar estrategicamente o futuro de Portugal em areas como defesa, ciberseguranca, reforma europeia, democracia e migracao. Defendo que "ninguem e vassalo, todos somos livres" &mdash; e que Portugal precisa de um Estado forte e de cidadaos informados para se afirmar no seculo XXI.</p>
+
+  <p>O lancamento na Culturgest, a 23 de fevereiro, esgotou a sala e contou com um painel que incluiu o presidente da SEDES, o Bastonario da Ordem dos Advogados, o Bastonario da Ordem dos Economistas e o ex-Autoridade Nacional de Seguranca.</p>
+
+  <p>Gostaria de propor a minha participacao em <span class="field">[NOME DO PROGRAMA]</span>, onde poderiamos abordar <span class="field">[TEMA ESPECIFICO RELEVANTE PARA O PROGRAMA]</span>. Acredito que o tema da soberania nacional e particularmente oportuno dado <span class="field">[GANCHO NOTICIOSO ATUAL]</span>.</p>
+
+  <p>Para referencia, partilho tres aparicoes recentes em video:</p>
+  <ul>
+    <li>DN Podcast Soberania: <a href="https://youtube.com/watch?v=Zbfa1DRxx9I">youtube.com/watch?v=Zbfa1DRxx9I</a></li>
+    <li>NOW Canal: <a href="https://youtube.com/watch?v=0k0ARysstBM">youtube.com/watch?v=0k0ARysstBM</a></li>
+    <li>IT Security Conference 2024: <a href="https://youtube.com/watch?v=CyPT6B7pGNg">youtube.com/watch?v=CyPT6B7pGNg</a></li>
+  </ul>
+
+  <p>Mais informacoes sobre o livro em <a href="https://nacaovalente.com.pt">nacaovalente.com.pt</a>. Disponivel para gravacao presencial em Lisboa ou remota.</p>
+
+  <p>Agradeco desde ja a atencao e fico ao dispor para qualquer esclarecimento.</p>
+
+  <p>Com os melhores cumprimentos,<br>
+  <strong>Joao Annes</strong><br>
+  Autor de "Nacao Valente &mdash; Decisoes Soberanas para Portugal"<br>
+  <span class="field">[EMAIL]</span> &bull; <span class="field">[TELEFONE]</span><br>
+  nacaovalente.com.pt &bull; @nacaovalente_pt</p>
+</div>
+
+<div class="tips">
+  <h4>Dicas para personalizacao / Customization Tips</h4>
+  <ul>
+    <li><strong>Referir episodios anteriores:</strong> Sempre que possivel, mencionar um episodio concreto do programa e explicar como o tema do livro se liga a essa conversa.</li>
+    <li><strong>Gancho noticioso:</strong> Ligar o pitch a uma noticia recente (ex.: cimeira NATO, incidente cibernetico, debate parlamentar sobre defesa).</li>
+    <li><strong>Tom:</strong> Profissional mas nao academico. O Joao comunica de forma clara e acessivel &mdash; enfatizar isso.</li>
+    <li><strong>Follow-up:</strong> Se nao houver resposta em 5-7 dias uteis, enviar um lembrete breve (2-3 linhas).</li>
+    <li><strong>Enviar exemplar:</strong> Oferecer envio de um exemplar do livro ao apresentador/produtor.</li>
+  </ul>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 2: PITCHES PERSONALIZADOS
+     ════════════════════════════════════════════════════════════════ -->
+<h2>2. Pitches Personalizados <span class="en">/ Personalized Pitches</span></h2>
+
+<!-- ──────────────────────────────────────────
+     PITCH 1: OBSERVADOR
+     ────────────────────────────────────────── -->
+<div class="pitch-card">
+  <div class="show-header">
+    <div>
+      <div class="show-name">Observador &mdash; Geopolitica</div>
+      <div class="show-detail">Apresentador: Bruno Cardoso Reis &bull; Podcast semanal &bull; Angulo: mundo multipolar, soberania de Portugal</div>
+    </div>
+    <span class="priority priority-high">Prioridade Alta</span>
+  </div>
+
+  <div class="pitch-body">
+    <p class="subject-line">Assunto: Proposta de participacao &mdash; "Nacao Valente" e a soberania no mundo multipolar</p>
+
+    <p>Caro Professor Bruno Cardoso Reis,</p>
+
+    <p>Acompanho com grande interesse o podcast Geopolitica do Observador, que se tornou uma referencia fundamental para quem quer compreender as dinamicas internacionais a partir de uma perspetiva informada e analitica. A forma como aborda as tensoes geopoliticas contemporaneas, da competicao entre grandes potencias a reconfiguracoes regionais, e exatamente o tipo de analise que Portugal precisa.</p>
+
+    <p>Sou Joao Annes, especialista em ciberseguranca e defesa, ex-CNCS, e membro do Observatorio de Seguranca e Defesa da SEDES. Acabo de publicar <strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> (PACTOR, fevereiro de 2026), um ensaio que propoe um modelo estrategico &mdash; <strong>Prevenir, Proteger, Projetar e Prosperar</strong> &mdash; para reposicionar Portugal num mundo multipolar.</p>
+
+    <p>O livro defende que Portugal nao e, nem deve ser, um ator geopolitico passivo. Pelo contrario: a nossa posicao atlantica, a nossa rede de relacoes com a lusofonia e a nossa experiencia historica de navegacao entre grandes potencias sao ativos estrategicos que podem e devem ser ativados. Defendo um "Estado forte em que ninguem e vassalo, todos somos livres" &mdash; e proponho reformas concretas em defesa, politica europeia e diplomacia.</p>
+
+    <p>O lancamento na Culturgest esgotou a sala e reuniu figuras como o presidente da SEDES, o Bastonario da Ordem dos Advogados e o ex-Autoridade Nacional de Seguranca &mdash; reflexo do interesse transversal que o tema desperta.</p>
+
+    <p>Seria uma honra participar no Geopolitica. Terei todo o gosto em enviar-lhe um exemplar do livro. Disponivel para gravacao presencial em Lisboa ou remota, conforme a sua conveniencia.</p>
+
+    <p>Com elevada estima,<br>
+    <strong>Joao Annes</strong><br>
+    nacaovalente.com.pt</p>
+  </div>
+
+  <div class="talking-points">
+    <h4>Pontos de Conversa Sugeridos / Suggested Talking Points</h4>
+    <ol>
+      <li><strong>Portugal no xadrez multipolar:</strong> Como pode um pais de media dimensao maximizar a sua influencia entre os EUA, a China e a UE? O conceito de "autonomia estrategica" e o papel atlantico de Portugal como ponte entre Europa, Africa e Americas.</li>
+      <li><strong>A reforma da defesa europeia depois da Ucrania:</strong> O que muda para Portugal com o aumento dos orcamentos de defesa na Europa? O Modelo 4P aplicado a politica de defesa nacional &mdash; de espectador a contribuinte ativo.</li>
+      <li><strong>Soberania digital e ciberseguranca como vetor geopolitico:</strong> Porque e que a ciberseguranca e hoje tao importante como a defesa convencional. Exemplos concretos de como Estados vulneraveis perdem soberania no dominio digital.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────────
+     PITCH 2: EXPRESSO
+     ────────────────────────────────────────── -->
+<div class="pitch-card">
+  <div class="show-header">
+    <div>
+      <div class="show-name">Expresso &mdash; Bloco de Leste / Internacional</div>
+      <div class="show-detail">Seccao internacional do Expresso &bull; Angulo: Ucrania, defesa europeia, NATO</div>
+    </div>
+    <span class="priority priority-high">Prioridade Alta</span>
+  </div>
+
+  <div class="pitch-body">
+    <p class="subject-line">Assunto: Joao Annes / "Nacao Valente" &mdash; defesa europeia e o novo paradigma pos-Ucrania</p>
+
+    <p>Exma. Redacao do Expresso &mdash; Seccao Internacional,</p>
+
+    <p>A cobertura internacional do Expresso, e em particular o trabalho sobre a guerra na Ucrania e as suas repercussoes na arquitetura de seguranca europeia, tem sido uma referencia para o debate publico portugues. E precisamente nesse contexto que gostaria de propor a minha participacao.</p>
+
+    <p>Sou Joao Annes, especialista em ciberseguranca e defesa, com experiencia no CNCS e no Observatorio de Seguranca e Defesa da SEDES. Publiquei em fevereiro de 2026 o ensaio <strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> (PACTOR/Grupo LIDEL, 232 paginas), que aborda frontalmente a questao da defesa europeia e o papel de Portugal neste novo ciclo estrategico.</p>
+
+    <p>A guerra na Ucrania obrigou a Europa a repensar as suas prioridades de defesa. O livro analisa o que isto significa concretamente para Portugal: dos compromissos NATO ao investimento em capacidades, da ciberseguranca como fronteira invisivel a necessidade de uma estrategia nacional que va alem das reacoes conjunturais. O <strong>Modelo 4P</strong> que proponho &mdash; Prevenir, Proteger, Projetar e Prosperar &mdash; oferece um enquadramento para esta reflexao.</p>
+
+    <p>O lancamento na Culturgest reuniu figuras como o Contra-Almirante Antonio Gameiro Marques (ex-Autoridade Nacional de Seguranca), o que reflete a pertinencia do tema junto de decisores na area da seguranca e defesa.</p>
+
+    <p>Estou disponivel para entrevista, artigo de opiniao ou participacao em formato podcast. Tenho experiencia em media &mdash; acumulo mais de 10 aparicoes em canais como a CNN Portugal/TVI Player sobre geopolitica. Terei todo o gosto em enviar um exemplar.</p>
+
+    <p>Com os melhores cumprimentos,<br>
+    <strong>Joao Annes</strong><br>
+    nacaovalente.com.pt</p>
+  </div>
+
+  <div class="talking-points">
+    <h4>Pontos de Conversa Sugeridos / Suggested Talking Points</h4>
+    <ol>
+      <li><strong>A Europa pos-Ucrania e o despertar da defesa:</strong> O que mudou irreversivelmente na seguranca europeia? Porque e que Portugal nao pode continuar a ser um free-rider em materia de defesa. Os 2% do PIB: simbolo ou substancia?</li>
+      <li><strong>Ciberguerra como segunda frente:</strong> A dimensao cibernetica do conflito ucraniano e as licoes para Portugal. Como um pais com infraestruturas criticas vulneraveis pode ser alvo sem que um unico tiro seja disparado.</li>
+      <li><strong>NATO, UE e a escolha atlantica de Portugal:</strong> Como equilibrar a fidelidade atlantica com a autonomia estrategica europeia? O Modelo 4P aplicado a politica externa portuguesa &mdash; propostas concretas para os proximos 10 anos.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────────
+     PITCH 3: RTP — PROVA DOS FACTOS
+     ────────────────────────────────────────── -->
+<div class="pitch-card">
+  <div class="show-header">
+    <div>
+      <div class="show-name">RTP &mdash; Prova dos Factos</div>
+      <div class="show-detail">Televisao publica nacional &bull; Programa de debate/atualidade &bull; Angulo: ciberseguranca e cidadania</div>
+    </div>
+    <span class="priority priority-high">Prioridade Alta</span>
+  </div>
+
+  <div class="pitch-body">
+    <p class="subject-line">Assunto: Proposta de participacao &mdash; ciberseguranca, soberania e o livro "Nacao Valente"</p>
+
+    <p>Exma. Producao do programa Prova dos Factos,</p>
+
+    <p>Numa altura em que os temas de ciberseguranca e soberania digital dominam cada vez mais a agenda publica &mdash; dos ataques informaticos a instituicoes portuguesas a crescente dependencia tecnologica &mdash; gostaria de propor a minha participacao no Prova dos Factos.</p>
+
+    <p>Sou Joao Annes, especialista em ciberseguranca e defesa com passagem pelo Centro Nacional de Ciberseguranca (CNCS), membro do Observatorio de Seguranca e Defesa da SEDES, e autor do recente <strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> (PACTOR, fevereiro de 2026).</p>
+
+    <p>O livro aborda questoes centrais para o debate publico portugues: Como proteger as nossas infraestruturas criticas? Estamos preparados para as ameacas hibridas do seculo XXI? Porque e que a literacia democratica e a primeira linha de defesa de qualquer sociedade livre? Proponho um modelo concreto &mdash; o <strong>Modelo 4P: Prevenir, Proteger, Projetar e Prosperar</strong> &mdash; que traduz estas preocupacoes em propostas de acao.</p>
+
+    <p>A participacao num programa com a visibilidade e a credibilidade do Prova dos Factos permitiria levar esta reflexao a um publico alargado, num registo acessivel e fundamentado. Tenho experiencia em televisao, com mais de 10 aparicoes na CNN Portugal/TVI Player sobre temas de geopolitica e seguranca, e comunico de forma clara para audiencias generalistas.</p>
+
+    <p>O lancamento do livro na Culturgest esgotou a sala e contou com painelistas de elevado perfil: o presidente da SEDES, dois Bastonarios (Advogados e Economistas) e o ex-Autoridade Nacional de Seguranca.</p>
+
+    <p>Fico inteiramente ao dispor. Terei muito gosto em enviar um exemplar do livro a producao.</p>
+
+    <p>Com os melhores cumprimentos,<br>
+    <strong>Joao Annes</strong><br>
+    nacaovalente.com.pt</p>
+  </div>
+
+  <div class="talking-points">
+    <h4>Pontos de Conversa Sugeridos / Suggested Talking Points</h4>
+    <ol>
+      <li><strong>Portugal esta protegido? A ciberseguranca no dia-a-dia:</strong> Dos hospitais as autarquias, das escolas aos transportes &mdash; como e que um ataque cibernetico pode afetar a vida dos portugueses. Exemplos recentes e o que aprendemos (ou nao) com eles.</li>
+      <li><strong>Literacia democratica como defesa nacional:</strong> Desinformacao, manipulacao eleitoral, fadiga civica &mdash; porque e que um cidadao informado e a melhor protecao contra ameacas hibridas. O papel da educacao, dos media e das instituicoes.</li>
+      <li><strong>O que e um "Estado forte" no seculo XXI:</strong> Nao e autoritarismo, e capacidade. A diferenca entre um Estado que protege e um Estado que controla. Como o Modelo 4P pode orientar Portugal &mdash; explicacao pratica para o cidadao comum.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────────
+     PITCH 4: POLITITANK — GABINETE DE CRISE
+     ────────────────────────────────────────── -->
+<div class="pitch-card">
+  <div class="show-header">
+    <div>
+      <div class="show-name">Polititank &mdash; Gabinete de Crise</div>
+      <div class="show-detail">Think tank independente &bull; Podcast de analise politica &bull; Angulo: estrategia nacional, reforma do Estado</div>
+    </div>
+    <span class="priority priority-med">Prioridade Media</span>
+  </div>
+
+  <div class="pitch-body">
+    <p class="subject-line">Assunto: Convite &mdash; "Nacao Valente" no Gabinete de Crise</p>
+
+    <p>Cara equipa do Polititank,</p>
+
+    <p>Tenho acompanhado o vosso trabalho no Gabinete de Crise com genuino interesse &mdash; pela qualidade da analise, pela independencia do formato e pela disposicao de ir alem das narrativas superficiais que dominam o debate politico portugues. E exatamente este espirito que me leva a propor a minha participacao.</p>
+
+    <p>Sou Joao Annes, especialista em ciberseguranca e defesa, com experiencia no CNCS e na SEDES. Publiquei recentemente <strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> (PACTOR, fevereiro de 2026), um ensaio que nao se limita a diagnosticar problemas &mdash; propoe um modelo de acao: o <strong>Modelo 4P (Prevenir, Proteger, Projetar e Prosperar)</strong>.</p>
+
+    <p>O livro aborda temas que sao o pao de cada dia do Gabinete de Crise: a fragilidade institucional portuguesa, a necessidade de pensamento estrategico a longo prazo, a reforma da defesa, a soberania tecnologica e a relacao entre literacia democratica e resiliencia nacional. Nao e um livro partidario &mdash; e uma proposta transversal para um Portugal que precisa de decidir o que quer ser.</p>
+
+    <p>O lancamento esgotou a Culturgest e contou com o presidente da SEDES, dois Bastonarios e o ex-Autoridade Nacional de Seguranca. O formato do vosso podcast seria ideal para uma conversa aprofundada sobre estrategia nacional &mdash; algo raro no panorama mediatico portugues.</p>
+
+    <p>Disponivel para gravacao presencial ou remota. Fiquem a vontade para contactar.</p>
+
+    <p>Com os melhores cumprimentos,<br>
+    <strong>Joao Annes</strong><br>
+    nacaovalente.com.pt</p>
+  </div>
+
+  <div class="talking-points">
+    <h4>Pontos de Conversa Sugeridos / Suggested Talking Points</h4>
+    <ol>
+      <li><strong>Portugal tem uma estrategia ou so reage?</strong> A ausencia de pensamento estrategico de longo prazo na politica portuguesa. Porque e que outros paises de dimensao semelhante (Finlandia, Israel, Singapura) conseguem e Portugal nao. O Modelo 4P como ponto de partida.</li>
+      <li><strong>Reforma do Estado e soberania real:</strong> O que significa ter um "Estado forte" sem cair no autoritarismo. A diferenca entre burocracia e capacidade. Propostas concretas para defesa, ciberseguranca e politica europeia &mdash; sem filtro partidario.</li>
+      <li><strong>A crise de participacao civica e a defesa da democracia:</strong> Abstencao recorde, desconfianca nas instituicoes, desinformacao galopante. Como e que uma democracia se defende quando os proprios cidadaos deixam de acreditar nela? O papel da literacia democratica como pilar de seguranca nacional.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────────
+     PITCH 5: FFMS — [IN]PERTINENTE
+     ────────────────────────────────────────── -->
+<div class="pitch-card">
+  <div class="show-header">
+    <div>
+      <div class="show-name">FFMS &mdash; [IN]Pertinente</div>
+      <div class="show-detail">Fundacao Francisco Manuel dos Santos &bull; Podcast de debate de politicas publicas &bull; Angulo: soberania, reformas estruturais</div>
+    </div>
+    <span class="priority priority-med">Prioridade Media</span>
+  </div>
+
+  <div class="pitch-body">
+    <p class="subject-line">Assunto: Proposta de episodio &mdash; soberania portuguesa e o Modelo 4P ("Nacao Valente")</p>
+
+    <p>Exma. Producao do [IN]Pertinente,</p>
+
+    <p>O [IN]Pertinente tem-se distinguido pela capacidade de transformar temas complexos de politica publica em conversas acessiveis e rigorosas &mdash; exatamente o tipo de plataforma que um debate serio sobre soberania e estrategia nacional merece.</p>
+
+    <p>Sou Joao Annes, especialista em ciberseguranca e defesa, com passagem pelo CNCS e membro do Observatorio de Seguranca e Defesa da SEDES. O meu livro <strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> (PACTOR, fevereiro de 2026, 232 paginas) propoe um enquadramento pragmatico &mdash; o <strong>Modelo 4P: Prevenir, Proteger, Projetar e Prosperar</strong> &mdash; para repensar a posicao de Portugal no mundo.</p>
+
+    <p>O livro cruza temas que estao no ADN da Fundacao Francisco Manuel dos Santos: como tornar o debate publico mais informado, como modernizar as instituicoes portuguesas, como conciliar integracao europeia com soberania nacional, e como preparar o pais para desafios que vao da ciberseguranca a migracao, da defesa a competitividade economica.</p>
+
+    <p>A tese central e simples: Portugal precisa de passar de espectador a protagonista. E para isso, precisa de cidadaos que compreendam os desafios e de instituicoes que estejam a altura. "Defendo um Estado forte em que ninguem e vassalo, todos somos livres" &mdash; esta e a premissa do livro.</p>
+
+    <p>O lancamento na Culturgest esgotou a sala com um painel que incluiu o presidente da SEDES, o Bastonario da Ordem dos Advogados, o Bastonario da Ordem dos Economistas e o ex-Autoridade Nacional de Seguranca.</p>
+
+    <p>Seria um privilegio participar no [IN]Pertinente. Disponivel para gravacao presencial ou remota, e terei todo o gosto em enviar um exemplar a equipa.</p>
+
+    <p>Com os melhores cumprimentos,<br>
+    <strong>Joao Annes</strong><br>
+    nacaovalente.com.pt</p>
+  </div>
+
+  <div class="talking-points">
+    <h4>Pontos de Conversa Sugeridos / Suggested Talking Points</h4>
+    <ol>
+      <li><strong>Soberania no seculo XXI &mdash; o que e e o que nao e:</strong> Soberania nao e isolamento. Como pode Portugal ser soberano dentro da UE e da NATO? A tensao entre integracao e autonomia estrategica, explicada com dados e exemplos europeus.</li>
+      <li><strong>Reformas para um Estado capaz:</strong> Porque e que Portugal investe pouco em defesa, em ciberseguranca, em inteligencia? Comparacao com paises de dimensao semelhante. O custo de nao investir &mdash; e o retorno de investir bem. Propostas concretas do Modelo 4P.</li>
+      <li><strong>Democracia sob pressao &mdash; desinformacao, abstencao e o papel do cidadao:</strong> Um diagnostico honesto da saude democratica portuguesa. O que dizem os dados sobre confianca nas instituicoes, participacao civica e literacia politica &mdash; e o que podemos fazer a respeito.</li>
+    </ol>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 3: MEDIA KIT
+     ════════════════════════════════════════════════════════════════ -->
+<div class="media-kit">
+  <h2>3. Media Kit &mdash; Ficha de Autor <span class="en" style="color:#8899b0;">/ One-Page Media Kit</span></h2>
+
+  <h3>Biografia do Autor</h3>
+  <p><strong>Joao Annes</strong> e especialista em ciberseguranca e defesa, com experiencia profissional no <strong>Centro Nacional de Ciberseguranca (CNCS)</strong> de Portugal. E membro do <strong>Observatorio de Seguranca e Defesa da SEDES</strong>, uma das mais antigas associacoes civicas portuguesas dedicadas ao desenvolvimento economico e social. Comentador regular de geopolitica e seguranca, com mais de 10 aparicoes na CNN Portugal / TVI Player. Autor do ensaio <em>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</em> (PACTOR, 2026).</p>
+
+  <h3>Sobre o Livro</h3>
+  <p><strong>"Nacao Valente &mdash; Decisoes Soberanas para Portugal"</strong> e um ensaio politico nao-ficcional que propoe um modelo estrategico para o futuro de Portugal num mundo multipolar. Organizado em torno do <strong>Modelo 4P &mdash; Prevenir, Proteger, Projetar e Prosperar</strong> &mdash;, o livro aborda defesa, ciberseguranca, reforma europeia, migracao e literacia democratica. Nao e um manifesto partidario: e uma proposta transversal para cidadaos e decisores que querem um Portugal mais forte, mais livre e mais capaz.</p>
+
+  <p><em>"Defendo um Estado forte em que ninguem e vassalo, todos somos livres."</em> &mdash; Joao Annes</p>
+
+  <div class="stat-row">
+    <div class="stat">
+      <span class="number">232</span>
+      <span class="label">Paginas</span>
+    </div>
+    <div class="stat">
+      <span class="number">&euro;19,95</span>
+      <span class="label">PVP</span>
+    </div>
+    <div class="stat">
+      <span class="number">23 Fev</span>
+      <span class="label">Lancamento</span>
+    </div>
+    <div class="stat">
+      <span class="number">Sala cheia</span>
+      <span class="label">Culturgest</span>
+    </div>
+    <div class="stat">
+      <span class="number">10+</span>
+      <span class="label">Aparicoes TV</span>
+    </div>
+  </div>
+
+  <div class="kit-grid">
+    <div class="kit-block">
+      <h4>Dados do Livro</h4>
+      <p><strong>Titulo:</strong> Nacao Valente &mdash; Decisoes Soberanas para Portugal</p>
+      <p><strong>Autor:</strong> Joao Annes</p>
+      <p><strong>Prefacio:</strong> Alvaro Beleza (Presidente da SEDES)</p>
+      <p><strong>Editora:</strong> PACTOR (Grupo LIDEL)</p>
+      <p><strong>ISBN:</strong> 978-989-693-214-5</p>
+      <p><strong>Paginas:</strong> 232</p>
+      <p><strong>PVP:</strong> &euro;19,95</p>
+      <p><strong>Data de publicacao:</strong> Fevereiro 2026</p>
+    </div>
+    <div class="kit-block">
+      <h4>Credenciais do Autor</h4>
+      <p>Ex-CNCS (Centro Nacional de Ciberseguranca)</p>
+      <p>Membro do Observatorio de Seguranca e Defesa &mdash; SEDES</p>
+      <p>10+ aparicoes em CNN Portugal / TVI Player</p>
+      <p>Entrevista no jornal SOL</p>
+      <p>2 artigos no iPress Journal</p>
+      <p>Orador na IT Security Conference 2024</p>
+    </div>
+    <div class="kit-block">
+      <h4>Lancamento (23 Fev 2026)</h4>
+      <p><strong>Local:</strong> Culturgest, Sala 2, Lisboa</p>
+      <p><strong>Resultado:</strong> Sala esgotada</p>
+      <p><strong>Moderadora:</strong> Valentina Marcelino</p>
+      <p><strong>Painelistas:</strong></p>
+      <p>&bull; Alvaro Beleza (Pres. SEDES)</p>
+      <p>&bull; Joao Massano (Bast. Ordem Advogados)</p>
+      <p>&bull; Antonio Mendonca (Bast. Ordem Economistas)</p>
+      <p>&bull; C-Alm. Antonio Gameiro Marques (ex-ANS)</p>
+    </div>
+    <div class="kit-block">
+      <h4>Onde Comprar</h4>
+      <p><a href="https://www.bertrand.pt/livro/nacao-valente-joao-annes/33089561">Bertrand Livreiros</a></p>
+      <p><a href="https://www.wook.pt/livro/nacao-valente-joao-annes/33089561">Wook</a></p>
+      <p><a href="https://www.fnac.pt/Nacao-Valente-Joao-Annes/a13916384">FNAC</a></p>
+      <p><a href="https://amazon.co.uk/dp/9897774025">Amazon UK</a></p>
+    </div>
+  </div>
+
+  <h3>Aparicoes em Video / YouTube</h3>
+  <ul class="video-list">
+    <li>
+      <span class="video-title">DN Podcast Soberania</span> &mdash; <span class="video-host">Diario de Noticias</span><br>
+      <a href="https://youtube.com/watch?v=Zbfa1DRxx9I">youtube.com/watch?v=Zbfa1DRxx9I</a><br>
+      <em style="color:#8899b0;font-size:0.88em;">"O Exercito americano tem unidades a preparar uma revolucao doutrinaria"</em>
+    </li>
+    <li>
+      <span class="video-title">NOW Canal</span> &mdash; <span class="video-host">Debate de atualidade</span><br>
+      <a href="https://youtube.com/watch?v=0k0ARysstBM">youtube.com/watch?v=0k0ARysstBM</a><br>
+      <em style="color:#8899b0;font-size:0.88em;">"Ataque a escola no Irao: A primeira vitima da guerra e a verdade"</em>
+    </li>
+    <li>
+      <span class="video-title">IT Security Conference 2024</span> &mdash; <span class="video-host">SEDES Observatorio de Seguranca e Defesa</span><br>
+      <a href="https://youtube.com/watch?v=CyPT6B7pGNg">youtube.com/watch?v=CyPT6B7pGNg</a>
+    </li>
+  </ul>
+
+  <h3>Contacto e Redes</h3>
+  <div class="kit-grid">
+    <div class="kit-block">
+      <h4>Online</h4>
+      <p><strong>Website:</strong> <a href="https://nacaovalente.com.pt">nacaovalente.com.pt</a></p>
+      <p><strong>Instagram:</strong> <a href="https://instagram.com/nacaovalente_pt">@nacaovalente_pt</a></p>
+    </div>
+    <div class="kit-block">
+      <h4>Disponibilidade</h4>
+      <p>Gravacao presencial: <strong>Lisboa</strong></p>
+      <p>Gravacao remota: <strong>Sim</strong> (Zoom, Teams, Google Meet)</p>
+      <p>Formato: entrevista, debate, painel, keynote</p>
+      <p>Idiomas: <strong>Portugues</strong>, Ingles</p>
+    </div>
+  </div>
+
+  <h3>Temas Disponiveis para Entrevista</h3>
+  <ul>
+    <li>Soberania nacional e autonomia estrategica num mundo multipolar</li>
+    <li>Ciberseguranca: ameacas, vulnerabilidades e resiliencia em Portugal</li>
+    <li>Defesa europeia pos-Ucrania e o papel de Portugal na NATO</li>
+    <li>Reforma do Estado e modernizacao institucional</li>
+    <li>Literacia democratica e combate a desinformacao</li>
+    <li>Migracao, identidade e coesao social</li>
+    <li>O futuro da UE visto de Lisboa &mdash; que reformas para Portugal?</li>
+    <li>O Modelo 4P: um quadro estrategico para o seculo XXI</li>
+  </ul>
+
+</div>
+
+<!-- ── Footer ── -->
+<div class="footer">
+  <p>Documento interno &mdash; Podcast Pitch Pack para "Nacao Valente" de Joao Annes &bull; Preparado em marco de 2026</p>
+  <p>nacaovalente.com.pt &bull; PACTOR / Grupo LIDEL &bull; ISBN 978-989-693-214-5</p>
+</div>
+
+</div><!-- /.container -->
+
+</body>
+</html>

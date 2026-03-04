@@ -144,6 +144,9 @@
   .badge-yellow { background: #fef9c3; color: #854d0e; }
   .badge-red { background: #fee2e2; color: #991b1b; }
   .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-done { background: #dcfce7; color: #166534; }
+  .badge-wip { background: #fef9c3; color: #854d0e; }
+  .badge-todo { background: #f3f4f6; color: #6b7280; }
 
   /* ── Budget tiers ── */
   .tier {
@@ -320,7 +323,7 @@
   <div class="meta-row">
     <span>Prepared: <strong>26 Feb 2026</strong></span>
     <span>Author: <strong>Eugene Nayshtetik</strong></span>
-    <span>Status: <strong>DRAFT v1</strong></span>
+    <span>Status: <strong>v2 — ACTIVE</strong></span>
   </div>
 </div>
 
@@ -341,12 +344,12 @@
 
 <h3>Gaps to fill</h3>
 <ul>
-  <li>No dedicated website / landing page for the book</li>
-  <li>No paid digital campaign running</li>
-  <li>Limited podcast appearances (the #1 discovery channel for PT nonfiction readers)</li>
-  <li>No Amazon listing optimization (the .co.uk listing exists but is bare)</li>
-  <li>No email list / lead capture for future launches</li>
-  <li>No review solicitation strategy (bookstore comment boxes are empty)</li>
+  <li><s>No dedicated website / landing page for the book</s> <span class="badge badge-done">DONE</span> — nacaovalente.com.pt live (also nacao-valente.pages.dev)</li>
+  <li>No paid digital campaign running <span class="badge badge-todo">TODO</span></li>
+  <li>Limited podcast appearances (the #1 discovery channel for PT nonfiction readers) <span class="badge badge-todo">TODO</span></li>
+  <li>No Amazon listing optimization (the .co.uk listing exists but is bare) <span class="badge badge-todo">TODO</span></li>
+  <li><s>No email list / lead capture for future launches</s> <span class="badge badge-done">DONE</span> — PHP/MySQL backend, admin panel at /admin.php</li>
+  <li>No review solicitation strategy (bookstore comment boxes are empty) <span class="badge badge-todo">TODO</span></li>
 </ul>
 
 <!-- ════════════════ 2. AUDIENCE ════════════════ -->
@@ -588,12 +591,12 @@
   <div class="tl-item">
     <div class="week">Week 1 (26 Feb — 4 Mar) — FOUNDATION</div>
     <ul>
-      <li>Set up landing page with purchase links + email capture</li>
-      <li>Optimize Amazon .co.uk listing (description, keywords, author bio)</li>
-      <li>Create Goodreads author page + book listing</li>
-      <li>Design 10 Instagram/LinkedIn content pieces (quote cards, 4P pillars, event photos)</li>
-      <li>Send review request emails to Culturgest attendees</li>
-      <li>Draft podcast pitch email (template + personalization per show)</li>
+      <li><s>Set up landing page with purchase links + email capture</s> <span class="badge badge-done">DONE</span></li>
+      <li>Optimize Amazon .co.uk listing (description, keywords, author bio) <span class="badge badge-todo">TODO</span></li>
+      <li>Create Goodreads author page + book listing <span class="badge badge-todo">TODO</span></li>
+      <li>Design 10 Instagram/LinkedIn content pieces (quote cards, 4P pillars, event photos) <span class="badge badge-wip">IN PROGRESS</span></li>
+      <li>Send review request emails to Culturgest attendees <span class="badge badge-wip">IN PROGRESS</span></li>
+      <li>Draft podcast pitch email (template + personalization per show) <span class="badge badge-wip">IN PROGRESS</span></li>
     </ul>
   </div>
 
@@ -661,9 +664,9 @@
 
 <div class="card-grid">
   <div class="card">
-    <h4>Landing Page</h4>
-    <p>Single-page site with book info, purchase links (Bertrand/Wook/FNAC/Amazon), author bio, press quotes, email signup. Mobile-first.</p>
-    <div class="note">Timeline: 1-2 days | Cost to João: hosting only (~&euro;3/month)</div>
+    <h4>Landing Page <span class="badge badge-done">DONE</span></h4>
+    <p>Live at nacaovalente.com.pt — hero video, book info, purchase links (Bertrand/Wook/FNAC), author bio, YouTube embeds, email signup, GA4 tracking. SEO: JSON-LD, OG tags, sitemap. Security: CSP, rate limiting, honeypot.</p>
+    <div class="note">Completed 3 Mar 2026 | Also mirrored at nacao-valente.pages.dev (Cloudflare)</div>
   </div>
 
   <div class="card">
@@ -679,21 +682,21 @@
   </div>
 
   <div class="card">
-    <h4>Podcast Pitch Pack</h4>
-    <p>Email templates personalized per show, one-page media kit PDF, suggested talking points, author headshot package.</p>
-    <div class="note">Timeline: 1 day | João sends them from his email</div>
+    <h4>Podcast Pitch Pack <span class="badge badge-done">DONE</span></h4>
+    <p>5 personalized pitches (Observador, Expresso, RTP, Polititank, FFMS), generic template, media kit. All in Portuguese.</p>
+    <div class="note">Completed 4 Mar 2026 | See <a href="podcast_pitches.html">podcast_pitches.html</a></div>
   </div>
 
   <div class="card">
-    <h4>LinkedIn Content Calendar</h4>
-    <p>6 weeks of post drafts: mix of book excerpts, opinion pieces, event updates, engagement questions. João reviews + posts.</p>
-    <div class="note">Timeline: 1-2 days | 2-3 posts per week</div>
+    <h4>LinkedIn Content Calendar <span class="badge badge-done">DONE</span></h4>
+    <p>6 weeks of content: 14 LinkedIn posts + 17 Instagram posts + 6 story concepts + 10 quote cards + hashtag strategy.</p>
+    <div class="note">Completed 4 Mar 2026 | See <a href="content_calendar.html">content_calendar.html</a></div>
   </div>
 
   <div class="card">
-    <h4>Review Request Campaign</h4>
-    <p>Email template for Culturgest attendees + João's network. Direct links to Bertrand/Wook review pages. Polite, personal tone.</p>
-    <div class="note">Timeline: 2 hours | Most impactful quick win</div>
+    <h4>Review Request Campaign <span class="badge badge-done">DONE</span></h4>
+    <p>3-email timed sequence, LinkedIn post template, 4 personalized panelist endorsement requests, best practices guide.</p>
+    <div class="note">Completed 4 Mar 2026 | See <a href="review_emails.html">review_emails.html</a></div>
   </div>
 </div>
 
