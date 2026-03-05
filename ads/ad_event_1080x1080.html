@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; overflow: hidden; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(160deg, #12121f 0%, #1a1a2e 40%, #1e2a4a 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    position: relative;
+  }
+  .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #C5A55A, #d4b96e, #C5A55A);
+  }
+  .cover {
+    width: 280px;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(197,165,90,0.3);
+    margin-bottom: 40px;
+  }
+  .badge {
+    background: #C5A55A;
+    color: #12121f;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 28px;
+    border-radius: 4px;
+    margin-bottom: 28px;
+  }
+  .event-title {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .event-title span { color: #C5A55A; }
+  .subtitle {
+    font-size: 24px;
+    color: #b0a89e;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .details {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    line-height: 1.8;
+  }
+  .details .date {
+    font-size: 32px;
+    font-weight: 700;
+    color: #C5A55A;
+    margin-bottom: 4px;
+  }
+  .details .venue {
+    font-size: 22px;
+    color: #c8c0b4;
+  }
+  .details .addr {
+    font-size: 17px;
+    color: #8a8078;
+    margin-top: 4px;
+  }
+  .free-badge {
+    margin-top: 24px;
+    border: 2px solid #C5A55A;
+    color: #C5A55A;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 32px;
+    border-radius: 4px;
+  }
+  .sold-out {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    background: rgba(197,165,90,0.15);
+    border: 1px solid rgba(197,165,90,0.4);
+    color: #C5A55A;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #C5A55A, #d4b96e, #C5A55A);
+  }
+</style>
+</head>
+<body>
+  <div class="top-bar"></div>
+  <div class="sold-out">Culturgest Lisboa<br>ESGOTADO</div>
+  <img src="../img/cover.jpg" alt="Nacao Valente" class="cover">
+  <div class="badge">Lancamento Porto</div>
+  <div class="event-title"><span>Nacao Valente</span></div>
+  <div class="subtitle">Decisoes Soberanas para Portugal</div>
+  <div class="details">
+    <div class="date">25 de Marco | 18h45</div>
+    <div class="venue">Porto Business School</div>
+    <div class="addr">Biblioteca | Av. Fabril do Norte, 425 | Matosinhos</div>
+  </div>
+  <div class="free-badge">Entrada Livre — Confirme Presenca</div>
+  <div class="bottom-bar"></div>
+</body></html>

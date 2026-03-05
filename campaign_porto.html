@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campanha Porto — Nacao Valente | FB + IG + Google</title>
+<style>
+  :root {
+    --navy: #1a1a2e;
+    --dark: #16213e;
+    --accent: #e94560;
+    --gold: #C5A55A;
+    --gold-light: #d4b96e;
+    --light: #f5f0e8;
+    --text: #2c2c2c;
+    --muted: #6b7280;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --fb: #1877F2;
+    --ig: #E1306C;
+    --goog: #4285F4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--text);
+    background: var(--light);
+    line-height: 1.6;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--dark) 60%, #0f3460 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2.4em; font-weight: 700; letter-spacing: -1px; margin-bottom: 8px; }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle { font-size: 1.15em; color: #b0b8c8; margin-bottom: 20px; }
+  .hero .meta-row {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+    font-size: 0.95em; color: #8899b0;
+  }
+  .hero .meta-row strong { color: white; }
+  .hero .event-box {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 16px 32px;
+    background: rgba(197,165,90,0.15);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .hero .event-box .date { font-size: 1.5em; font-weight: 700; color: var(--gold); }
+  .hero .event-box .venue { font-size: 0.95em; color: #c8c0b4; margin-top: 4px; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+  h2 {
+    font-size: 1.55em; color: var(--navy);
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 8px; margin: 48px 0 20px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 1.15em; color: var(--dark); margin: 24px 0 10px; }
+  p, li { font-size: 0.97em; margin-bottom: 10px; }
+  ul, ol { padding-left: 24px; }
+  li { margin-bottom: 6px; }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.93em;
+  }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  th { background: var(--navy); color: white; font-weight: 600; }
+  tr:nth-child(even) { background: #f9fafb; }
+
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.8em; font-weight: 600;
+  }
+  .badge-fb { background: #dbeafe; color: #1e40af; }
+  .badge-ig { background: #fce7f3; color: #9d174d; }
+  .badge-goog { background: #dbeafe; color: #1d4ed8; }
+  .badge-high { background: #fee2e2; color: #991b1b; }
+  .badge-med { background: #fef9c3; color: #854d0e; }
+
+  .callout {
+    background: #fff7ed; border-left: 4px solid var(--gold);
+    padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0;
+  }
+  .callout-blue { background: #eff6ff; border-left-color: var(--blue); }
+  .callout-green { background: #f0fdf4; border-left-color: var(--green); }
+  .callout-red { background: #fef2f2; border-left-color: var(--red); }
+  .callout strong { color: var(--navy); }
+
+  .platform-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px; border-radius: 8px; margin: 24px 0 16px;
+    color: white; font-weight: 700; font-size: 1.2em;
+  }
+  .platform-header.meta { background: linear-gradient(135deg, var(--fb), var(--ig)); }
+  .platform-header.google { background: linear-gradient(135deg, var(--goog), #34a853); }
+
+  .ad-variant {
+    background: white; border-radius: 10px; padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin: 16px 0;
+    border-left: 4px solid var(--gold);
+  }
+  .ad-variant h4 {
+    font-size: 1.05em; color: var(--navy); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ad-variant .ad-field {
+    margin-bottom: 8px; font-size: 0.93em;
+  }
+  .ad-variant .ad-field .label {
+    display: inline-block; width: 120px; font-weight: 600;
+    color: var(--muted); font-size: 0.85em; text-transform: uppercase;
+  }
+  .ad-variant .ad-copy {
+    background: #f8f6f0; padding: 16px; border-radius: 6px;
+    font-size: 0.95em; line-height: 1.7; margin: 8px 0;
+    border: 1px solid #e5e0d5;
+  }
+  .ad-variant .ad-copy em { color: var(--muted); font-size: 0.85em; }
+
+  .targeting-box {
+    background: white; border-radius: 10px; padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin: 16px 0;
+  }
+  .targeting-box h4 { color: var(--navy); margin-bottom: 12px; }
+  .targeting-box .spec {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 4px 16px; font-size: 0.93em; margin-bottom: 6px;
+  }
+  .targeting-box .spec .label { font-weight: 600; color: var(--muted); }
+
+  .budget-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0;
+  }
+  .budget-card {
+    background: white; border-radius: 10px; padding: 24px; text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .budget-card .platform { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .budget-card .amount { font-size: 2em; font-weight: 700; color: var(--accent); }
+  .budget-card .pct { font-size: 0.85em; color: var(--muted); }
+  .budget-card .expected { font-size: 0.85em; color: var(--green); margin-top: 8px; font-weight: 600; }
+
+  .utm-box {
+    background: white; border-radius: 8px; padding: 14px 18px;
+    font-family: 'Consolas', 'Courier New', monospace; font-size: 0.82em;
+    word-break: break-all; margin: 8px 0; border: 1px solid #e5e7eb;
+    line-height: 1.6;
+  }
+
+  .timeline { position: relative; padding-left: 32px; margin: 20px 0; }
+  .timeline::before {
+    content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(180deg, var(--gold), var(--accent));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative; margin-bottom: 20px; background: white;
+    padding: 16px 20px; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .tl-item::before {
+    content: ''; position: absolute; left: -28px; top: 18px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--light);
+  }
+  .tl-item .date { font-weight: 700; color: var(--navy); font-size: 0.9em; }
+
+  .creative-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin: 20px 0;
+  }
+  .creative-spec {
+    background: white; border-radius: 8px; padding: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05); text-align: center;
+  }
+  .creative-spec .format { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .creative-spec .dims { font-size: 0.85em; color: var(--muted); }
+  .creative-spec .use { font-size: 0.85em; color: var(--text); margin-top: 6px; }
+
+  .footer {
+    text-align: center; padding: 32px; color: var(--muted);
+    font-size: 0.85em; border-top: 1px solid #e5e7eb; margin-top: 48px;
+  }
+
+  @media (max-width: 768px) {
+    .budget-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.8em; }
+    .targeting-box .spec { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    .hero { padding: 30px 20px; }
+    .container { padding: 20px; }
+    h2 { break-after: avoid; }
+    .ad-variant, .tl-item, .targeting-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1><span>Campanha Porto</span> — Nacao Valente</h1>
+  <div class="subtitle">Primeira campanha paga: Facebook + Instagram + Google Ads</div>
+  <div class="meta-row">
+    <span>Preparado: <strong>5 Mar 2026</strong></span>
+    <span>Objectivo: <strong>Inscricoes para o lancamento Porto</strong></span>
+    <span>Canais: <strong>Meta + Google</strong></span>
+  </div>
+  <div class="event-box">
+    <div class="date">25 de Marco, 18h45</div>
+    <div class="venue">Biblioteca da Porto Business School — Av. Fabril do Norte, 425, Matosinhos</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ════════════════ 1. OVERVIEW ════════════════ -->
+<h2>1. Campaign Overview</h2>
+
+<table>
+  <tr><th>Parameter</th><th>Detail</th></tr>
+  <tr><td><strong>Objective</strong></td><td>Drive RSVPs for the Porto book launch event (March 25)</td></tr>
+  <tr><td><strong>Conversion action</strong></td><td>Google Form submission (name + email + confirm attendance)</td></tr>
+  <tr><td><strong>Form URL</strong></td><td style="word-break:break-all;font-size:0.85em;">https://docs.google.com/forms/d/e/1FAIpQLSeUhw38oV9qUsEVRfSNpZSlw2ISSvQYTHpGwFdUEbzbmzzP_g/viewform</td></tr>
+  <tr><td><strong>Flight dates</strong></td><td>March 6 - March 24, 2026 (19 days)</td></tr>
+  <tr><td><strong>Total budget</strong></td><td><strong>&euro;400</strong> (adjustable — see breakdown below)</td></tr>
+  <tr><td><strong>Primary audience</strong></td><td>Porto metro, 25-65, politics/current affairs/books</td></tr>
+  <tr><td><strong>Landing page</strong></td><td>nacaovalente.com.pt (updated with Porto event section + RSVP button)</td></tr>
+  <tr><td><strong>GA4 property</strong></td><td>G-4YNTJ7TJKJ (already live on site)</td></tr>
+</table>
+
+<div class="callout">
+  <strong>Strategy:</strong> Two-path funnel. Path A: Ads &rarr; nacaovalente.com.pt (Porto section) &rarr; Form — for people who want to learn about the book first. Path B: Ads &rarr; Form directly — for people already aware, just need to RSVP. Split: 60% Path A / 40% Path B.
+</div>
+
+<!-- ════════════════ 2. BUDGET ════════════════ -->
+<h2>2. Budget Allocation</h2>
+
+<div class="budget-grid">
+  <div class="budget-card">
+    <div class="platform">Meta (FB + IG)</div>
+    <div class="amount">&euro;280</div>
+    <div class="pct">70% of budget</div>
+    <div class="expected">~35-50K impressions | 350-600 clicks</div>
+  </div>
+  <div class="budget-card">
+    <div class="platform">Google Search</div>
+    <div class="amount">&euro;80</div>
+    <div class="pct">20% of budget</div>
+    <div class="expected">~8-12K impressions | 100-200 clicks</div>
+  </div>
+  <div class="budget-card">
+    <div class="platform">Reserve</div>
+    <div class="amount">&euro;40</div>
+    <div class="pct">10% of budget</div>
+    <div class="expected">Boost best performer mid-campaign</div>
+  </div>
+</div>
+
+<div class="callout-blue callout">
+  <strong>Expected outcome at &euro;400:</strong> 60-120 RSVPs at &euro;3-7 per registration. Porto Business School library capacity is ~80-120 seats. A full room is achievable.
+</div>
+
+<!-- ════════════════ 3. META ADS ════════════════ -->
+<h2>3. Meta Ads (Facebook + Instagram)</h2>
+
+<div class="platform-header meta">Meta Ads — Facebook + Instagram</div>
+
+<h3>3.1 Campaign Structure</h3>
+
+<table>
+  <tr><th>Level</th><th>Name</th><th>Setting</th></tr>
+  <tr><td><strong>Campaign</strong></td><td>NV_Porto_Lancamento_Mar2026</td><td>Objective: Traffic (Link Clicks) or Leads</td></tr>
+  <tr><td><strong>Ad Set 1</strong></td><td>Porto_Politica_25-55</td><td>Core audience — politics/books in Porto metro</td></tr>
+  <tr><td><strong>Ad Set 2</strong></td><td>Porto_Defesa_30-65</td><td>Defense/security/business interests</td></tr>
+  <tr><td><strong>Ad Set 3</strong></td><td>Norte_Livros_25-50</td><td>Broader Norte region — book lovers</td></tr>
+</table>
+
+<h3>3.2 Audience Targeting</h3>
+
+<div class="targeting-box">
+  <h4>Ad Set 1: Porto Politica (Primary — &euro;120)</h4>
+  <div class="spec"><span class="label">Location</span><span>Porto metro (30 km radius) — Porto, Matosinhos, Maia, Vila Nova de Gaia, Gondomar</span></div>
+  <div class="spec"><span class="label">Age</span><span>25-55</span></div>
+  <div class="spec"><span class="label">Language</span><span>Portuguese</span></div>
+  <div class="spec"><span class="label">Interests</span><span>Politica portuguesa, Observador (media), Expresso (jornal), Publico (jornal), Geopolitica, Uniao Europeia, NATO, Livros de nao-ficcao, Ensaios politicos</span></div>
+  <div class="spec"><span class="label">Education</span><span>University / Post-graduate (optional — narrow if audience too broad)</span></div>
+  <div class="spec"><span class="label">Placements</span><span>Facebook Feed, Instagram Feed, Instagram Stories, Facebook Stories</span></div>
+  <div class="spec"><span class="label">Est. audience</span><span>~80-150K people</span></div>
+</div>
+
+<div class="targeting-box">
+  <h4>Ad Set 2: Porto Defesa (Secondary — &euro;100)</h4>
+  <div class="spec"><span class="label">Location</span><span>Porto metro (30 km radius)</span></div>
+  <div class="spec"><span class="label">Age</span><span>30-65</span></div>
+  <div class="spec"><span class="label">Interests</span><span>Ciberseguranca, Defesa nacional, Forcas Armadas, Economia portuguesa, Gestao empresarial, Ordem dos Economistas, SEDES, Business leadership</span></div>
+  <div class="spec"><span class="label">Job titles</span><span>(Optional) Diretor, CEO, Professor, Investigador, Militar</span></div>
+  <div class="spec"><span class="label">Placements</span><span>Facebook Feed, Instagram Feed</span></div>
+  <div class="spec"><span class="label">Est. audience</span><span>~30-60K people</span></div>
+</div>
+
+<div class="targeting-box">
+  <h4>Ad Set 3: Norte Livros (Broadening — &euro;60)</h4>
+  <div class="spec"><span class="label">Location</span><span>Distrito do Porto + Braga + Aveiro</span></div>
+  <div class="spec"><span class="label">Age</span><span>25-50</span></div>
+  <div class="spec"><span class="label">Interests</span><span>Leitura, Livros, Bertrand Livreiros, Wook, FNAC Portugal, Feira do Livro, Cultura portuguesa</span></div>
+  <div class="spec"><span class="label">Placements</span><span>Facebook Feed, Instagram Feed, Instagram Stories, Instagram Reels</span></div>
+  <div class="spec"><span class="label">Est. audience</span><span>~150-300K people</span></div>
+</div>
+
+<h3>3.3 Ad Copy — Ready to Paste</h3>
+
+<div class="ad-variant">
+  <h4>Variante A — Evento + Urgencia <span class="badge badge-high">PRIMARY</span></h4>
+  <div class="ad-copy">
+    <strong>Texto principal (Primary Text):</strong><br><br>
+    Joao Annes apresenta <strong>Nacao Valente — Decisoes Soberanas para Portugal</strong> no Porto.<br><br>
+    Uma conversa sobre soberania, ciberseguranca, defesa e o futuro de Portugal num mundo multipolar — com Estela Barbot (SEDES) e Carlos Brito (Ordem dos Economistas).<br><br>
+    Depois de esgotar a sala na Culturgest em Lisboa, o debate chega ao Norte.<br><br>
+    25 de Marco | 18h45 | Biblioteca da Porto Business School<br>
+    Entrada livre — lugares limitados.<br><br>
+    <em>[CTA: Confirmar Presenca]</em>
+  </div>
+  <div class="ad-field"><span class="label">Headline</span> Lancamento no Porto — 25 de Marco</div>
+  <div class="ad-field"><span class="label">Description</span> Entrada livre. Confirme a sua presenca.</div>
+  <div class="ad-field"><span class="label">CTA Button</span> Sign Up / Learn More</div>
+  <div class="ad-field"><span class="label">Link</span> nacaovalente.com.pt (Path A) or Form direct (Path B)</div>
+  <div class="ad-field"><span class="label">Image</span> Book cover + event overlay (1080x1080)</div>
+</div>
+
+<div class="ad-variant">
+  <h4>Variante B — Provocacao Tematica <span class="badge badge-med">TEST</span></h4>
+  <div class="ad-copy">
+    <strong>Texto principal:</strong><br><br>
+    Portugal sabe defender-se num mundo que mudou?<br><br>
+    Da ciberseguranca a NATO, da emigracao a soberania energetica — Joao Annes, ex-CNCS e membro da SEDES, propoe respostas concretas no seu primeiro livro.<br><br>
+    No Porto, a 25 de Marco, o debate ganha voz com Estela Barbot e Carlos Brito. Na Porto Business School, as 18h45.<br><br>
+    Sala Culturgest esgotou em Lisboa. Garanta o seu lugar no Porto.<br><br>
+    <em>[CTA: Inscreva-se Gratuitamente]</em>
+  </div>
+  <div class="ad-field"><span class="label">Headline</span> Soberania, Defesa e o Futuro de Portugal</div>
+  <div class="ad-field"><span class="label">Description</span> Lancamento + debate. Porto Business School, 25 Marco.</div>
+  <div class="ad-field"><span class="label">CTA Button</span> Sign Up</div>
+  <div class="ad-field"><span class="label">Image</span> Author photo + quote overlay (1080x1080)</div>
+</div>
+
+<div class="ad-variant">
+  <h4>Variante C — Social Proof (Culturgest) <span class="badge badge-med">TEST</span></h4>
+  <div class="ad-copy">
+    <strong>Texto principal:</strong><br><br>
+    A Culturgest esgotou. O debate continua no Porto.<br><br>
+    "Defendo um Estado forte em que ninguem e vassalo, todos somos livres." — Joao Annes<br><br>
+    Nacao Valente e um ensaio sobre como Portugal pode prevenir, proteger, projetar e prosperar. Depois do lancamento em Lisboa com o Bastonario da OA, o Bastonario da OE e o Presidente da SEDES, o autor traz a conversa ao Norte.<br><br>
+    Porto Business School | 25 Marco | 18h45 | Entrada livre<br><br>
+    <em>[CTA: Confirmar Presenca]</em>
+  </div>
+  <div class="ad-field"><span class="label">Headline</span> Esgotou em Lisboa. Agora no Porto.</div>
+  <div class="ad-field"><span class="label">Description</span> Lancamento de Nacao Valente. Confirme a presenca.</div>
+  <div class="ad-field"><span class="label">CTA Button</span> Sign Up</div>
+  <div class="ad-field"><span class="label">Image</span> Culturgest full room photo (if available) or book cover</div>
+</div>
+
+<div class="ad-variant">
+  <h4>Variante D — Instagram Stories / Reels <span class="badge badge-ig">IG ONLY</span></h4>
+  <div class="ad-copy">
+    <strong>Story / Reel script (9:16, max 15s):</strong><br><br>
+    <em>[Frame 1 — 0-3s]</em> Book cover zooms in. Text overlay: "NACAO VALENTE"<br>
+    <em>[Frame 2 — 3-7s]</em> Text: "Lancamento Porto | 25 Marco | 18h45"<br>
+    <em>[Frame 3 — 7-11s]</em> Text: "Porto Business School — Entrada Livre"<br>
+    <em>[Frame 4 — 11-15s]</em> "Swipe up para confirmar presenca" + RSVP arrow<br><br>
+    <strong>Alt:</strong> Use 15s clip from Culturgest launch video (already have lancamento.mp4) with text overlay of Porto event details.
+  </div>
+  <div class="ad-field"><span class="label">Format</span> 1080x1920 (9:16 vertical)</div>
+  <div class="ad-field"><span class="label">CTA</span> Swipe Up / Sign Up</div>
+  <div class="ad-field"><span class="label">Link</span> Form direct (Stories = impulse action)</div>
+</div>
+
+<h3>3.4 Meta Ads — Settings Checklist</h3>
+
+<table>
+  <tr><th>Setting</th><th>Value</th></tr>
+  <tr><td>Campaign budget optimization (CBO)</td><td>ON — let Meta allocate across ad sets</td></tr>
+  <tr><td>Daily budget</td><td>&euro;15/day (19 days = &euro;285, rounded to &euro;280)</td></tr>
+  <tr><td>Bid strategy</td><td>Lowest cost (auto)</td></tr>
+  <tr><td>Optimization goal</td><td>Link Clicks (initially) &rarr; switch to Landing Page Views after 3 days if CTR > 1%</td></tr>
+  <tr><td>Schedule</td><td>All day (Porto audience is most active 12-14h and 19-22h)</td></tr>
+  <tr><td>Frequency cap</td><td>Max 3x per person per 7 days</td></tr>
+  <tr><td>Pixel</td><td>Install Meta Pixel on nacaovalente.com.pt for retargeting (see Section 6)</td></tr>
+  <tr><td>Advantage+ creative</td><td>ON — let Meta auto-optimize headlines/images</td></tr>
+  <tr><td>A/B test</td><td>Run variants A vs B for first 5 days. Kill loser at day 5, promote winner.</td></tr>
+</table>
+
+<!-- ════════════════ 4. GOOGLE ADS ════════════════ -->
+<h2>4. Google Ads (Search)</h2>
+
+<div class="platform-header google">Google Ads — Search</div>
+
+<div class="callout">
+  <strong>Purpose:</strong> Capture people who are already searching for the book or the event. Low volume but high intent — every click is someone who wants to find this. Budget &euro;80 = ~100-200 clicks over 19 days.
+</div>
+
+<h3>4.1 Keywords</h3>
+
+<table>
+  <tr><th>Match Type</th><th>Keywords</th><th>Intent</th></tr>
+  <tr><td>Exact</td><td>[nacao valente], [nacao valente livro], [joao annes livro]</td><td>Brand — direct</td></tr>
+  <tr><td>Exact</td><td>[nacao valente porto], [lancamento nacao valente porto]</td><td>Event-specific</td></tr>
+  <tr><td>Phrase</td><td>"joao annes", "nacao valente"</td><td>Brand — broad</td></tr>
+  <tr><td>Phrase</td><td>"lancamento livro porto marco", "apresentacao livro porto"</td><td>Event discovery</td></tr>
+  <tr><td>Broad</td><td>livro soberania portugal, ciberseguranca portugal livro</td><td>Topic — test with low bids</td></tr>
+  <tr><th colspan="3">Negative Keywords</th></tr>
+  <tr><td colspan="2">-pdf, -download, -gratis, -free, -resumo, -summary</td><td>Exclude freebie seekers</td></tr>
+</table>
+
+<h3>4.2 Ad Copy</h3>
+
+<div class="ad-variant">
+  <h4>Google Ad — Variant 1 (Event Focus)</h4>
+  <div class="ad-copy">
+    <strong>Headline 1:</strong> Nacao Valente — Lancamento Porto<br>
+    <strong>Headline 2:</strong> 25 Marco | Porto Business School<br>
+    <strong>Headline 3:</strong> Entrada Livre — Inscreva-se<br><br>
+    <strong>Description 1:</strong> Joao Annes apresenta "Decisoes Soberanas para Portugal". Debate com Estela Barbot e Carlos Brito. Biblioteca da PBS, 18h45.<br>
+    <strong>Description 2:</strong> Depois de esgotar na Culturgest, o lancamento chega ao Porto. Lugares limitados. Confirme a presenca online.<br><br>
+    <strong>Display URL:</strong> nacaovalente.com.pt/porto<br>
+    <strong>Final URL:</strong> nacaovalente.com.pt#lancamento (with UTMs)
+  </div>
+</div>
+
+<div class="ad-variant">
+  <h4>Google Ad — Variant 2 (Book + Buy)</h4>
+  <div class="ad-copy">
+    <strong>Headline 1:</strong> Nacao Valente — Joao Annes<br>
+    <strong>Headline 2:</strong> Decisoes Soberanas para Portugal<br>
+    <strong>Headline 3:</strong> Disponivel na Bertrand, Wook e FNAC<br><br>
+    <strong>Description 1:</strong> Como pode Portugal prevenir, proteger, projetar e prosperar num mundo multipolar? Um ensaio sobre soberania, defesa e democracia.<br>
+    <strong>Description 2:</strong> Lancamento no Porto a 25 de Marco. Entrada livre na Porto Business School. &euro;19,95 em todas as livrarias.<br><br>
+    <strong>Display URL:</strong> nacaovalente.com.pt<br>
+    <strong>Final URL:</strong> nacaovalente.com.pt (with UTMs)
+  </div>
+</div>
+
+<h3>4.3 Google Ads — Settings</h3>
+
+<table>
+  <tr><th>Setting</th><th>Value</th></tr>
+  <tr><td>Campaign type</td><td>Search</td></tr>
+  <tr><td>Networks</td><td>Google Search only (no Display, no Partners)</td></tr>
+  <tr><td>Location</td><td>Portugal (primary), then test Diaspora: UK, FR, LU for brand terms only</td></tr>
+  <tr><td>Language</td><td>Portuguese</td></tr>
+  <tr><td>Daily budget</td><td>&euro;4.20/day (&euro;80 / 19 days)</td></tr>
+  <tr><td>Bid strategy</td><td>Maximize Clicks (with max CPC cap &euro;1.50)</td></tr>
+  <tr><td>Ad schedule</td><td>All day (search is intent-driven)</td></tr>
+  <tr><td>Ad rotation</td><td>Optimize: prefer best performing ads</td></tr>
+  <tr><td>Sitelink extensions</td><td>"Comprar na Bertrand" | "Sobre o Autor" | "Lancamento Porto"</td></tr>
+  <tr><td>Callout extensions</td><td>"Entrada Livre" | "PACTOR Editora" | "232 Paginas" | "Esgotou em Lisboa"</td></tr>
+</table>
+
+<!-- ════════════════ 5. CREATIVE SPECS ════════════════ -->
+<h2>5. Creative Assets Needed</h2>
+
+<div class="creative-grid">
+  <div class="creative-spec">
+    <div class="format">Feed Image</div>
+    <div class="dims">1080 x 1080 px</div>
+    <div class="use">FB Feed + IG Feed</div>
+  </div>
+  <div class="creative-spec">
+    <div class="format">Story / Reel</div>
+    <div class="dims">1080 x 1920 px</div>
+    <div class="use">IG Stories + FB Stories</div>
+  </div>
+  <div class="creative-spec">
+    <div class="format">Landscape</div>
+    <div class="dims">1200 x 628 px</div>
+    <div class="use">FB Feed (wide) + Google Display</div>
+  </div>
+  <div class="creative-spec">
+    <div class="format">Video (15s)</div>
+    <div class="dims">1080 x 1080 + 1080 x 1920</div>
+    <div class="use">IG Reels + Stories + FB Feed</div>
+  </div>
+</div>
+
+<h3>Creative Concepts (3 visuals needed)</h3>
+
+<table>
+  <tr><th>#</th><th>Concept</th><th>Elements</th><th>Text Overlay</th></tr>
+  <tr>
+    <td>1</td>
+    <td><strong>Event Announcement</strong></td>
+    <td>Book cover + gold/navy gradient background</td>
+    <td>"LANCAMENTO PORTO | 25 MARCO | 18h45 | Porto Business School | Entrada Livre"</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><strong>Author + Quote</strong></td>
+    <td>Author photo (img/author.jpg) + dark overlay</td>
+    <td>"Defendo um Estado forte em que ninguem e vassalo, todos somos livres." + event date</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><strong>Social Proof</strong></td>
+    <td>Culturgest full room (if photo exists) or book cover with "ESGOTADO" stamp on Lisboa</td>
+    <td>"Esgotou em Lisboa. Agora no Porto." + date/venue</td>
+  </tr>
+</table>
+
+<div class="callout">
+  <strong>Production note:</strong> All 3 concepts can be built in Canva in ~2 hours using existing assets (cover.jpg, author.jpg, gold #C5A55A / navy #1a1a2e palette). The 15s video can be assembled from lancamento.mp4 clips + text overlays. No external designer needed.
+</div>
+
+<!-- ════════════════ 6. TRACKING ════════════════ -->
+<h2>6. UTM Tracking &amp; Pixel Setup</h2>
+
+<h3>6.1 UTM Links</h3>
+
+<p>All ad links must use UTM parameters so GA4 tracks source/medium correctly.</p>
+
+<p><strong>Path A — To Website:</strong></p>
+<div class="utm-box">
+Facebook Feed:<br>
+https://nacaovalente.com.pt?utm_source=facebook&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento&amp;utm_content=var_a_evento<br><br>
+Instagram Feed:<br>
+https://nacaovalente.com.pt?utm_source=instagram&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento&amp;utm_content=var_a_evento<br><br>
+Instagram Stories:<br>
+https://nacaovalente.com.pt?utm_source=instagram&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento&amp;utm_content=story_d<br><br>
+Google Search:<br>
+https://nacaovalente.com.pt?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento&amp;utm_content=search_v1
+</div>
+
+<p><strong>Path B — Direct to Form:</strong></p>
+<div class="utm-box">
+Facebook:<br>
+https://docs.google.com/forms/d/e/1FAIpQLSeUhw38oV9qUsEVRfSNpZSlw2ISSvQYTHpGwFdUEbzbmzzP_g/viewform?utm_source=facebook&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento<br><br>
+Instagram:<br>
+https://docs.google.com/forms/d/e/1FAIpQLSeUhw38oV9qUsEVRfSNpZSlw2ISSvQYTHpGwFdUEbzbmzzP_g/viewform?utm_source=instagram&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento<br><br>
+Google:<br>
+https://docs.google.com/forms/d/e/1FAIpQLSeUhw38oV9qUsEVRfSNpZSlw2ISSvQYTHpGwFdUEbzbmzzP_g/viewform?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=porto_lancamento
+</div>
+
+<h3>6.2 Meta Pixel (Important)</h3>
+
+<div class="callout callout-blue">
+  <strong>Action required:</strong> Add Meta Pixel to nacaovalente.com.pt. This enables:
+  <ul style="margin-top: 8px;">
+    <li><strong>Retargeting:</strong> Show ads to people who visited the site but didn't RSVP</li>
+    <li><strong>Conversion tracking:</strong> Measure outbound clicks to the Google Form</li>
+    <li><strong>Lookalike audiences:</strong> Find more people like those who RSVP'd (for future campaigns)</li>
+  </ul>
+  <strong>How:</strong> Create a pixel in Meta Events Manager &rarr; add the base code to &lt;head&gt; of index.html &rarr; add an outbound click event on the RSVP button.
+</div>
+
+<!-- ════════════════ 7. TIMELINE ════════════════ -->
+<h2>7. Execution Timeline</h2>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="date">Mar 5-6 (Thu-Fri) — SETUP</div>
+    <ul>
+      <li>Update nacaovalente.com.pt with Porto event section + RSVP button</li>
+      <li>Create 3 ad visuals (Canva: event announcement, author+quote, social proof)</li>
+      <li>Cut 15s video clip from lancamento.mp4 with Porto overlay</li>
+      <li>Set up Meta campaign structure (3 ad sets, 4 variants)</li>
+      <li>Set up Google Search campaign (keywords, 2 ad variants, extensions)</li>
+      <li>Generate all UTM links</li>
+      <li>Deploy updated website</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="date">Mar 7-8 (Sat-Sun) — SOFT LAUNCH</div>
+    <ul>
+      <li>Meta ads go live — low budget (&euro;10/day) to test all variants</li>
+      <li>Organic Instagram post: announce Porto event on @nacaovalente_pt</li>
+      <li>Joao shares event on personal LinkedIn + Facebook</li>
+      <li>Monitor initial CTR and CPC — flag any issues</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="date">Mar 9-11 (Mon-Wed) — OPTIMIZE</div>
+    <ul>
+      <li>Google Ads go live</li>
+      <li>Review Meta performance: kill ads with CTR &lt; 0.8%, double budget on winners</li>
+      <li>Instagram Story: countdown to Porto event (20 days...)</li>
+      <li>Share form link in SEDES Norte / Porto Business School networks</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="date">Mar 12-16 (Week 2) — SCALE</div>
+    <ul>
+      <li>Increase Meta daily budget to &euro;18/day on winning ad sets</li>
+      <li>Instagram carousel post: "4 pilares — Prevenir, Proteger, Projetar, Prosperar"</li>
+      <li>LinkedIn: Joao posts about Porto event, tags speakers</li>
+      <li>Deploy reserve budget (&euro;40) if one channel is clearly outperforming</li>
+      <li>Mid-campaign check: how many RSVPs so far? Adjust if needed</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="date">Mar 17-21 (Week 3) — URGENCY</div>
+    <ul>
+      <li>Update ad copy: "Faltam X dias" / "Ultimos lugares"</li>
+      <li>Instagram Stories: daily countdown</li>
+      <li>Retarget website visitors who didn't RSVP (if Meta Pixel installed)</li>
+      <li>Email blast to nacaovalente.com.pt subscribers about Porto event</li>
+      <li>Share event in Porto-specific Facebook groups (manual, organic)</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="date">Mar 22-24 (Final Push) — LAST CALL</div>
+    <ul>
+      <li>Final ad push: "Ultimos 3 dias" messaging</li>
+      <li>Turn off Google ads (search volume drops close to event)</li>
+      <li>Concentrate remaining Meta budget on best-performing ad set</li>
+      <li>Joao: personal message to Porto contacts</li>
+      <li>Instagram Story: "Amanha / Hoje" reminder</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="date">Mar 25 — EVENT DAY</div>
+    <ul>
+      <li>All paid ads OFF by noon</li>
+      <li>Instagram: live Story from event or immediate post-event recap</li>
+      <li>Photo/video capture at event for future content</li>
+      <li>Thank-you post next day + tag speakers</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════ 8. KPIs ════════════════ -->
+<h2>8. Success Metrics</h2>
+
+<table>
+  <tr><th>Metric</th><th>Target</th><th>Measurement</th></tr>
+  <tr><td>Form submissions (RSVPs)</td><td>80-120</td><td>Google Forms response count</td></tr>
+  <tr><td>Cost per RSVP</td><td>&lt; &euro;5</td><td>Total spend / RSVPs</td></tr>
+  <tr><td>Meta CTR</td><td>&gt; 1.0%</td><td>Meta Ads Manager</td></tr>
+  <tr><td>Meta CPC</td><td>&lt; &euro;0.80</td><td>Meta Ads Manager</td></tr>
+  <tr><td>Google CTR</td><td>&gt; 3.0%</td><td>Google Ads</td></tr>
+  <tr><td>Google CPC</td><td>&lt; &euro;1.00</td><td>Google Ads</td></tr>
+  <tr><td>Website sessions (from campaign)</td><td>500+</td><td>GA4 (filter by utm_campaign=porto_lancamento)</td></tr>
+  <tr><td>Website &rarr; Form click-through</td><td>&gt; 25%</td><td>GA4 outbound click event</td></tr>
+  <tr><td>Event attendance (actual)</td><td>60-100</td><td>Head count at venue</td></tr>
+  <tr><td>No-show rate</td><td>&lt; 40%</td><td>(RSVPs - attendees) / RSVPs</td></tr>
+</table>
+
+<div class="callout callout-green">
+  <strong>Decision points:</strong>
+  <ul style="margin-top: 8px;">
+    <li><strong>Day 5:</strong> If Meta CTR &lt; 0.5% across all variants &rarr; pause, redesign creatives</li>
+    <li><strong>Day 10:</strong> If RSVPs &lt; 20 &rarr; shift more budget to best channel, add urgency copy</li>
+    <li><strong>Day 14:</strong> If RSVPs &gt; 80 &rarr; reduce paid spend, shift to organic only (room is filling up)</li>
+    <li><strong>Day 14:</strong> If RSVPs &lt; 40 &rarr; deploy full reserve budget, activate retargeting</li>
+  </ul>
+</div>
+
+<!-- ════════════════ 9. NEXT STEPS ════════════════ -->
+<h2>9. Immediate Actions</h2>
+
+<ol>
+  <li><strong>Joao creates Meta Business Suite account</strong> (if not already) — link Instagram @nacaovalente_pt + Facebook page</li>
+  <li><strong>Joao creates Google Ads account</strong> — link to GA4 property G-4YNTJ7TJKJ</li>
+  <li><strong>We deploy updated website</strong> with Porto event + RSVP CTA (ready now)</li>
+  <li><strong>We create 3 ad visuals + 1 video</strong> in Canva (2 hours)</li>
+  <li><strong>We set up campaigns</strong> in both platforms using specs above</li>
+  <li><strong>Confirm budget: &euro;400</strong> — or adjust (min viable: &euro;200, ideal: &euro;500)</li>
+  <li><strong>Payment method</strong> — Joao adds card to Meta + Google ad accounts</li>
+  <li><strong>Go live: March 7</strong></li>
+</ol>
+
+<div class="callout">
+  <strong>Accounts needed from Joao:</strong>
+  <ul style="margin-top: 8px;">
+    <li>Meta Business Suite login (or Facebook page admin access)</li>
+    <li>Instagram @nacaovalente_pt credentials (to link as business account)</li>
+    <li>Google Ads account (or we set one up together)</li>
+    <li>Payment method for ad spend</li>
+  </ul>
+</div>
+
+</div>
+
+<div class="footer">
+  Prepared by Eugene Nayshtetik | Nacao Valente — Porto Campaign Plan | March 2026<br>
+  All ad copy in Portuguese. Budget adjustable. Ready to execute.
+</div>
+
+</body>
+</html>

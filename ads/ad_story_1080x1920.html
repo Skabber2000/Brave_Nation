@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 30%, #1e2a4a 70%, #12121f 100%);
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 60px;
+  }
+  .top-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: #C5A55A;
+  }
+  .header {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 18px;
+    color: #C5A55A;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    margin-top: 20px;
+  }
+  .cover {
+    width: 380px;
+    border-radius: 6px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(197,165,90,0.2);
+    margin-bottom: 50px;
+  }
+  .title {
+    font-size: 64px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .title span { color: #C5A55A; }
+  .subtitle {
+    font-size: 28px;
+    color: #b0a89e;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .by {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 20px;
+    color: #8a8078;
+    margin-bottom: 60px;
+  }
+  .by strong { color: #C5A55A; }
+  .event-card {
+    background: rgba(197,165,90,0.1);
+    border: 2px solid rgba(197,165,90,0.4);
+    border-radius: 12px;
+    padding: 36px 48px;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 50px;
+  }
+  .event-card .label {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    color: #C5A55A;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .event-card .date {
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .event-card .venue {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 22px;
+    color: #c8c0b4;
+  }
+  .event-card .addr {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    color: #8a8078;
+    margin-top: 8px;
+  }
+  .speakers {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 700px;
+  }
+  .speakers .label {
+    font-size: 14px;
+    color: #8a8078;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .speakers .names {
+    font-size: 20px;
+    color: #c8c0b4;
+    line-height: 1.6;
+  }
+  .speakers .names strong { color: white; }
+  .cta {
+    background: #C5A55A;
+    color: #12121f;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 20px 60px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .swipe {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    color: #8a8078;
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+  .bottom-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: #C5A55A;
+  }
+</style>
+</head>
+<body>
+  <div class="top-accent"></div>
+  <div class="header">Lancamento</div>
+  <img src="../img/cover.jpg" alt="Nacao Valente" class="cover">
+  <div class="title"><span>Nacao Valente</span></div>
+  <div class="subtitle">Decisoes Soberanas para Portugal</div>
+  <div class="by">por <strong>Joao Annes</strong></div>
+  <div class="event-card">
+    <div class="label">Porto</div>
+    <div class="date">25 Marco | 18h45</div>
+    <div class="venue">Porto Business School</div>
+    <div class="addr">Biblioteca — Av. Fabril do Norte, 425</div>
+  </div>
+  <div class="speakers">
+    <div class="label">Com a participacao de</div>
+    <div class="names">
+      <strong>Estela Barbot</strong> (SEDES)<br>
+      <strong>Carlos Brito</strong> (Ordem dos Economistas)
+    </div>
+  </div>
+  <div class="cta">Confirmar Presenca</div>
+  <div class="swipe">Entrada Livre — Lugares Limitados</div>
+  <div class="bottom-accent"></div>
+</body></html>

@@ -1,0 +1,33 @@
+name: "Send Porto Campaign Plan"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install openai playwright && python -m playwright install chromium
+
+      - name: Generate ad screenshots
+        run: cd ads && python screenshot_ads.py
+
+      - name: Send campaign plan email
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SMTP_EMAIL: ${{ secrets.SMTP_EMAIL }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          CC_EMAIL: ${{ secrets.CC_EMAIL }}
+        run: python agents/send_campaign_porto.py
