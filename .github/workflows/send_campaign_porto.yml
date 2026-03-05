@@ -18,10 +18,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install openai playwright && python -m playwright install chromium
-
-      - name: Generate ad screenshots
-        run: cd ads && python screenshot_ads.py
+        run: pip install openai
 
       - name: Send campaign plan email
         env:

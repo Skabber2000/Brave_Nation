@@ -1,50 +1,43 @@
 #!/usr/bin/env python3
 """Send Porto campaign plan to Joao for approval."""
 
-import sys, os, base64
+import sys, os
 sys.stdout.reconfigure(encoding="utf-8")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from shared import send_email
 
-def img_to_cid(path, cid_name):
-    """Read image file and return base64 for inline embedding."""
-    with open(path, "rb") as f:
-        data = base64.b64encode(f.read()).decode()
-    ext = path.rsplit(".", 1)[-1]
-    return f"data:image/{ext};base64,{data}"
+BASE_URL = "https://nacaovalente.com.pt/ads"
+
+ADS = [
+    {"name": "ad_event_1080x1080.png", "label": "Evento + Capa (Feed)", "w": "200"},
+    {"name": "ad_quote_1080x1080.png", "label": "Citacao + Autor (Feed)", "w": "200"},
+    {"name": "ad_story_1080x1920.png", "label": "Story Completo (9:16)", "w": "112"},
+]
 
 
 def build_email():
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    ads_dir = os.path.join(project_root, "ads")
-
-    # Check if PNG files exist (may need to run screenshot_ads.py first)
-    pngs = []
-    for name in ["ad_event_1080x1080.png", "ad_quote_1080x1080.png", "ad_story_1080x1920.png"]:
-        path = os.path.join(ads_dir, name)
-        if os.path.exists(path):
-            pngs.append((name, img_to_cid(path, name)))
-
-    visuals_html = ""
-    if pngs:
-        visuals_html = """
+    visuals_html = """
         <h2 style="color:#1a1a2e;border-bottom:2px solid #C5A55A;padding-bottom:8px;
           margin-top:36px;">Visuais para Aprovacao</h2>
         <p style="font-size:14px;color:#666;margin-bottom:16px;">
           3 conceitos criativos prontos para Meta Ads. Clicar para ver em tamanho real.</p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+          <tr>
+    """
+    for ad in ADS:
+        url = f"{BASE_URL}/{ad['name']}"
+        visuals_html += f"""
+            <td style="padding:8px;text-align:center;vertical-align:top;">
+              <a href="{url}" target="_blank" style="text-decoration:none;">
+                <img src="{url}" alt="{ad['label']}"
+                  width="{ad['w']}" style="display:block;border-radius:6px;
+                  border:1px solid #ddd;">
+              </a>
+              <p style="font-size:11px;color:#888;margin:6px 0 0;
+                font-family:Arial,sans-serif;">{ad['label']}</p>
+            </td>
         """
-        for name, data_uri in pngs:
-            label = name.replace("ad_", "").replace("_", " ").replace(".png", "").title()
-            w = "200px" if "1920" not in name else "112px"
-            visuals_html += f"""
-            <div style="text-align:center;">
-              <img src="{data_uri}" alt="{label}"
-                style="width:{w};border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
-              <p style="font-size:12px;color:#888;margin-top:4px;">{label}</p>
-            </div>
-            """
-        visuals_html += "</div>"
+    visuals_html += "</tr></table>"
 
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
