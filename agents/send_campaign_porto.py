@@ -69,7 +69,7 @@ def build_email():
         <td style="padding:10px 14px;border:1px solid #e0ddd5;font-weight:bold;width:35%;">
           Objectivo</td>
         <td style="padding:10px 14px;border:1px solid #e0ddd5;">
-          Inscricoes para o lancamento Porto (Google Form)</td>
+          Inscricoes para o lancamento Porto (Google Form) — max 50 lugares</td>
       </tr>
       <tr>
         <td style="padding:10px 14px;border:1px solid #e0ddd5;font-weight:bold;">Canais</td>
@@ -84,13 +84,13 @@ def build_email():
       <tr>
         <td style="padding:10px 14px;border:1px solid #e0ddd5;font-weight:bold;">Orcamento Total</td>
         <td style="padding:10px 14px;border:1px solid #e0ddd5;font-size:16px;">
-          <strong style="color:#e94560;">&euro;400</strong>
-          (Meta &euro;280 + Google &euro;80 + Reserva &euro;40)</td>
+          <strong style="color:#e94560;">&euro;200</strong>
+          (Meta &euro;140 + Google &euro;40 + Reserva &euro;20)</td>
       </tr>
       <tr style="background:#f9f6f0;">
         <td style="padding:10px 14px;border:1px solid #e0ddd5;font-weight:bold;">Resultado Esperado</td>
         <td style="padding:10px 14px;border:1px solid #e0ddd5;">
-          60-120 inscricoes (custo &euro;3-7 por inscricao)</td>
+          50-65 inscricoes para 50 lugares (custo &euro;3-5 por inscricao)</td>
       </tr>
       <tr>
         <td style="padding:10px 14px;border:1px solid #e0ddd5;font-weight:bold;">Plano Completo</td>
@@ -137,8 +137,7 @@ def build_email():
     <div style="background:#e8f5e9;border-left:4px solid #27ae60;padding:16px 20px;
       border-radius:0 6px 6px 0;margin-bottom:16px;">
       <ol style="margin:0;padding-left:20px;font-size:14px;">
-        <li style="margin-bottom:8px;"><strong>Aprovar o orcamento</strong> (&euro;400)
-          — ou dizer qual o teu limite</li>
+        <li style="margin-bottom:8px;"><strong>Aprovar o orcamento</strong> (&euro;200)</li>
         <li style="margin-bottom:8px;"><strong>Aprovar os visuais</strong>
           — ou pedir alteracoes</li>
         <li style="margin-bottom:8px;"><strong>Criar conta Meta Business Suite</strong>
